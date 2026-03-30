@@ -25,7 +25,7 @@ subtitle                 : "Database-integrated Python modelling"
 name                     : "Thomas Gumbricht"
 description              : "Open-source framework for scripting database-integrated Python workflows."
 url                      : "https://xspatula.github.io"
-baseurl                  : "/setup_core_db_docs"
+baseurl                  : ""
 repository               : "xspatula/setup_core_db_docs"
 # bundle exec jekyll build -d /Users/thomasgumbricht/GitHub_AI4SH/in-situ_data_docs/docs
 # ===== END edits by TG 20251115 =====

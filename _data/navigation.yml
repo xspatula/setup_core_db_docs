@@ -74,6 +74,8 @@ main:
   - title: "Setup Xspatula DB"
     url: /setup_db/
     description: "Setting up a postgreSQL database with Xspatula framework"
+  - title: "About"
+    url: ../about/
   #- title: "AI4SH"
   #  url: /ai4sh/
   #  description: Setup AI4SoilHealth project
