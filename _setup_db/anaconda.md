@@ -18,10 +18,10 @@ To setup an Anaconda (conda for short) environment you need to [download][downlo
 
 ## Framework virtual python environment
 
-To create a virtual python environment for the basic database functions of the framework you can use the file _xspatula_framework_py_3.12.yml_. It is included in the Xspatula repo under the path ./anaconda and shown below.
+To create a virtual python environment for the database functions of the framework you can use the file _xspatula_py_3.12.yml_. It is included in the Xspatula repo under the path ./anaconda and shown below.
 
 ```
-name: xspatula_framework_py_3.12
+name: xspatula_py_3.12
 channels:
   - conda-forge
   - defaults
@@ -33,16 +33,16 @@ dependencies:
   - python-dotenv
 ```
 
-Open a Terminal window and navigate to the folder that contains _xspatula_framework_py_3.12.yml_. Then execute the command _conda env create_ as shown below. When you start a notebook in the framework package for the first time you will be asked to select Python environment. Select the _xspatula_framework_py_3.12.yml_ as the Python environment.
+Open a Terminal window and navigate to the folder that contains _xspatula_py_3.12.yml_. Then execute the command _conda env create_ as shown below. When you start a notebook in the framework package for the first time you will be asked to select Python environment. Select the _xspatula_py_3.12.yml_ as the Python environment.
 
 ```
-conda env create --file xspatula_framework_py_3.12.yml
+conda env create --file xspatula_py_3.12.yml
 ```
 
 If you want to remove the virtual environment, run the command:
 
 ```
-conda remove --name xspatula_framework_py_3.12 --all
+conda remove --name xspatula_py_3.12 --all
 ```
 
 [download_anaconda]: https://www.anaconda.com/download
