@@ -1,0 +1,428 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Xspatula notebooks - Xspatula database integrated python modeling</title>
+<meta name="description" content="To manage the Xspatula framework database it comes with three Jupyter notebooks: setup_db, delete_db and setup_processes. Before you can run the notebooks you need to create a python environment. The only thing you need to edit in the framework itself are your credentials for the postgreSQL database cluster you want to use.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula database integrated python modeling">
+<meta property="og:title" content="Xspatula notebooks">
+<meta property="og:url" content="http://localhost:4000/setup_core_db_docs/docs/framework/notebook/">
+
+
+  <meta property="og:description" content="To manage the Xspatula framework database it comes with three Jupyter notebooks: setup_db, delete_db and setup_processes. Before you can run the notebooks you need to create a python environment. The only thing you need to edit in the framework itself are your credentials for the postgreSQL database cluster you want to use.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-15T15:13:03+01:00">
+
+
+
+  <meta property="article:modified_time" content="2026-03-29T21:15:03+02:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/setup_core_db_docs/docs/framework/notebook/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/setup_core_db_docs/docs/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula database integrated python modeling Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/setup_core_db_docs/docs/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/setup_core_db_docs/docs/"><img src="/setup_core_db_docs/docs/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+        
+        <a class="site-title" href="/setup_core_db_docs/docs/">
+          Script your own environment
+          <span class="site-subtitle"></span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/setup_core_db_docs/docs/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_core_db_docs/docs/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup Xspatula DB</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">Xspatula framework</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/">Synopsis</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/notebook/" class="active">notebook</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/scheme_file/">Scheme file</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/job_file/">Job file</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/pilot_file/">Pilot file</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/process_file/">Process file</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Xspatula notebooks">
+    <meta itemprop="description" content="To manage the Xspatula framework database it comes with three Jupyter notebooks: setup_db, delete_db and setup_processes. Before you can run the notebooks you need to create a python environment. The only thing you need to edit in the framework itself are your credentials for the postgreSQL database cluster you want to use.">
+    <meta itemprop="datePublished" content="2026-03-15T15:13:03+01:00">
+    <meta itemprop="dateModified" content="2026-03-29T21:15:03+02:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/setup_core_db_docs/docs/framework/notebook/" itemprop="url">Xspatula notebooks
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>To manage the Xspatula framework database it comes with three Jupyter notebooks: setup_db, delete_db and setup_processes. Before you can run the notebooks you need to create a python environment. The only thing you need to edit in the framework itself are your credentials for the postgreSQL database cluster you have access to.</p>
+
+<h2 id="prerequisits">Prerequisits</h2>
+
+<p>To build your own database, whether on your local machine or a remote server, you might need to install the following applications/files:</p>
+
+<ul>
+  <li><a href="https://code.visualstudio.com">Visual Studion code (VScode)</a> (or other environment for running jupyter notebooks),</li>
+  <li><a href="../setup_db/postgres/">postgreSQL</a> (unless you have access to a server with postgres installed),</li>
+  <li><a href="../setup_db/anaconda/">Anaconda</a> or any other application for defining virtual python environments, and/or</li>
+  <li>A <a href="../setup_db/netrc/">.netrc</a> file that defines your credentials for setting up new databases (to protect your login credentials).</li>
+</ul>
+
+<h2 id="python-environment">Python environment</h2>
+
+<p>To run a Jupyter notebook you need to define the Python environment that must contain all Python packages used by the notebook and its underlying code. In the Xspatula package path ./anaconda there is a prepared .yml file and a short instruction for how to setup the virtual environment. The same information is available in the <a href="../setup_db/anaconda/">Anaconda</a> document that also links to the Anaconda <a href="https://www.anaconda.com/download">download</a> and <a href="https://www.anaconda.com/docs/getting-started/anaconda/install/overview">installation</a> guides.</p>
+
+<h2 id="notebook-structure">Notebook structure</h2>
+
+<p>All Xspatula framework notebooks have the same basic structure with only three code blocks. The first code block loads the underlying python packages, the second defines the <a href="../scheme_file">scheme</a> file, and the third points to either a <a href="../job_file">job</a> or <a href="../process_file">process</a> file and the actual processes to run.</p>
+
+<h3 id="code-block-1---imports-and-setup">Code block 1 - imports and setup</h3>
+
+<p>The first code block in all notebooks defines the local path to the notebook itself and loads the necessary python packages. Only the last item, the package application import, differs between the notebooks.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Standard library imports
+from os import path, getcwd
+
+import sys
+
+# Get the working directory of the notebook
+notebook_path = getcwd()
+
+# Set the path to the root directory of this jupyter notebook (python) project
+module_path = path.abspath(path.join('..'))
+
+if module_path not in sys.path:
+
+    sys.path.append(module_path)
+
+# Package application imports
+from src_setup.lib_setup import Initiate_database
+</code></pre></div></div>
+
+<h3 id="code-block-2---scheme-file">Code block 2 - scheme file</h3>
+
+<p>The second code block loads the <a href="../scheme_file">scheme</a> file, defining project path, login credentials and  default settings for execute, delete, overwrite and verbosity.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scheme_file = './zzz/scheme_xspatula_local_setup.json'
+</code></pre></div></div>
+
+<p>The default path for the <em>scheme</em> file for setting up the database is in the (sleepy) directory zzz under the directory where the notebooks themselves are available. You can move the <em>scheme</em> file to any other path you want, and either give a relative (vis-a-vis the notebook itself) or absolute path that you have access to.</p>
+
+<p>See the document on <a href="../scheme_file">scheme file</a> for more information.</p>
+
+<h3 id="code-block-3---job-or-process-file">Code block 3 - job or process file</h3>
+
+<p>The third code block points to either a <em>job</em> file or a <em>process</em> file (the framework will recognise which type it is and act accordingly).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>job_file = 'job_setup_db.json'
+
+Initiate_database(notebook_path, scheme_file, job_file)
+</code></pre></div></div>
+
+<p>The code in the block calling the job/process file is different when setting up or deleting a database compared to all other notebooks, illustrated below by code block in the notebook <em>setup_processes</em></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>job_file = 'job_setup_processes.json'
+
+structured_process_D = Initiate_process(notebook_path, scheme_file, job_file)
+
+if structured_process_D is not None:
+
+    Run_process(structured_process_D)
+</code></pre></div></div>
+
+<p>See the documents on <a href="../job_file">job file</a>, <a href="../pilot_file">pilot file</a> and <a href="../process_file">process file</a> for more information.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-29">March 29, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/setup_core_db_docs/docs/framework/job_file/" class="pagination--pager" title="Xspatula job file (project) structure">Previous</a>
+    
+    
+      <a href="/setup_core_db_docs/docs/framework/pilot_file/" class="pagination--pager" title="Xspatula pilot file">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/setup_core_db_docs/docs/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula database integrated python modeling</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/setup_core_db_docs/docs/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr.min.js"></script>
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-store.js"></script>
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

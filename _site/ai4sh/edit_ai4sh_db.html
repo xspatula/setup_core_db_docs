@@ -1,0 +1,693 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Edit AI4SH DB - Xspatula database integrated python modeling</title>
+<meta name="description" content="The AI4SH database is defined using a set of JSON structured process files. The syntax for creating schemas and tables and also inserting data in selected table is based on SQL.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula database integrated python modeling">
+<meta property="og:title" content="Edit AI4SH DB">
+<meta property="og:url" content="http://localhost:4000/setup_core_db_docs/docs/ai4sh/edit_ai4sh_db">
+
+
+  <meta property="og:description" content="The AI4SH database is defined using a set of JSON structured process files. The syntax for creating schemas and tables and also inserting data in selected table is based on SQL.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-22T05:13:03+01:00">
+
+
+
+  <meta property="article:modified_time" content="2026-03-22T05:13:03+01:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/setup_core_db_docs/docs/ai4sh/edit_ai4sh_db">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/setup_core_db_docs/docs/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula database integrated python modeling Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/setup_core_db_docs/docs/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/setup_core_db_docs/docs/"><img src="/setup_core_db_docs/docs/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+        
+        <a class="site-title" href="/setup_core_db_docs/docs/">
+          Script your own environment
+          <span class="site-subtitle"></span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/setup_core_db_docs/docs/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_core_db_docs/docs/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup Xspatula DB</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">AI4SH project</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/setup_core_db_docs/docs/ai4sh/">Synopsis</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/ai4sh/setup_ai4sh_db">Setup AI4SH DB</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/ai4sh/edit_ai4sh_db" class="active">Edit AI4SH DB</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/ai4sh_project/setup_ai4sh_processes">Setup AI4SH processes</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Edit AI4SH DB">
+    <meta itemprop="description" content="The AI4SH database is defined using a set of JSON structured process files. The syntax for creating schemas and tables and also inserting data in selected table is based on SQL.">
+    <meta itemprop="datePublished" content="2026-03-22T05:13:03+01:00">
+    <meta itemprop="dateModified" content="2026-03-22T05:13:03+01:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/setup_core_db_docs/docs/ai4sh/edit_ai4sh_db" itemprop="url">Edit AI4SH DB
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>The AI4SH database is defined using a set of JSON structured process files. The syntax for creating schemas and tables and also inserting data in selected table is based on SQL.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>You need to clone or download (or fork) the <a href="https://github.com/">GitHub</a> framework_project_ai4sh_database for getting access to the JSON files defining the database. To access the project you need to send a request to join that repo and then click <a href="https://github.com/AI4SH/framework_project_ai4sh_database">here</a>. [TO BE COMPLETED]</p>
+
+<h2 id="edit-the-ai4sh-database-structure">Edit the AI4SH database structure</h2>
+
+<p>In the AI4SH project, the definition of the database is under the path</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./ai4sh_db/setup_db
+</code></pre></div></div>
+
+<p>with following content:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── db_setup.txt
+└── jsonsql
+    ├── community_create_grant_db_user_new_v10_sql.json
+    ├── community_create_grant_db_user_v10_sql.json
+    ├── community_user_organisation_records_v10_sql.json
+    ├── community_user_organisation_v10_sql.json
+    ├── observation_campaign_v10_sql.json
+    ├── observation_dataset_v10_sql.json
+    ├── observation_geolocation_v10_sql.json
+    ├── observation_measurement_v10_sql.json
+    ├── observation_observation_log_v10_sql.json
+    ├── observation_observation_v10_sql.json
+    ├── observation_organisation_person_v10_sql.json
+    ├── observation_sample_v10_sql.json
+    ├── observation_sampling_log_v10_sql.json
+    ├── observation_utility_apparatus_v10_sql.json
+    ├── observation_utility_classification_v10_sql.json
+    ├── observation_utility_indicator_default_unit_v10_sql.json
+    ├── observation_utility_indicator_v10_sql.json
+    ├── observation_utility_juxtaposition_v10_sql.json
+    ├── observation_utility_license_v10_sql.json
+    ├── observation_utility_location_method_v10_sql.json
+    ├── observation_utility_method_translate_v10_sql.json
+    ├── observation_utility_method_v10_sql.json
+    ├── observation_utility_monitor_v10_sql.json
+    ├── observation_utility_preparation_v10_sql.json
+    ├── observation_utility_preservation_v10_sql.json
+    ├── observation_utility_profiling_v10_sql.json
+    ├── observation_utility_provider_v10_sql.json
+    ├── observation_utility_provision_indicator_v10_sql.json
+    ├── observation_utility_provision_v10_sql.json
+    ├── observation_utility_quantity_default_unit_v10_sql.json
+    ├── observation_utility_quantity_v10_sql.json
+    ├── observation_utility_setting_v10_sql.json
+    ├── observation_utility_spatial_reference_v10_sql.json
+    ├── observation_utility_storage_v10_sql.json
+    ├── observation_utility_territory_v10_sql.json
+    ├── observation_utility_transportation_v10_sql.json
+    ├── observation_utility_unit_translate_v10_sql.json
+    ├── observation_utility_unit_v10_sql.json
+    ├── processes_records_v10_sql.json
+    ├── processes_v10_sql.json
+    ├── schema_v10_sql.json
+    └── utility_v10_sql.json
+</code></pre></div></div>
+
+<h2 id="pilot-file-db_setuptxt">pilot file db_setup.txt</h2>
+
+<p>The single file in the root of the directory, db_setup.txt, is a <a href="../framework/pilot_file/">pilot</a> that lists JSON files to execute. If you want to only run a selection of JSON <a href="../framework/process_file/">process</a> files, you simply put a hashtag (#) in front of the the JSON process files to exclude.</p>
+
+<p>Illustration for the first lines in the pilot file db_setup.txt.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#################################################
+##### DEFINE AI4SH DB SCHEMAS AND TABELS #####
+#################################################
+#!!!!! The schemas must be defined before the tables
+#!!!!!
+### SCHEMAS ###
+
+schema_v10_sql.json
+
+### PROCESSES ###
+
+processes_v10_sql.json
+
+processes_records_v10_sql.json
+
+### COMMUNITY - REQUIRED FOR SETUP AND LOGIN ###
+
+community_user_organisation_v10_sql.json
+
+community_user_organisation_records_v10_sql.json
+
+### GENERAL UTILITIES ###
+
+utility_v10_sql.json
+
+### OBSERVATION UTILITIES ###
+
+observation_utility_apparatus_v10_sql.json
+...
+...
+</code></pre></div></div>
+
+<h2 id="generic-process-files">Generic process files</h2>
+
+<p>The first JSON process file to call must be the one that does the setup of the schemas you require (schema_v10_sql.json). The order of the remaining process files also has some importance and if you change the order some processes will crash. Note that for setting up the database there is no internal check of the SQL syntax prior to executing any SQL command.</p>
+
+<p>The second process file in the pilot file is processes_v10_sql.json, that defines the <a href="../setup_db/schemas_tables/#default-processes">default tables required for defining any process</a>. Editing this table will cause subsequent changes in the whole framework construction.</p>
+
+<p>The third process, processes_records_v10_sql.json, populates the tables defining processes with the information required for setting up any other process. Editing the content of that JSON process file will also require rewriting large chunks of the framework code.</p>
+
+<p>The 4th and 5th process files in the pilot sets up and populates the tables for organisations and users in the schema community. As explained in the <a href="../setup_db/schemas_tables/#default-human-users">framework synopsis</a>, for logging in to the framework a user must be registered in the table user. It is thus recommended that you edit the JSON process file community_user_organisation_records_v10_sql.json, and add at least a single user with your own definitions, as detailed <a href="../setup_db/schemas_tables/#table-insert">here</a>.</p>
+
+<p>The 6th process file, utility_v10_sql.json also defines and populates generic tables that are similar across all databases built by the framework. Changing them will require rewriting the framework code.</p>
+
+<h2 id="ai4sh-database-related-process-files">AI4SH database related process files</h2>
+
+<p>The specific AI4SH database structure is defined in two schemas:</p>
+<ul>
+  <li>observation_utility, and</li>
+  <li>observation.</li>
+</ul>
+
+<h3 id="observation-utilities">Observation utilities</h3>
+
+<p>The table below is a summary of the tables in the schema observation_utility.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>table</td>
+      <td>objective</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>apparatus</td>
+      <td>definition of generic data acquisition systems (instrument, service, tool, sensor, sensory organ)</td>
+    </tr>
+    <tr>
+      <td>order</td>
+      <td>The highest, most generic, classification level used for defining datasets, campaigns and samples</td>
+    </tr>
+    <tr>
+      <td>family</td>
+      <td>Mid classification level used for defining datasets, campaigns and sample</td>
+    </tr>
+    <tr>
+      <td>genus</td>
+      <td>Lower classification level used for defining datasets, campaigns and samples</td>
+    </tr>
+    <tr>
+      <td>species</td>
+      <td>Lowest classification level used for defining samples</td>
+    </tr>
+    <tr>
+      <td>specimen</td>
+      <td>individual sample labeling</td>
+    </tr>
+    <tr>
+      <td>indicator_default_unit</td>
+      <td>Default units for all indicators</td>
+    </tr>
+    <tr>
+      <td>indicator</td>
+      <td>soil status indicator with defined quantitative meaning</td>
+    </tr>
+    <tr>
+      <td>juxtaposition</td>
+      <td>attributes used for defining spatial neighbourhood setting</td>
+    </tr>
+    <tr>
+      <td>license</td>
+      <td>licences under which data is shared or accessed</td>
+    </tr>
+    <tr>
+      <td>location_method</td>
+      <td>methods used for spatial geolocation</td>
+    </tr>
+    <tr>
+      <td>method_translate</td>
+      <td>formulas for translating recorded values between different methods</td>
+    </tr>
+    <tr>
+      <td>method</td>
+      <td>description of methods, including international standard codes if applicable</td>
+    </tr>
+    <tr>
+      <td>monitor</td>
+      <td>the level of skills applied for analysis</td>
+    </tr>
+    <tr>
+      <td>preparation</td>
+      <td>sample preparation before analysis, if not part of a method standard</td>
+    </tr>
+    <tr>
+      <td>preservation</td>
+      <td>sample preservation between acquisition and analysis</td>
+    </tr>
+    <tr>
+      <td>profiling</td>
+      <td>profiling method and units recorded for 3D samples</td>
+    </tr>
+    <tr>
+      <td>provider</td>
+      <td>instrument, organisation, service or tool providing data</td>
+    </tr>
+    <tr>
+      <td>provision</td>
+      <td>data from provider supplied for a particular dataset or campaign</td>
+    </tr>
+    <tr>
+      <td>provision_serial_nr</td>
+      <td>if the serial number of an applied individual provision is known</td>
+    </tr>
+    <tr>
+      <td>provision_indicator</td>
+      <td>the indicator(s) that a particular provision is reporting including method and unit</td>
+    </tr>
+    <tr>
+      <td>quantity_default_unit</td>
+      <td>default units of all quantities</td>
+    </tr>
+    <tr>
+      <td>quantity</td>
+      <td>definition of quantities</td>
+    </tr>
+    <tr>
+      <td>setting</td>
+      <td>systems for defining juxtapositioning</td>
+    </tr>
+    <tr>
+      <td>spatial_reference</td>
+      <td>Spatial reference system applied for geospatial reference</td>
+    </tr>
+    <tr>
+      <td>storage</td>
+      <td>sample storage method between acquisition and analysis</td>
+    </tr>
+    <tr>
+      <td>territory</td>
+      <td>extended ISO codes for territories</td>
+    </tr>
+    <tr>
+      <td>transportation</td>
+      <td>sample transportation method between acquisition and analysis</td>
+    </tr>
+    <tr>
+      <td>unit</td>
+      <td>units used for reporting values, distance, proximity etc</td>
+    </tr>
+    <tr>
+      <td>unit_translate</td>
+      <td>formulas for translation between defined units</td>
+    </tr>
+  </tfoot>
+</table>
+
+<h3 id="observation">Observation</h3>
+
+<p>The table below is a summary of the tables in the schema observation.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>table</td>
+      <td>objective</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>organisation</td>
+      <td>organisations related to datasets, campaigns and sampling/observation logs</td>
+    </tr>
+    <tr>
+      <td>person</td>
+      <td>individuals responsible for different parts; e.g. sampling, observation and data clearing</td>
+    </tr>
+    <tr>
+      <td>dataset</td>
+      <td>datasets available in the database</td>
+    </tr>
+    <tr>
+      <td>campaign</td>
+      <td>assembly of data collected and analysed as part of a dataset</td>
+    </tr>
+    <tr>
+      <td>sampling_log</td>
+      <td>log describing location and methods for soil sampling events</td>
+    </tr>
+    <tr>
+      <td>sample</td>
+      <td>individual samples acquired as part of soil sampling events</td>
+    </tr>
+    <tr>
+      <td>geolocation</td>
+      <td>geospatial coordinates for individual samples, if applicable</td>
+    </tr>
+    <tr>
+      <td>observation_log</td>
+      <td>log with identified analysis provision applied</td>
+    </tr>
+    <tr>
+      <td>observation</td>
+      <td>connects individual samples with a provision, quantity and method</td>
+    </tr>
+    <tr>
+      <td>measurement</td>
+      <td>the value(s) for a defined observation and indicator</td>
+    </tr>
+  </tfoot>
+</table>
+
+<h2 id="process-structure-for-create-table">Process structure for create table</h2>
+
+<p>The framework process for defining a table is <span class="sub_process">create_table</span>. The process requires three parameters (arguments):</p>
+
+<ul>
+  <li>schema (the name of the schema where to create the table),</li>
+  <li>table (the name of the table)</li>
+  <li>command (array of the columns to create in SQL conformed syntax).</li>
+</ul>
+
+<p>The example below shows the command for creating the table <span class="db_table">unit</span>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "process": [
+    {
+      "process_id": "create_table",
+      "overwrite": false,
+      "delete": false,
+      "parameters": {
+        "schema": "observation_utility",
+        "table": "unit",
+        "command": [
+          "id SERIAL",
+          "name TEXT UNIQUE",
+          "alias TEXT UNIQUE",
+          "abstract TEXT",
+          "system TEXT",
+          "PRIMARY KEY (id)"
+        ]
+      }
+    }
+  ]
+}
+</code></pre></div></div>
+
+<p>The individual elements in the array can include any syntax that is compatible with postgreSQL.</p>
+
+<p>If you want to change the definition on a table in the framework database, open the process file defining the table you want to change and edit the schema, table, or the elements in the command array. Then set overwrite to true and rerun the notebook setup_db, this will create, or drop and recreate, the table. Remember to reset overwrite to false once your table has the structure you wanted.</p>
+
+<h2 id="acknowledgments-and-funding">Acknowledgments and Funding</h2>
+
+<p>This work was partly done as part of the AI4SoilHealth project, funded by the European Union’s Horizon Europe Research and Innovation Programme under Grant Agreement No. 101086179.</p>
+
+<p><em>Funded by the European Union. The views expressed are those of the authors and do not necessarily reflect those of the European Union or the European Research Executive Agency.</em></p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-22">March 22, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/setup_core_db_docs/docs/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula database integrated python modeling</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/setup_core_db_docs/docs/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr.min.js"></script>
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-store.js"></script>
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

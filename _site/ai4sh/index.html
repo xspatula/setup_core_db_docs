@@ -1,0 +1,397 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>AI4SH project synopsis - Xspatula database integrated python modeling</title>
+<meta name="description" content="The EU funded project AI4SoilHealth (AI4SH) database is built for holding soil data derived both from field sampling and satellite images, with a large number of different instruments, laboratories, sensors and methods being used for capturing the data. To accommodate this data with FAIR principles the framework was used to build a comprehensive postgreSQL database.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula database integrated python modeling">
+<meta property="og:title" content="AI4SH project synopsis">
+<meta property="og:url" content="http://localhost:4000/setup_core_db_docs/docs/ai4sh/">
+
+
+  <meta property="og:description" content="The EU funded project AI4SoilHealth (AI4SH) database is built for holding soil data derived both from field sampling and satellite images, with a large number of different instruments, laboratories, sensors and methods being used for capturing the data. To accommodate this data with FAIR principles the framework was used to build a comprehensive postgreSQL database.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-22T15:13:03+01:00">
+
+
+
+  <meta property="article:modified_time" content="2026-03-22T15:13:03+01:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/setup_core_db_docs/docs/ai4sh/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/setup_core_db_docs/docs/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula database integrated python modeling Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/setup_core_db_docs/docs/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/setup_core_db_docs/docs/"><img src="/setup_core_db_docs/docs/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+        
+        <a class="site-title" href="/setup_core_db_docs/docs/">
+          Script your own environment
+          <span class="site-subtitle"></span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/setup_core_db_docs/docs/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_core_db_docs/docs/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup Xspatula DB</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">AI4SH project</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/setup_core_db_docs/docs/ai4sh/" class="active">Synopsis</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/ai4sh/setup_ai4sh_db">Setup AI4SH DB</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/ai4sh/edit_ai4sh_db">Edit AI4SH DB</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/ai4sh_project/setup_ai4sh_processes">Setup AI4SH processes</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AI4SH project synopsis">
+    <meta itemprop="description" content="The EU funded project AI4SoilHealth (AI4SH) database is built for holding soil data derived both from field sampling and satellite images, with a large number of different instruments, laboratories, sensors and methods being used for capturing the data. To accommodate this data with FAIR principles the framework was used to build a comprehensive postgreSQL database.">
+    <meta itemprop="datePublished" content="2026-03-22T15:13:03+01:00">
+    <meta itemprop="dateModified" content="2026-03-22T15:13:03+01:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/setup_core_db_docs/docs/ai4sh/" itemprop="url">AI4SH project synopsis
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>The EU funded project AI4SoilHealth (AI4SH) database is built for holding soil data derived both from field sampling and satellite images, with a large number of different instruments, laboratories, sensors and methods being used for capturing the data. To accommodate this data with <a href="https://www.go-fair.org/fair-principles/">FAIR (Findability, Accessibility, Interoperability, and Reuse)</a> principles the Xspatula framework was used to build a comprehensive postgreSQL database.</p>
+
+<h2 id="prerequisits">Prerequisits</h2>
+
+<p>To create your own database using the framework, you must first setup a dedicated postgreSQL database as described in the <a href="../setup_db/">framework</a> section of this site. This section will assume that you have already done that, and that setup adhered to the default settings of the framework.</p>
+
+<h2 id="outline-of-the-ai4sh-postgresql-database">Outline of the AI4SH postgreSQL database</h2>
+
+<p>The AI4SH postgres database incudes 6 schemas:</p>
+<ul>
+  <li>utility,</li>
+  <li>community,</li>
+  <li>process,</li>
+  <li>observation_utility, and</li>
+  <li>observation.</li>
+</ul>
+
+<p>NOTE THAT IS NOT FINAL, THERE MIGHT BE MORE OR LESS</p>
+
+<h3 id="utility-schema">Utility schema</h3>
+
+<p>The utility schema contains support tables for general information used across several tables and processes. This is a default framework schema.</p>
+
+<h3 id="community-schema">Community schema</h3>
+
+<p>The community schema contains tables for organisations and users. All users logging into the system must be registered in the table user. This is a default framework schema.</p>
+
+<h3 id="process-schema">Process schema</h3>
+
+<p>The process schema contains all the processes defined for the AI4SH database. This is a default framework schema.</p>
+
+<h3 id="observation_utility-schema">Observation_utility schema</h3>
+
+<p>The observation_utility schema contains generic data required for fulfilling the FAIR principles of data access, including data on quantities, units, methods, positioning, profiles and much more. The data in the observation utility schema pertain to most types of soil data and is not particular for the data collected within the AI4SH project.</p>
+
+<h3 id="observation-schema">Observation schema</h3>
+
+<p>The observation schema is where data on actual soil properties are stored, but it also contains tables that store information on campaigns, and logs for sampling events and observations.</p>
+
+<h2 id="schematic-flow-chart-for-data-entry">Schematic flow chart for data entry</h2>
+
+<p>For entering data on soil properties the flow chart below illustrates what is required to fulfil the data requirement of FAIR principles and how they are reflected in the database. If the chain of data is broken at a single step, the data can not be entered into the database.</p>
+
+<p>TO BE COMPLETED</p>
+
+<h2 id="building-the-ai4sh-database">Building the AI4SH database</h2>
+
+<p>To build the AI4SH database, follow the sequential instructions in the following documents:</p>
+
+<ul>
+  <li>[setup the AI4SH database][setup_db]</li>
+</ul>
+
+<h2 id="acknowledgments-and-funding">Acknowledgments and Funding</h2>
+
+<p>This work was partly done as part of the AI4SoilHealth project, funded by the European Union’s Horizon Europe Research and Innovation Programme under Grant Agreement No. 101086179.</p>
+
+<p><em>Funded by the European Union. The views expressed are those of the authors and do not necessarily reflect those of the European Union or the European Research Executive Agency.</em></p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-22">March 22, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/setup_core_db_docs/docs/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula database integrated python modeling</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/setup_core_db_docs/docs/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr.min.js"></script>
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-store.js"></script>
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

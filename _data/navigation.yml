@@ -1,0 +1,107 @@
+seed_postgres_DB:
+  - title: Seed postgreSQL DB
+    children:
+      - title: "Setup Xspatula DB"
+        url: /setup_db/
+      - title: "AI4SH project"
+        url: /ai4sh_project/
+      - title: "setup DB"
+        url: /setup/setup-db/
+      - title: "setup process"
+        url: /setup-process/setup-process/
+
+framework:
+  - title: Xspatula framework
+    children:
+      - title: "Synopsis"
+        url: /framework/
+      - title: "notebook"
+        url: /framework/notebook/
+      - title: "Scheme file"
+        url: /framework/scheme_file/
+      - title: "Job file"
+        url: /framework/job_file/
+      - title: "Pilot file"
+        url: /framework/pilot_file/
+      - title: "Process file"
+        url: /framework/process_file/
+
+setup_db:
+  - title: Setup Xspatula DB
+    children:
+      - title: "Synopsis"
+        url: /setup_db/
+      - title: "PostgreSQL"
+        url: /setup_db/postgres/
+      - title: "Anaconda"
+        url: /setup_db/anaconda/
+      - title: ".netrc"
+        url: /setup_db/netrc/
+      - title: "Defining schemas & tables"
+        url: /setup_db/schemas_tables/
+      - title: "Defining default users"
+        url: /setup_db/schemas_tables/#table-insert
+
+ai4sh:
+  - title: "AI4SH project"
+    children:
+      - title: "Synopsis"
+        url: /ai4sh/
+      - title: "Setup AI4SH DB"
+        url: /ai4sh/setup_ai4sh_db
+      - title: "Edit AI4SH DB"
+        url: /ai4sh/edit_ai4sh_db
+      - title: "Setup AI4SH processes"
+        url: /ai4sh_project/setup_ai4sh_processes
+
+#setup_processes:
+#  - title: "setup process"
+#    children:
+#      - title: "Manage processs"
+#        url: /setup_process/manage_processes
+#      - title: "Setup new process"
+#        url: /setup_process/setup_new_process
+#      - title: "Update process"
+#        url: /setup_process/update_process
+#      - title: "Delete process"
+#        url: /setup_process/delete_process
+
+# main links
+main:
+  - title: "Xspatula framework"
+    url: /framework/
+    description: "Structure and function of the Xspatula framework"
+  - title: "Setup Xspatula DB"
+    url: /setup_db/
+    description: "Setting up a postgreSQL database with Xspatula framework"
+  #- title: "AI4SH"
+  #  url: /ai4sh/
+  #  description: Setup AI4SoilHealth project
+  #- title: "Setup DB"
+  #  url: /setup/
+  #  description: Setting up a framework postgreSQL # database
+#  - title: "Setup processes"
+#    url: /setup_processes/
+#    description: Managing processs process definitions in the database
+  #- title: "modelling"
+  #  url: /github/
+  #  description: In-situ data modelling - Pyhton package for AI modelling with AI4SH in-situ data
+  # - title: "Sample Posts"
+  #   url: /year-archive/
+  # - title: "Sample Collections"
+  #   url: /collection-archive/
+  #- title: "GitHub"
+  #  url: /websetup/github/
+  #- title: "Sitemap"
+  #  url: /websetup/sitemap/
+  #- title: "ImageMagick"
+  #  url: /websetup/imagemagick/
+  #- title: "ffmpeg"
+  #  url: /websetup/ffmpeg/
+
+
+
+  #- title: "ffmpeg"
+  #    url: /ffmpeg/
+  #- title: "GitHub"
+  #  url: /github/

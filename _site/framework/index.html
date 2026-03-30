@@ -1,0 +1,357 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Xspatula framework - Xspatula database integrated python modeling</title>
+<meta name="description" content="The Xspatula framework is a skeleton allowing users to build a postgreSQL database and define the arguments (parameters) for processes that utilise the database.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula database integrated python modeling">
+<meta property="og:title" content="Xspatula framework">
+<meta property="og:url" content="http://localhost:4000/setup_core_db_docs/docs/framework/">
+
+
+  <meta property="og:description" content="The Xspatula framework is a skeleton allowing users to build a postgreSQL database and define the arguments (parameters) for processes that utilise the database.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-15T15:13:03+01:00">
+
+
+
+  <meta property="article:modified_time" content="2026-03-30T09:34:58+02:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/setup_core_db_docs/docs/framework/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/setup_core_db_docs/docs/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula database integrated python modeling Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/setup_core_db_docs/docs/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--home" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/setup_core_db_docs/docs/"><img src="/setup_core_db_docs/docs/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+        
+        <a class="site-title" href="/setup_core_db_docs/docs/">
+          Script your own environment
+          <span class="site-subtitle"></span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/setup_core_db_docs/docs/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_core_db_docs/docs/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup Xspatula DB</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">Xspatula framework</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/" class="active">Synopsis</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/notebook/">notebook</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/scheme_file/">Scheme file</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/job_file/">Job file</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/pilot_file/">Pilot file</a></li>
+            
+              <li><a href="/setup_core_db_docs/docs/framework/process_file/">Process file</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <div class="archive">
+    
+      <h1 id="page-title" class="page__title">Xspatula framework</h1>
+    
+    <p>The Xspatula framework is a skeleton for building python programs with arguments, input data and results stored in a postgreSQL database. The framework was primarily built for handling large, complex datasets, and for predictive modeling using this data.</p>
+
+<p>When setting up an Xspatula framework you first have to setup a postgreSQL database and then  define the parameters (arguments) for processes that utilise the database. Once the framework is set up you have to add the processes you want to run by either importing and linking existing python packages, create python bindings or write your own processes in python code. Each python operation that you want to include must then be defined as a process in the postgreSQL database.</p>
+
+<h2 id="framework-interface">Framework interface</h2>
+
+<p>At its core the framework is a set of python scripts that create, update, populate and delete postgreSQL databases, schemas and tables. There is no graphical user interface, all commands are run via JSON (JavaScript Object Notation) commands. At first this might seem cumbersome but it comes with great advantages: you can safely update and delete trials and rerun the whole seeding procedure in a matter of seconds. And once you start using the framework for your own production you will always have a full documentation of all the process steps.</p>
+
+<h3 id="hierarchical-scheme-and-project-structure">Hierarchical scheme and project structure</h3>
+
+<p>Everything in the framework is defined as a project, with a hierarchical structure defining <a href="./scheme_file/">scheme</a>, <a href="./job_file/">project (job)</a> and <a href="./process_file/">process(es)</a> to run. The scheme, project and processes are all defined using JSON files, where:</p>
+
+<ul>
+  <li>scheme defines user, database and the project to run,</li>
+  <li>project (job) defines the processes to run, and</li>
+  <li>process defines the python operation to run and all required arguments for that particular process.</li>
+</ul>
+
+<h3 id="notebook-interface">Notebook interface</h3>
+
+<p>The framework is built for running with Jupyter notebooks. The core framework includes three notebooks for seeding the postgreSQL database:</p>
+
+<ul>
+  <li>./setup/setup_db.ipynb</li>
+  <li>./setup/delete_db.ipynb</li>
+  <li>./setup/setup_processes.ipynb</li>
+</ul>
+
+<p>In the <a href="./notebook/">notebooks</a> you define the scheme and the project (job) that you want to run.</p>
+
+<p>All python operations specific to data and modeling must be developed as part of building up your own framework.</p>
+
+<h2 id="xspatula-access-and-license">Xspatula access and license</h2>
+
+<p>The Xspatula framework is provided under the following licenses:</p>
+
+<ul>
+  <li>Data License: Creative Commons Attribution license (<strong>CC-BY</strong>)</li>
+  <li>Code License: Massachusetts Institute of Technology License (<strong>MIT License</strong>)</li>
+</ul>
+
+
+
+<h3 class="archive__subtitle">Recent posts</h3>
+
+
+
+
+<div class="entries-list">
+  
+
+
+
+
+</div>
+
+
+
+
+  </div>
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/setup_core_db_docs/docs/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula database integrated python modeling</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/setup_core_db_docs/docs/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr.min.js"></script>
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-store.js"></script>
+<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

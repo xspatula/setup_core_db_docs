@@ -1,0 +1,1 @@
+Sitemap: http://localhost:4000/setup_core_db_docs/docs/sitemap.xml
