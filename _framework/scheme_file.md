@@ -272,4 +272,4 @@ As noted above, if any of the default values appear in an individual process JSO
 
 [notebook]: ../notebook/
 
-[netrc]: ../setup_db/netrc/
+[netrc]: ../../setup_db/netrc/

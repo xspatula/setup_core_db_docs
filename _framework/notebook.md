@@ -91,11 +91,11 @@ See the documents on [job file][job_file], [pilot file][pilot_file] and [process
 
 [vscode]: https://code.visualstudio.com
 
-[postgres]: ../setup_db/postgres/
+[postgres]: ../../setup_db/postgres/
 
-[anaconda]: ../setup_db/anaconda/
+[anaconda]: ../../setup_db/anaconda/
 
-[netrc]: ../setup_db/netrc/
+[netrc]: ../../setup_db/netrc/
 
 [download_anaconda]: https://www.anaconda.com/download
 

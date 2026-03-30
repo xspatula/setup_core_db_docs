@@ -20,6 +20,10 @@ If you do not define:
 
 The values for those arguments will be inherited from the [scheme file][scheme_file].
 
+The process file(s) to run are defined in the [job file][job_file].
+
+## Process file for creating database schemas
+
 The process create_schema requires a single parameter (_schema_) and the process file for setting up the default schemas of the framework database looks like this:
 
 ```
@@ -69,3 +73,5 @@ If you want to change verbosity, execute, overwrite, or delete for a particular 
 ```
 
 [scheme_file]: ../scheme_file
+
+[job_file]: ../job_file
