@@ -19,19 +19,19 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 locale                   : "en-US"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
 # ===== START edits by TG 20251115 =====
-title                    : "In-situ data"
-title_separator          : ""
-subtitle                 : ""
+title                    : "Xspatula"
+title_separator          : "-"
+subtitle                 : "Database-integrated Python modelling"
 name                     : "Thomas Gumbricht"
-description              : "Dirty hands is a prerequist."
+description              : "Open-source framework for scripting database-integrated Python workflows."
 url                      : # "https://karttur-v2.github.io"
 baseurl                  : "" # "/site-setup"
 repository               : # "karttur-v2/site-setup"
 # ===== END edits by TG 20251115 =====
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # ===== START edits by TG 20251115 =====
-logo                     : "/assets/media/ai4soilhealth_4f.png"
-masthead_title           : "In-situ data" # overrides the website title displayed in the masthead, use " " for no title
+logo                     : "/assets/media/xspectre_logo-trans_480.png"
+masthead_title           : "Script your own environment" # overrides the website title displayed in the masthead, use " " for no title
 # ===== END edits by TG 20251115 =====
 breadcrumbs              : # true, false (default)
 words_per_minute         : 200

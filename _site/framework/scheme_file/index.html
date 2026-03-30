@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Xspatula scheme file - Xspatula database integrated python modeling</title>
+<!-- begin _includes/seo.html --><title>Xspatula scheme file</title>
 <meta name="description" content="In the Xspatula framework a scheme file defines: 1. the project you want to run, 2. your login credentials for accessing the database, and 3. default settings used throughout the processing of all processes linked to the project. Scheme files are written in JSON format.">
 
 
@@ -22,9 +22,9 @@
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="Xspatula database integrated python modeling">
+<meta property="og:site_name" content="Xspatula">
 <meta property="og:title" content="Xspatula scheme file">
-<meta property="og:url" content="http://localhost:4000/setup_core_db_docs/docs/framework/scheme_file/">
+<meta property="og:url" content="http://localhost:4000/framework/scheme_file/">
 
 
   <meta property="og:description" content="In the Xspatula framework a scheme file defines: 1. the project you want to run, 2. your login credentials for accessing the database, and 3. default settings used throughout the processing of all processes linked to the project. Scheme files are written in JSON format.">
@@ -48,7 +48,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/setup_core_db_docs/docs/framework/scheme_file/">
+<link rel="canonical" href="http://localhost:4000/framework/scheme_file/">
 
 
 
@@ -65,7 +65,7 @@
 
 
 
-  <link href="/setup_core_db_docs/docs/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula database integrated python modeling Feed">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula Feed">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
@@ -74,7 +74,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/setup_core_db_docs/docs/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/main.css">
 <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
 
@@ -104,24 +104,30 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/setup_core_db_docs/docs/"><img src="/setup_core_db_docs/docs/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
         
-        <a class="site-title" href="/setup_core_db_docs/docs/">
+        <a class="site-title" href="https://xspatula.github.io">
           Script your own environment
-          <span class="site-subtitle"></span>
+          <span class="site-subtitle">Database-integrated Python modelling</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a
-                href="/setup_core_db_docs/docs/framework/"
+                href="/framework/"
                  title="Structure and function of the Xspatula framework"
                 
               >Xspatula framework</a>
             </li><li class="masthead__menu-item">
               <a
-                href="/setup_core_db_docs/docs/setup_db/"
+                href="/setup_db/"
                  title="Setting up a postgreSQL database with Xspatula framework"
                 
               >Setup Xspatula DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -175,17 +181,17 @@
           
           <ul>
             
-              <li><a href="/setup_core_db_docs/docs/framework/">Synopsis</a></li>
+              <li><a href="/framework/">Synopsis</a></li>
             
-              <li><a href="/setup_core_db_docs/docs/framework/notebook/">notebook</a></li>
+              <li><a href="/framework/notebook/">notebook</a></li>
             
-              <li><a href="/setup_core_db_docs/docs/framework/scheme_file/" class="active">Scheme file</a></li>
+              <li><a href="/framework/scheme_file/" class="active">Scheme file</a></li>
             
-              <li><a href="/setup_core_db_docs/docs/framework/job_file/">Job file</a></li>
+              <li><a href="/framework/job_file/">Job file</a></li>
             
-              <li><a href="/setup_core_db_docs/docs/framework/pilot_file/">Pilot file</a></li>
+              <li><a href="/framework/pilot_file/">Pilot file</a></li>
             
-              <li><a href="/setup_core_db_docs/docs/framework/process_file/">Process file</a></li>
+              <li><a href="/framework/process_file/">Process file</a></li>
             
           </ul>
           
@@ -211,7 +217,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="http://localhost:4000/setup_core_db_docs/docs/framework/scheme_file/" itemprop="url">Xspatula scheme file
+            <a href="http://localhost:4000/framework/scheme_file/" itemprop="url">Xspatula scheme file
 </a>
           </h1>
           
@@ -494,7 +500,7 @@ DB_PASSWORD=db_user_password
       
   <nav class="pagination">
     
-      <a href="/setup_core_db_docs/docs/framework/vscode/" class="pagination--pager" title="Visual Studio Code">Previous</a>
+      <a href="/framework/vscode/" class="pagination--pager" title="Visual Studio Code">Previous</a>
     
     
       <a href="#" class="pagination--pager disabled">Next</a>
@@ -573,26 +579,26 @@ DB_PASSWORD=db_user_password
     
 
     
-      <li><a href="/setup_core_db_docs/docs/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
     
   </ul>
 </div>
 
 
-<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula database integrated python modeling</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
 
     
-  <script src="/setup_core_db_docs/docs/assets/js/main.min.js"></script>
+  <script src="/assets/js/main.min.js"></script>
 
 
 
 
-<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr.min.js"></script>
-<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-store.js"></script>
-<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-en.js"></script>
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
 
 
 

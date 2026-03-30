@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Anaconda - virtual python environments - Xspatula database integrated python modeling</title>
+<!-- begin _includes/seo.html --><title>Anaconda - virtual python environments - Xspatula</title>
 <meta name="description" content="Anaconda is an application that allows setting up virtual Python environments. You define the Python version and packages to include with each virtual environment and then Anaconda creates a self-contained Python environment for you.">
 
 
@@ -22,9 +22,9 @@
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="Xspatula database integrated python modeling">
+<meta property="og:site_name" content="Xspatula">
 <meta property="og:title" content="Anaconda - virtual python environments">
-<meta property="og:url" content="http://localhost:4000/setup_core_db_docs/docs/setup_db/anaconda/">
+<meta property="og:url" content="http://localhost:4000/setup_db/anaconda/">
 
 
   <meta property="og:description" content="Anaconda is an application that allows setting up virtual Python environments. You define the Python version and packages to include with each virtual environment and then Anaconda creates a self-contained Python environment for you.">
@@ -48,7 +48,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/setup_core_db_docs/docs/setup_db/anaconda/">
+<link rel="canonical" href="http://localhost:4000/setup_db/anaconda/">
 
 
 
@@ -65,7 +65,7 @@
 
 
 
-  <link href="/setup_core_db_docs/docs/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula database integrated python modeling Feed">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula Feed">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
@@ -74,7 +74,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/setup_core_db_docs/docs/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/main.css">
 <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
 
@@ -104,24 +104,30 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/setup_core_db_docs/docs/"><img src="/setup_core_db_docs/docs/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
         
-        <a class="site-title" href="/setup_core_db_docs/docs/">
+        <a class="site-title" href="https://xspatula.github.io">
           Script your own environment
-          <span class="site-subtitle"></span>
+          <span class="site-subtitle">Database-integrated Python modelling</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a
-                href="/setup_core_db_docs/docs/framework/"
+                href="/framework/"
                  title="Structure and function of the Xspatula framework"
                 
               >Xspatula framework</a>
             </li><li class="masthead__menu-item">
               <a
-                href="/setup_core_db_docs/docs/setup_db/"
+                href="/setup_db/"
                  title="Setting up a postgreSQL database with Xspatula framework"
                 
               >Setup Xspatula DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -175,17 +181,17 @@
           
           <ul>
             
-              <li><a href="/setup_core_db_docs/docs/setup_db/">Synopsis</a></li>
+              <li><a href="/setup_db/">Synopsis</a></li>
             
-              <li><a href="/setup_core_db_docs/docs/setup_db/postgres/">PostgreSQL</a></li>
+              <li><a href="/setup_db/postgres/">PostgreSQL</a></li>
             
-              <li><a href="/setup_core_db_docs/docs/setup_db/anaconda/" class="active">Anaconda</a></li>
+              <li><a href="/setup_db/anaconda/" class="active">Anaconda</a></li>
             
-              <li><a href="/setup_core_db_docs/docs/setup_db/netrc/">.netrc</a></li>
+              <li><a href="/setup_db/netrc/">.netrc</a></li>
             
-              <li><a href="/setup_core_db_docs/docs/setup_db/schemas_tables/">Defining schemas & tables</a></li>
+              <li><a href="/setup_db/schemas_tables/">Defining schemas & tables</a></li>
             
-              <li><a href="/setup_core_db_docs/docs/setup_db/schemas_tables/#table-insert">Defining default users</a></li>
+              <li><a href="/setup_db/schemas_tables/#table-insert">Defining default users</a></li>
             
           </ul>
           
@@ -211,7 +217,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="http://localhost:4000/setup_core_db_docs/docs/setup_db/anaconda/" itemprop="url">Anaconda - virtual python environments
+            <a href="http://localhost:4000/setup_db/anaconda/" itemprop="url">Anaconda - virtual python environments
 </a>
           </h1>
           
@@ -230,9 +236,9 @@
 
 <h2 id="framework-virtual-python-environment">Framework virtual python environment</h2>
 
-<p>To create a virtual python environment for the basic database functions of the framework you can use the file <em>xspatula_framework_py_3.12.yml</em>. It is included in the Xspatula repo under the path ./anaconda and shown below.</p>
+<p>To create a virtual python environment for the database functions of the framework you can use the file <em>xspatula_py_3.12.yml</em>. It is included in the Xspatula repo under the path ./anaconda and shown below.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: xspatula_framework_py_3.12
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: xspatula_py_3.12
 channels:
   - conda-forge
   - defaults
@@ -244,14 +250,14 @@ dependencies:
   - python-dotenv
 </code></pre></div></div>
 
-<p>Open a Terminal window and navigate to the folder that contains <em>xspatula_framework_py_3.12.yml</em>. Then execute the command <em>conda env create</em> as shown below. When you start a notebook in the framework package for the first time you will be asked to select Python environment. Select the <em>xspatula_framework_py_3.12.yml</em> as the Python environment.</p>
+<p>Open a Terminal window and navigate to the folder that contains <em>xspatula_py_3.12.yml</em>. Then execute the command <em>conda env create</em> as shown below. When you start a notebook in the framework package for the first time you will be asked to select Python environment. Select the <em>xspatula_py_3.12.yml</em> as the Python environment.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda env create --file xspatula_framework_py_3.12.yml
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda env create --file xspatula_py_3.12.yml
 </code></pre></div></div>
 
 <p>If you want to remove the virtual environment, run the command:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda remove --name xspatula_framework_py_3.12 --all
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda remove --name xspatula_py_3.12 --all
 </code></pre></div></div>
 
 
@@ -277,7 +283,7 @@ dependencies:
       <a href="#" class="pagination--pager disabled">Previous</a>
     
     
-      <a href="/setup_core_db_docs/docs/setup_db/" class="pagination--pager" title="Setup Xspatula DB">Next</a>
+      <a href="/setup_db/" class="pagination--pager" title="Setup Xspatula DB">Next</a>
     
   </nav>
 
@@ -353,26 +359,26 @@ dependencies:
     
 
     
-      <li><a href="/setup_core_db_docs/docs/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
     
   </ul>
 </div>
 
 
-<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula database integrated python modeling</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
 
     
-  <script src="/setup_core_db_docs/docs/assets/js/main.min.js"></script>
+  <script src="/assets/js/main.min.js"></script>
 
 
 
 
-<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr.min.js"></script>
-<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-store.js"></script>
-<script src="/setup_core_db_docs/docs/assets/js/lunr/lunr-en.js"></script>
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
 
 
 
