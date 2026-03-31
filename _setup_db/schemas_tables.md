@@ -179,8 +179,8 @@ You can use the suggested users to test setting up the database. Then delete the
 
 The most important insert process is the adding of the root and sub processes that define the structure for adding any other process. All definitions related to defining processes are in the schema _process_ holding the following tables:
 
-- root_process (for grouping sub_processes)
-- sub_process (actual processes linked to framework script functions)
+- root_process (for grouping processes)
+- process (actual processes linked to framework script functions)
 - process_parameter (parameters expected and required for running a process)
 - process_parameter_set_value (if a text parameter can only take a on a set of distinct values)
 - process_parameter_minmax (if a numerical parameter can only take on a limited range)
