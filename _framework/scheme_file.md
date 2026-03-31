@@ -127,7 +127,14 @@ You can also add additional postgres users (pg_user in postgres jargon, which is
 - user_cat_4,
 - user_cat_5 [for users who can SELECT, INSERT, UPDATE AND DELETE in most tables]
 
-The privileges for the user categories listed above are hardcoded in the Python package and are only meant as a starting point. You can later add more pg_users through a separate process [NOT YET IMPLEMENTED]. It is recommended that you at least include the pg_user for login_evaluation when you setup a new database.
+The privileges for the user categories listed above are granted and revoked from the JSON files
+
+```
+./setup/src_setup/lib_setup/roles_grants.json
+./setup/src_setup/lib_setup/revoke_privileges.json
+```
+
+These are only meant as a starting point. You can later add more pg_users through a separate process [NOT YET IMPLEMENTED]. It is recommended that you at least include the pg_user for login_evaluation when you setup a new database.
 
 The scheme file example below shows how to set up one pg_user per predefined pg_user group.
 ```
