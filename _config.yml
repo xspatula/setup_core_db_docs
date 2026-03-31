@@ -26,7 +26,7 @@ name                     : "Thomas Gumbricht"
 description              : "Open-source framework for scripting database-integrated Python workflows."
 url                      : "https://xspatula.github.io"
 baseurl                  : ""
-repository               : "xspatula/setup_core_db_docs"
+repository               : "xspatula/seed_ai4sh_db_docs"
 # bundle exec jekyll build -d /Users/thomasgumbricht/GitHub_AI4SH/in-situ_data_docs/docs
 # ===== END edits by TG 20251115 =====
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -347,9 +347,9 @@ compress_html:
 
 # Collections
 collections:
-  framework:
-    output: true
   setup_db:
+    output: true
+  setup_processes:
     output: true
   ai4sh:
     output: false

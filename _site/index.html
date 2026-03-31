@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Xspatula</title>
-<meta name="description" content="The Xspatula framework is an advanced tool for developing database integrated python packages.">
+<meta name="description" content="The EU funded project AI4SoilHealth (AI4SH) database is built for holding soil data derived both from field sampling and satellite images. To accommodate this data with FAIR principles the Xspatula framework was used to build a comprehensive postgreSQL database. This site documents how to seed that database.">
 
 
   <meta name="author" content="Thomas Gumbricht">
@@ -25,7 +25,7 @@
 <meta property="og:url" content="http://localhost:4000/">
 
 
-  <meta property="og:description" content="The Xspatula framework is an advanced tool for developing database integrated python packages.">
+  <meta property="og:description" content="The EU funded project AI4SoilHealth (AI4SH) database is built for holding soil data derived both from field sampling and satellite images. To accommodate this data with FAIR principles the Xspatula framework was used to build a comprehensive postgreSQL database. This site documents how to seed that database.">
 
 
 
@@ -117,19 +117,19 @@
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a
-                href="/framework/"
-                 title="Structure and function of the Xspatula framework"
-                
-              >Xspatula framework</a>
-            </li><li class="masthead__menu-item">
-              <a
                 href="/setup_db/"
-                 title="Setting up a postgreSQL database with Xspatula framework"
+                 title="Setting up the AI4SoilHealth database"
                 
-              >Setup Xspatula DB</a>
+              >Setup AI4SH DB</a>
             </li><li class="masthead__menu-item">
               <a
-                href="/about/"
+                href="/setup_process/"
+                 title="Setting up the AI4SoilHealth processes"
+                
+              >Setup AI4SH processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="https://xspatula.github.io/about/"
                 
                 
               >About</a>
@@ -298,20 +298,55 @@
     
       <h1 id="page-title" class="page__title"></h1>
     
-    <h1 id="xspatula-python-and-db-model-environment">Xspatula python and DB model environment</h1>
+    <h1 id="building-the-ai4sh-db-with-xspatula">Building the AI4SH DB with Xspatula</h1>
 
-<p>Xspatula is an advanced tool for developing database integrated python packages. You can also use Xspatula just for setting up a database without using the framework for something else. The framework is freely available on GitHub.</p>
+<p>The EU funded project AI4SoilHealth (AI4SH) database is built for holding soil data derived both from field sampling and satellite images, with a large number of different instruments, laboratories, sensors and methods being used for capturing the data. To accommodate this data with <a href="https://www.go-fair.org/fair-principles/">FAIR (Findability, Accessibility, Interoperability, and Reuse)</a> principles the <a href="https://xspatula.github.io/setup_core_db_docs/framework/">Xspatula framework</a> was used to build a comprehensive postgreSQL database.</p>
 
-<p>The get started, clone or download Xspatula from GitHub. Then follow the instructions under <a href="./setup_db">Setup Xspatula DB</a>. If you get stuck have a look in the documents under <a href="./framework">Xspatula framework</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<h2 id="xspatula-access-and-license">Xspatula access and license</h2>
+<p>To seed the AI4SH database you must first have the Xspatula framework installed and a postgreSQL database running. These steps are described in the companion site <a href="https://xspatula.github.io/setup_core_db_docs/">Setup core db</a>. This site assumes you have completed those steps.</p>
 
-<p>The Xspatula framework is provided under the following licenses:</p>
+<p>You also need to clone or download the AI4SH seed package from GitHub:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/xspatula/seed_ai4sh_db
+</code></pre></div></div>
+
+<h2 id="outline-of-the-ai4sh-postgresql-database">Outline of the AI4SH postgreSQL database</h2>
+
+<p>The AI4SH postgres database contains 9 schemas:</p>
 
 <ul>
-  <li>Data License: Creative Commons Attribution license (<strong>CC-BY</strong>)</li>
-  <li>Code License: Massachusetts Institute of Technology License (<strong>MIT License</strong>)</li>
+  <li><strong>utility</strong> — support tables for general information used across schemas (default framework schema)</li>
+  <li><strong>community</strong> — organisations and users; all users logging into the system must be registered here (default framework schema)</li>
+  <li><strong>process</strong> — all processes defined for the AI4SH database (default framework schema)</li>
+  <li><strong>landscape_utility</strong> — reference tables for landscape classification</li>
+  <li><strong>landscape</strong> — landscape observations</li>
+  <li><strong>observation_utility</strong> — catalogues and reference data required for FAIR-compliant soil observations (units, methods, instruments, taxa, etc.)</li>
+  <li><strong>observation</strong> — actual soil property data, organised through datasets, campaigns, samples and observations</li>
+  <li><strong>edna_utility</strong> — reference tables for environmental DNA methods</li>
+  <li><strong>edna</strong> — eDNA observations</li>
 </ul>
+
+<h2 id="seeding-the-database">Seeding the database</h2>
+
+<p>The AI4SH database is seeded in two stages:</p>
+
+<ol>
+  <li><strong><a href="/setup_db/">Setup DB</a></strong> — defines all schemas and tables using the Jupyter notebook <code class="language-plaintext highlighter-rouge">setup/setup_db.ipynb</code></li>
+  <li><strong><a href="/setup_process/">Setup processes</a></strong> — registers all framework processes in the database using the notebook <code class="language-plaintext highlighter-rouge">setup/setup_processes.ipynb</code></li>
+</ol>
+
+<p>Both stages use the Xspatula JSON-driven workflow: a <em>scheme file</em> points to a <em>job file</em>, which links to a <em>pilot file</em> listing the individual <em>process files</em> to execute. For a detailed explanation of this hierarchy, see the <a href="https://xspatula.github.io/setup_core_db_docs/framework/">Xspatula framework documentation</a>.</p>
+
+<h2 id="schematic-data-entry-flow">Schematic data entry flow</h2>
+
+<p>For entering soil property data the entire chain from dataset → campaign → sampling log → sample → observation must be complete. If any link in this chain is missing the data cannot be entered into the database. The observation_utility schema provides all the reference catalogues (units, methods, instruments, etc.) that observations depend on.</p>
+
+<h2 id="acknowledgments-and-funding">Acknowledgments and Funding</h2>
+
+<p>This work was done as part of the AI4SoilHealth project, funded by the European Union’s Horizon Europe Research and Innovation Programme under Grant Agreement No. 101086179.</p>
+
+<p><em>Funded by the European Union. The views expressed are those of the authors and do not necessarily reflect those of the European Union or the European Research Executive Agency.</em></p>
 
 
 

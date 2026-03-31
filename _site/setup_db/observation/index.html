@@ -1,0 +1,504 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Observation Schema - Xspatula</title>
+<meta name="description" content="The observation schema stores actual soil property data, organised hierarchically through data owners, datasets, campaigns, sampling logs, samples and observations. All observation records depend on the observation_utility reference catalogues.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula">
+<meta property="og:title" content="Observation Schema">
+<meta property="og:url" content="http://localhost:4000/setup_db/observation/">
+
+
+  <meta property="og:description" content="The observation schema stores actual soil property data, organised hierarchically through data owners, datasets, campaigns, sampling logs, samples and observations. All observation records depend on the observation_utility reference catalogues.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-31T08:00:00+02:00">
+
+
+
+  <meta property="article:modified_time" content="2026-03-31T08:00:00+02:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/setup_db/observation/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+        
+        <a class="site-title" href="https://xspatula.github.io">
+          Script your own environment
+          <span class="site-subtitle">Database-integrated Python modelling</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/setup_db/"
+                 title="Setting up the AI4SoilHealth database"
+                
+              >Setup AI4SH DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_process/"
+                 title="Setting up the AI4SoilHealth processes"
+                
+              >Setup AI4SH processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="https://xspatula.github.io/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">Setup AI4SoilHealth database</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/setup_db/">Introduction</a></li>
+            
+              <li><a href="/setup_db/schemas/">Schemas</a></li>
+            
+              <li><a href="/setup_db/utility/">Utility</a></li>
+            
+              <li><a href="/setup_db/community/">Community</a></li>
+            
+              <li><a href="/setup_db/process/">Process</a></li>
+            
+              <li><a href="/setup_db/observation_utility/">Observation utility</a></li>
+            
+              <li><a href="/setup_db/observation/" class="active">Observation</a></li>
+            
+              <li><a href="/setup_db/landscape/">Landscape</a></li>
+            
+              <li><a href="/setup_db/edna/">eDNA</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Observation Schema">
+    <meta itemprop="description" content="The observation schema stores actual soil property data, organised hierarchically through data owners, datasets, campaigns, sampling logs, samples and observations. All observation records depend on the observation_utility reference catalogues.">
+    <meta itemprop="datePublished" content="2026-03-31T08:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-03-31T08:00:00+02:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/setup_db/observation/" itemprop="url">Observation Schema
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>The <code class="language-plaintext highlighter-rouge">observation</code> schema stores actual soil property data. Data is organised in a strict hierarchy: an observation belongs to a sample, a sample belongs to a sampling log, a sampling log belongs to a campaign, a campaign belongs to a dataset. Every step in this chain must exist before the next can be created. All observation values link to reference records in <code class="language-plaintext highlighter-rouge">observation_utility</code>.</p>
+
+<h2 id="process-files">Process files</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Tables created</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_data_owner_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">data_owner</code></td>
+      <td>Simplified copy of <code class="language-plaintext highlighter-rouge">community.organisation</code> — passive data suppliers who need not be full system users</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_person_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">person</code></td>
+      <td>Simplified copy of <code class="language-plaintext highlighter-rouge">community.user</code> with no login credentials — allows attributing data to non-registered persons (GDPR consideration)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_dataset_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">dataset</code></td>
+      <td>Top-level grouping of related data (e.g. LUCAS, AI4SoilHealth)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_campaign_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">campaign</code>, <code class="language-plaintext highlighter-rouge">campaign_meta</code>, <code class="language-plaintext highlighter-rouge">campaign_method_tier</code>, <code class="language-plaintext highlighter-rouge">campaign_location</code>, <code class="language-plaintext highlighter-rouge">campaign_provision</code>, <code class="language-plaintext highlighter-rouge">campaign_setting</code></td>
+      <td>Child of dataset; captures details of a specific data collection effort</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_sampling_log_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">sampling_log</code></td>
+      <td>A sampling event — one or multiple samples taken with consistent methods over a period</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_sample_geolocation_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">sample_geolocation</code></td>
+      <td>Spatial coordinates for a geolocated sample</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_sample_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">sample</code></td>
+      <td>An individual sample acquired under a sampling log</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_observation_log_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">observation_log</code></td>
+      <td>Links a sampling log to a provision; records the logistics (preservation, storage, transportation) of getting the sample to analysis</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_observation_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">observation</code></td>
+      <td>The actual measured value for a specific indicator from a specific provision</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_infiltration_beerkan_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">infiltration_beerkan</code></td>
+      <td>BeerKan infiltration measurements</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_macrofauna_image_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">macrofauna_image</code></td>
+      <td>Image records for macrofauna observations</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_macrofauna_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">macrofauna</code></td>
+      <td>Macrofauna count and biomass observations</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">observation/observation_measurement_v10_sql.json</code></td>
+      <td><code class="language-plaintext highlighter-rouge">measurement</code></td>
+      <td>General sensor or instrument measurements</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="table-hierarchy">Table hierarchy</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_owner
+dataset (→ data_owner)
+  campaign (→ dataset)
+    campaign_meta (→ campaign, observation_utility.*)
+    campaign_method_tier (→ campaign)
+    campaign_location (→ campaign, utility.territory, observation_utility.spatial_reference)
+    campaign_provision (→ campaign, observation_utility.provision)
+    campaign_setting (→ campaign, observation_utility.setting_system)
+    sampling_log (→ campaign)
+      sample_geolocation (→ sampling_log, observation_utility.spatial_reference)
+      sample (→ sampling_log)
+        observation_log (→ sampling_log, observation_utility.provision)
+          observation (→ observation_log, observation_utility.provision_indicator)
+</code></pre></div></div>
+
+<h2 id="key-tables-in-detail">Key tables in detail</h2>
+
+<h3 id="dataset">dataset</h3>
+
+<p>A dataset is a coherent collection of data from one or more campaigns — for example, LUCAS 2009–2022 or the AI4SoilHealth project. Datasets are associated with a <code class="language-plaintext highlighter-rouge">data_owner</code>.</p>
+
+<p>Key columns: <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">data_owner_id</code>, <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">alias</code>, <code class="language-plaintext highlighter-rouge">status_code</code>.</p>
+
+<h3 id="campaign">campaign</h3>
+
+<p>A campaign is a child of a dataset where sampling methods may vary in detail. For example, LUCAS 2009 and LUCAS 2015 are two campaigns within the LUCAS dataset. Each AI4SH pilot site is a separate campaign.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">campaign</code> table has five companion meta tables:</p>
+
+<ul>
+  <li><strong>campaign_meta</strong> — abstract, DOI, URL, keywords, time series flag, license, taxonomic scope</li>
+  <li><strong>campaign_method_tier</strong> — boolean flags for which method tiers (in-situ, in-home, in-lab, from-drone, from-satellite, etc.) are used in the campaign</li>
+  <li><strong>campaign_location</strong> — geographic bounding box and spatial reference</li>
+  <li><strong>campaign_provision</strong> — which provisions (instrument+provider+method_tier combinations) are used</li>
+  <li><strong>campaign_setting</strong> — which setting systems (field, forest, lake, etc.) apply</li>
+</ul>
+
+<h3 id="sampling_log">sampling_log</h3>
+
+<p>A sampling log is a sampling event within a campaign, covering one or multiple samples taken with consistent methods. It records the responsible person and time window.</p>
+
+<h3 id="sample-and-sample_geolocation">sample and sample_geolocation</h3>
+
+<p><code class="language-plaintext highlighter-rouge">sample</code> represents an individual physical sample. <code class="language-plaintext highlighter-rouge">sample_geolocation</code> optionally records its latitude, longitude, elevation, and spatial reference. Decoupled from <code class="language-plaintext highlighter-rouge">sample</code> so that non-geolocated samples are still representable.</p>
+
+<h3 id="observation_log-and-observation">observation_log and observation</h3>
+
+<p><code class="language-plaintext highlighter-rouge">observation_log</code> bridges a sampling log to a provision (instrument + service + method tier) and records the sample handling chain (preservation, storage, transportation method). <code class="language-plaintext highlighter-rouge">observation</code> stores the actual numeric or text result for a specific <code class="language-plaintext highlighter-rouge">provision_indicator</code> (a measurable value from a specific provision).</p>
+
+<h3 id="specialised-observation-tables">Specialised observation tables</h3>
+
+<p>Three additional tables cover non-standard observation types:</p>
+
+<ul>
+  <li><strong>infiltration_beerkan</strong> — BeerKan ring infiltration test results</li>
+  <li><strong>macrofauna</strong> and <strong>macrofauna_image</strong> — macrofauna counts, biomass, and associated image records</li>
+  <li><strong>measurement</strong> — direct sensor readings (e.g. from a handheld spectral sensor)</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-31">March 31, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/setup_db/landscape/" class="pagination--pager" title="Landscape Schema">Previous</a>
+    
+    
+      <a href="/setup_db/observation_utility/" class="pagination--pager" title="Observation Utility Schema">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -4,44 +4,45 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Purpose
 
-`setup_core_db_docs` is a documentation site written in Markdown using the Jekyll theme Minimal Mistakes (https://mmistakes.github.io/minimal-mistakes/). The site introduces the Xspatula framework and guides users through setting up a PostgreSQL database with it.
+`seed_ai4sh_db_docs` is a documentation site written in Markdown using the Jekyll theme Minimal Mistakes (https://mmistakes.github.io/minimal-mistakes/). The site is an instructions for how to seed the ai4sh (AI4SoilHealth) database using the Xspatula framework introduced in the sibling directory `setup_core_db_docs`.
 
 The Xspatula framework is written in Python and uses JSON files to define all executions and processes. These JSON files are called from Jupyter notebooks. The framework is available:
-- As a sibling directory at relative path `../setup_core_db`
+- As a sibling directory at relative path `../seed_ai4sh_db`
 - On GitHub at https://github.com/xspatula/setup_core_db
 
 ## Site Architecture
 
 **Theme**: Minimal Mistakes Jekyll theme, version 4.27.3 (local install, not remote)
-**URL (production)**: `https://xspatula.github.io/setup_core_db_docs/docs`
+**URL (production)**: `https://xspatula.github.io/seed_ai4sh_db_docs/docs`
 **Search**: Lunr (client-side, full content)
 
 ### Collections
 
 | Collection | Directory | Output | Purpose |
 |---|---|---|---|
-| `framework` | `_framework/` | true | Framework architecture documentation |
+
 | `setup_db` | `_setup_db/` | true | Step-by-step database setup guide |
+| `setup_processes` | `_setup_processes/` | true | Step-by-step database processes setup guide |
 | `ai4sh` | `ai4sh/` | false | AI4SoilHealth project case study |
 
 ### Navigation Structure
 
 ```
 Top navbar:
-├─ Xspatula framework  →  _framework/
-└─ Setup Xspatula DB   →  _setup_db/
+├─ Setup AI4SoilHealth DB   →  _setup_db/
+└─ Setup AI4SoilHealth processes   →  _setup_processes/
 
-Framework subsection (7 pages):
-  introduction, notebook, scheme_file, job_file, pilot_file, process_file, vscode
+Setup DB subsection (9 pages):
+  introduction, schemas, process, community, utility, observation_utility, observation, landscape, edna
 
-Setup DB subsection (5 pages):
-  introduction, postgres, anaconda, netrc, schemas_tables
+Setup DB processes (6 pages):
+    introduction, root_process, community, utility, observation_utility, observation, edna
 ```
 
 ### Key Directories
 
 - `_data/` — `navigation.yml` (site nav) and `ui-text.yml` (theme UI strings)
-- `_setup_processes/` — supplementary process documentation (not in main nav yet)
+- `_setup_processes/` — supplementary process documentation
 - `assets/media/` — logos and schema diagram images
 - `_site/` — generated output (do not edit manually)
 
@@ -64,10 +65,8 @@ To serve locally: `bundle exec jekyll serve --config _config.yml,_config_local.y
 ## Content Scope
 
 The documentation covers:
-1. **Framework fundamentals** — scheme files, job files, pilot files, process files, notebook interface
-2. **Database setup** — PostgreSQL installation, Anaconda environment, `.netrc` credentials, defining schemas and tables
-3. **Security** — use of `.netrc` and `.env` files; six user categories (`user_cat_0` through `user_cat_5`) with varying PostgreSQL privileges
-4. **AI4SH case study** — EU-funded AI4SoilHealth project using six database schemas: utility, community, process, observation_utility, observation
+2. **AI4SH Database setup** — defining schemas and tables, 9 pages
+4. **AI4SH process setup** — defining processses, 6 pages
 
 ## Licenses
 

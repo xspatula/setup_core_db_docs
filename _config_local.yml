@@ -346,16 +346,18 @@ compress_html:
 
 # Collections
 collections:
-  in-situ_methods:
+  setup_db:
+    output: true
+  setup_processes:
     output: true
 
 # collection navigation orders
-nav_order:
-  in-situ_methods:
-    - chruby-installation
-    - ruby-installation
-    - ruby-gem-update
-    - ruby-collection
+#nav_order:
+#  setup_db:
+#    -
+#  setup_processes:
+#    -
+
 
 # Defaults
 defaults:

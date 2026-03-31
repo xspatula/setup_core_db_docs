@@ -1,0 +1,255 @@
+thomasgumbricht@MacBook-Air-4 ~ % /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs
+zsh: permission denied: /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs
+(base) thomasgumbricht@MacBook-Air-4 ~ % cd /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs
+(base) thomasgumbricht@MacBook-Air-4 seed_ai4sh_db_docs % bundle exec jekyll build --config _config.yml,_config_local.yml
+Configuration file: /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/_config.yml
+Configuration file: /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/_config_local.yml
+To use retry middleware with Faraday v2.0+, install `faraday-retry` gem
+            Source: /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs
+       Destination: /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating...
+        Pagination: Pagination is enabled, but I couldn't find an index.html page to use as the pagination template. Skipping pagination.
+       Jekyll Feed: Generating feed for posts
+Deprecation Warning [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+3 │ @import "minimal-mistakes/skins/default"; // skin
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 3:9  root stylesheet
+Deprecation Warning [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+4 │ @import "minimal-mistakes"; // main partials
+  │         ^^^^^^^^^^^^^^^^^^
+  ╵
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9  root stylesheet
+Deprecation Warning [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+2 │ @import "minimal-mistakes/copyright";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    minimal-mistakes.scss 2:9                                                           @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9  root stylesheet
+Deprecation Warning [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+5 │ @import "minimal-mistakes/variables";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    minimal-mistakes.scss 5:9                                                           @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9  root stylesheet
+Deprecation Warning [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+8 │ @import "minimal-mistakes/vendor/breakpoint/breakpoint";
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    minimal-mistakes.scss 8:9                                                           @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9  root stylesheet
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+95 │ $dark-gray: mix(#000, $gray, 50%) !default;
+   │             ^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_variables.scss 95:13  @import
+    minimal-mistakes.scss 5:9                                                                @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9       root stylesheet
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+96 │ $darker-gray: mix(#000, $gray, 60%) !default;
+   │               ^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_variables.scss 96:15  @import
+    minimal-mistakes.scss 5:9                                                                @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9       root stylesheet
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+97 │ $light-gray: mix(#fff, $gray, 50%) !default;
+   │              ^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_variables.scss 97:14  @import
+    minimal-mistakes.scss 5:9                                                                @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9       root stylesheet
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+98 │ $lighter-gray: mix(#fff, $gray, 90%) !default;
+   │                ^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_variables.scss 98:16  @import
+    minimal-mistakes.scss 5:9                                                                @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9       root stylesheet
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+    ╷
+104 │ $muted-text-color: mix(#fff, $text-color, 20%) !default;
+    │                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_variables.scss 104:20  @import
+    minimal-mistakes.scss 5:9                                                                 @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9        root stylesheet
+Deprecation Warning [slash-div]: Using / for division is deprecated and will be removed in Dart Sass 2.0.0.
+
+Recommendation: math.div(9, 16)
+
+More info and automated migrator: https://sass-lang.com/d/slash-div
+
+   ╷
+31 │ $mfp-iframe-ratio:                    9/16;                       // Ratio of iframe (9/16 = widescreen, 3/4 = standard, etc.)
+   │                                       ^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/magnific-popup/_settings.scss 31:39      @import
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/magnific-popup/_magnific-popup.scss 3:9  @import
+    minimal-mistakes.scss 10:9                                                                                        @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9                                root stylesheet
+Deprecation Warning [slash-div]: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.
+
+Recommendation: math.div($value, 16px) or calc($value / 16px)
+
+More info and automated migrator: https://sass-lang.com/d/slash-div
+
+   ╷
+28 │     @return $value / 16px * 1em;
+   │             ^^^^^^^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/breakpoint/_helpers.scss 28:13                base-conversion()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/breakpoint/_helpers.scss 20:13                breakpoint-to-base-em()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/breakpoint/parsers/single/_default.scss 8:29  breakpoint-parse-default()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/breakpoint/parsers/_single.scss 22:14         breakpoint-parse-single()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/breakpoint/_parsers.scss 153:18               breakpoint-parse()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/breakpoint/_parsers.scss 48:22                breakpoint()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/breakpoint/_breakpoint.scss 46:16             breakpoint()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_reset.scss 13:3                                     @import
+    minimal-mistakes.scss 15:9                                                                                             @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9                                     root stylesheet
+Deprecation Warning [slash-div]: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.
+
+Recommendation: math.div(5px, 2) or calc(5px / 2)
+
+More info and automated migrator: https://sass-lang.com/d/slash-div
+
+   ╷
+28 │     margin-bottom: (5px / 2);
+   │                     ^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_forms.scss 28:21  @import
+    minimal-mistakes.scss 17:9                                                           @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9   root stylesheet
+Deprecation Warning [color-functions]: red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+64 │   $red: red($color);
+   │         ^^^^^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 64:9   yiq-is-light()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 81:14  yiq-contrast-color()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 91:10  yiq-contrasted()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_buttons.scss 50:7  @import
+    minimal-mistakes.scss 22:9                                                            @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9    root stylesheet
+Deprecation Warning [color-functions]: green() is deprecated. Suggestion:
+
+color.channel($color, "green", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+65 │   $green: green($color);
+   │           ^^^^^^^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 65:11  yiq-is-light()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 81:14  yiq-contrast-color()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 91:10  yiq-contrasted()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_buttons.scss 50:7  @import
+    minimal-mistakes.scss 22:9                                                            @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9    root stylesheet
+Deprecation Warning [color-functions]: blue() is deprecated. Suggestion:
+
+color.channel($color, "blue", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+66 │   $blue: blue($color);
+   │          ^^^^^^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 66:10  yiq-is-light()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 81:14  yiq-contrast-color()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 91:10  yiq-contrasted()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_buttons.scss 50:7  @import
+    minimal-mistakes.scss 22:9                                                            @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9    root stylesheet
+Deprecation Warning [slash-div]: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.
+
+Recommendation: math.div(($red * 299) + ($green * 587) + ($blue * 114), 1000) or calc((($red * 299) + ($green * 587) + ($blue * 114)) / 1000)
+
+More info and automated migrator: https://sass-lang.com/d/slash-div
+
+   ╷
+68 │   $yiq: (($red*299)+($green*587)+($blue*114))/1000;
+   │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 68:9   yiq-is-light()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 81:14  yiq-contrast-color()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_mixins.scss 91:10  yiq-contrasted()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_buttons.scss 50:7  @import
+    minimal-mistakes.scss 22:9                                                            @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9    root stylesheet
+Deprecation Warning [slash-div]: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.
+
+Recommendation: math.div($span-width, $container) or calc($span-width / $container)
+
+More info and automated migrator: https://sass-lang.com/d/slash-div
+
+   ╷
+93 │     @return percentage($span-width / $container);
+   │                        ^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/susy/susy/_su-math.scss 93:24          su-span()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/susy/susy/_syntax-helpers.scss 190:11  su-call()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/susy/susy/_api.scss 146:13             susy-span()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/susy/susy/_unprefix.scss 19:11         span()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_utilities.scss 177:29                        @content
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/vendor/breakpoint/_breakpoint.scss 66:7       breakpoint()
+    ../../../../minimal-mistakes-jekyll-4.27.3/_sass/minimal-mistakes/_utilities.scss 176:3                         @import
+    minimal-mistakes.scss 31:9                                                                                      @import
+    /Users/thomasgumbricht/GitHub_xspatula/seed_ai4sh_db_docs/assets/css/main.scss 4:9                              root stylesheet
+Warning: 215 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+                    done in 0.265 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.

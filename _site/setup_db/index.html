@@ -10,8 +10,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Setup Xspatula DB</title>
-<meta name="description" content="The first step in building up an Xspatula framework is to setup a postgreSQL database. You can also use Xspatula just for setting up a database without using the framework for something else.">
+<!-- begin _includes/seo.html --><title>Setup AI4SH Database - Xspatula</title>
+<meta name="description" content="Seeding the AI4SoilHealth postgreSQL database using the Xspatula framework. This guide covers running the setup notebook, editing the scheme file, and the full order of JSON process files.">
 
 
   <meta name="author" content="Thomas Gumbricht">
@@ -23,11 +23,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Xspatula">
-<meta property="og:title" content="Setup Xspatula DB">
+<meta property="og:title" content="Setup AI4SH Database">
 <meta property="og:url" content="http://localhost:4000/setup_db/">
 
 
-  <meta property="og:description" content="The first step in building up an Xspatula framework is to setup a postgreSQL database. You can also use Xspatula just for setting up a database without using the framework for something else.">
+  <meta property="og:description" content="Seeding the AI4SoilHealth postgreSQL database using the Xspatula framework. This guide covers running the setup notebook, editing the scheme file, and the full order of JSON process files.">
 
 
 
@@ -35,11 +35,11 @@
 
 
 
-  <meta property="article:published_time" content="2026-03-15T15:13:03+01:00">
+  <meta property="article:published_time" content="2026-03-31T08:00:00+02:00">
 
 
 
-  <meta property="article:modified_time" content="2026-03-29T20:45:30+02:00">
+  <meta property="article:modified_time" content="2026-03-31T08:00:00+02:00">
 
 
 
@@ -112,19 +112,19 @@
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a
-                href="/framework/"
-                 title="Structure and function of the Xspatula framework"
-                
-              >Xspatula framework</a>
-            </li><li class="masthead__menu-item">
-              <a
                 href="/setup_db/"
-                 title="Setting up a postgreSQL database with Xspatula framework"
+                 title="Setting up the AI4SoilHealth database"
                 
-              >Setup Xspatula DB</a>
+              >Setup AI4SH DB</a>
             </li><li class="masthead__menu-item">
               <a
-                href="/about/"
+                href="/setup_process/"
+                 title="Setting up the AI4SoilHealth processes"
+                
+              >Setup AI4SH processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="https://xspatula.github.io/about/"
                 
                 
               >About</a>
@@ -175,23 +175,29 @@
       
         <li>
           
-            <span class="nav__sub-title">Setup Xspatula DB</span>
+            <span class="nav__sub-title">Setup AI4SoilHealth database</span>
           
 
           
           <ul>
             
-              <li><a href="/setup_db/" class="active">Synopsis</a></li>
+              <li><a href="/setup_db/" class="active">Introduction</a></li>
             
-              <li><a href="/setup_db/postgres/">PostgreSQL</a></li>
+              <li><a href="/setup_db/schemas/">Schemas</a></li>
             
-              <li><a href="/setup_db/anaconda/">Anaconda</a></li>
+              <li><a href="/setup_db/utility/">Utility</a></li>
             
-              <li><a href="/setup_db/netrc/">.netrc</a></li>
+              <li><a href="/setup_db/community/">Community</a></li>
             
-              <li><a href="/setup_db/schemas_tables/">Defining schemas & tables</a></li>
+              <li><a href="/setup_db/process/">Process</a></li>
             
-              <li><a href="/setup_db/schemas_tables/#table-insert">Defining default users</a></li>
+              <li><a href="/setup_db/observation_utility/">Observation utility</a></li>
+            
+              <li><a href="/setup_db/observation/">Observation</a></li>
+            
+              <li><a href="/setup_db/landscape/">Landscape</a></li>
+            
+              <li><a href="/setup_db/edna/">eDNA</a></li>
             
           </ul>
           
@@ -208,16 +214,16 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Setup Xspatula DB">
-    <meta itemprop="description" content="The first step in building up an Xspatula framework is to setup a postgreSQL database. You can also use Xspatula just for setting up a database without using the framework for something else.">
-    <meta itemprop="datePublished" content="2026-03-15T15:13:03+01:00">
-    <meta itemprop="dateModified" content="2026-03-29T20:45:30+02:00">
+    <meta itemprop="headline" content="Setup AI4SH Database">
+    <meta itemprop="description" content="Seeding the AI4SoilHealth postgreSQL database using the Xspatula framework. This guide covers running the setup notebook, editing the scheme file, and the full order of JSON process files.">
+    <meta itemprop="datePublished" content="2026-03-31T08:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-03-31T08:00:00+02:00">
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="http://localhost:4000/setup_db/" itemprop="url">Setup Xspatula DB
+            <a href="http://localhost:4000/setup_db/" itemprop="url">Setup AI4SH Database
 </a>
           </h1>
           
@@ -228,346 +234,155 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>The first step in building up an Xspatula framework is to setup a postgreSQL database. You can also use Xspatula just for setting up a database without using the framework for something else.</p>
+        <p>Seeding the AI4SH database uses the same Xspatula JSON-driven workflow described in the <a href="https://xspatula.github.io/setup_core_db_docs/">Xspatula python and DB model environment documentation</a>. What this site adds is the full set of AI4SH-specific process files that define the schemas, tables and processes for a comprehensive soil data repository.</p>
 
-<h2 id="prerequisits">Prerequisits</h2>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<p>To build your own postgreSQL database using the Xspatula framework you might need to install the following applications/files:</p>
-
-<ul>
-  <li><a href="../framework/vscode/">Visual Studion code (VScode)</a> (if you want to use the Jupyter notebook interface),</li>
-  <li><a href="./postgres/">postgreSQL</a> (unless you have access to a machine with postgres installed),</li>
-  <li><a href="./anaconda/">Anaconda</a> or any other application for defining virtual python environments, and/or</li>
-  <li>A <a href="./netrc/">.netrc</a> file that defines your credentials for setting up new databases (to protect your login credentials).</li>
-</ul>
-
-<h2 id="hidden-files-and-security">Hidden files and security</h2>
-
-<p>To create secure login credentials for the postgreSQL superuser that you must have for building the framework database, and for other users accessing the database, two sets of hidden files holding the credentials can be used.</p>
-
-<h3 id="netrc">.netrc</h3>
-
-<p>A <a href="./netrc/">.netrc</a> file is a hidden file in your home directory where you can store login credential to postgreSQL or any other server resource. You do not need to use a .netrc file to setup or run the Xspatula framework, you can also give your login and password in plain text in a <em>scheme</em> file as explained below. If you want to use a .netrc file, create a file named .netrc in the home directory of your own machine and enter the credentials by stating <em>machine</em>, <em>login</em> and <em>password</em>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>machine postgresql login &lt;superuser&gt; password &lt;passphrase&gt;
-</code></pre></div></div>
-
-<p>Where <em>machine</em> is the code word you send to .netrc for the resource you want to access, and <em>login</em> and <em>password</em> are the credentials on the resource you are trying to enter.</p>
-
-<h3 id="environment">.environment</h3>
-
-<p>When a user tries to login to the framework database, a postgreSQL session is opened and the user credentials are read from the database. If the user and password are found, the database is instead opened from an environment (.env) file reflecting the rights of the user logging in. When you setup an Xspatula database, the framework automatically creates .env files for different categories of postgres users (pg_user in postgres jargon). The framework includes some default pg_users, but you most probably want to define your own. All the hidden .env files will by default be saved in the framework python package path:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./src/postgres/environment
-</code></pre></div></div>
-
-<p>All environment files contain the following entries:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DB_HOST=localhost
-DB_NAME=my_database
-DB_USER=db_user
-DB_PASSWORD=db_user_password
-</code></pre></div></div>
-
-<p>These credentials are automatically loaded when a user is recognised in the system and then used for accessing the database. The default .env files created by the framework when setting it up include:</p>
+<p>Before running the AI4SH database setup you need:</p>
 
 <ul>
-  <li>community_admin (for handling users),</li>
-  <li>login_evaluation (used for checking all login attempts),</li>
-  <li>user_cat_0</li>
-  <li>user_cat_1</li>
-  <li>user_cat_2</li>
-  <li>user_cat_3</li>
-  <li>user_cat_4</li>
-  <li>user_cat_5</li>
+  <li>A running postgreSQL installation where you are superuser — see <a href="https://xspatula.github.io/setup_core_db_docs/setup_db/postgres/">PostgreSQL setup</a></li>
+  <li>The Xspatula framework installed and a working Anaconda environment — see <a href="https://xspatula.github.io/setup_core_db_docs/setup_db/anaconda/">Anaconda setup</a></li>
+  <li>The <code class="language-plaintext highlighter-rouge">seed_ai4sh_db</code> repository cloned to your machine:</li>
 </ul>
 
-<p>The different user categories (user_cat_0 to user_cat_5) have varying rights using the database, with 0 have the least and 5 the most.</p>
-
-<h2 id="notebook-interface">Notebook interface</h2>
-
-<p>The framework database can be managed through two of the Jupyter notebooks included in the online repository:</p>
-
-<ul>
-  <li>./setup/setup_db.ipynb</li>
-  <li>./setup/delete_db.ipynb</li>
-</ul>
-
-<p>To learn more, see the documents on <a href="../framework/notebook/">notebooks</a> and <a href="../framework/vscode/">VScode</a>.</p>
-
-<h3 id="scheme-file">Scheme file</h3>
-
-<p>Running Xspatula requires a <em>scheme</em> file that defines the user credentials for accessing the database and can also define default settings for execute, overwrite and delete. The <em>scheme</em> file also links to the library of JSON command files to run. To actually interact with the framework database, the <em>scheme</em> file points to a <em>job_file</em> (project) that links to the <em>process file(s)</em> to run.</p>
-
-<p>The <em>scheme</em> file and the JSON command files can be located anywhere on your system. The default setting is to store the library of files inside the framework itself - referencing it as a relative path in the <em>scheme</em> file. This allows you to initially run the framework without consideration of paths and operating systems while testing it. Once you understand the system you can put the <em>scheme</em> file and the JSON command structure in any other relative or absolute path.</p>
-
-<h4 id="scheme-file-for-database-setup">Scheme file for database setup</h4>
-
-<p>The scheme file for setting up your database must define both the postgres superuser that will own the database as well as other postgres users (pg_user) that can access the database.</p>
-
-<p>In the example of a <em>scheme</em> file for setting up a database below I have added some comments indicated by a hashtag (#). These comments are not allowed in a production version of a <em>scheme</em> file.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-  "project_path": "./xspatula", # Absolute or relative path to the root folder of your project, e.g. for setting up a database
-  "postgresdb": { # Defines the postgres database cluster and your superuser credentials allowing you to create a new database
-    "host": "localhost", # The host of your database cluster
-    "port": 5432, # The port that your database cluster is attached to
-    "db": "name_of_db_to_create", # The name of the postgreSQL database to create
-    "host_netrc_id": "my_host_db_netrc_access_code", # The login credentials for your overaraching postgres database
-    "user_name": "your_superuser_for_postgres", # Only required if host_netrc_id not stated
-    "password": "your_superuser_password_for_postgres", # Only required if host_netrc_id not stated
-    "db_users": [ # array of pg_users to add as users in the new postgres database and their credentials
-      {
-        "user_id": "community_admin", # pg_user for community administration
-        "password": "guessing-rubble-garden-opera", # password for pg_user community_admin
-        "role": "community_admin" # predefined (hardcoded) type of pg_user
-      },
-      {
-        "user_id": "login_evaluation", # pg_user for checking any login attempt to the database (very restricted)
-        "password": "hippodrome-bicycle-concert-shuttle", # password for pg_user login_evaluation
-        "role": "login_evaluation" # predefined (hardcoded) type of pg_user
-      },
-      {
-        "user_id": "user_cat_0", # most restricted database pg_user
-        "password": "tablecloth-summerleaf-riverbasin-vacuumcleaner", # password for pg_user user_cat_0
-        "role": "user_cat_1" # predefined (hardcoded) type of pg_user
-      },
-      ...
-      ...
-      {
-        "user_id": "user_cat_5", # most permissive database pg_user
-        "password": "fireplace-olympicgames-grassroot-luminescence", # password for pg_user user_cat_5
-        "role": "user_cat_5" # predefined (hardcoded) type of pg_user
-      }
-    ]
-  },
-  "process": [ # Default settings for all processes called from this scheme file
-    {
-      "execute": true,
-      "verbose": 1,
-      "overwrite": false,
-      "delete": false # Must be set to false to setup a database
-    }
-  ]
-}
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/xspatula/seed_ai4sh_db
 </code></pre></div></div>
 
-<h4 id="default-human-users">Default (human) users</h4>
+<h2 id="the-setup-notebook">The setup notebook</h2>
 
-<p>The postgres superuser defined in the <em>scheme</em> file for setting up your new database will become both the owner and a superuser for your new database. The default processes defined for setting up a new database include the definition of ordinary user(s) (not pg_users) in the database. The default user (Jane Doe) in the online repository has the user name <em>jane_doe</em> and the password is <em>hello-xspatula</em>. It is recommended that you change the names and passwords of the default users in the file</p>
+<p>The database setup is driven by the Jupyter notebook:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/xspatula/setup_db/jsonsql/community_user_records_v10_sql.json.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/setup_db.ipynb
 </code></pre></div></div>
 
-<p>You must then also change the login credentials in the subsequent <em>scheme</em> files for ordinary login (not database setup). You can also always login with the superuser that you used for setting up the database.</p>
+<p>Open this notebook in VS Code or Jupyter Lab. The notebook has two key code blocks to edit before running:</p>
 
-<p>For details on including default users as part of the database setup, see the document on <a href="./schemas_tables/">defining schemas and tables</a>.</p>
+<ol>
+  <li><strong>Scheme file</strong> — set the path to your <a href="https://xspatula.github.io/setup_core_db_docs/framework/scheme_file/">scheme file</a></li>
+  <li><strong>Job file</strong> — set the name of the <a href="https://xspatula.github.io/setup_core_db_docs/framework/job_file//">job file</a> (default: <code class="language-plaintext highlighter-rouge">job_setup_db.json</code>)</li>
+</ol>
 
-<h4 id="scheme-file-for-database-delete">Scheme file for database delete</h4>
+<h2 id="edit-the-scheme-file">Edit the scheme file</h2>
 
-<p>The framework package allows deleting either parts of, or the whole database with a single process. To do that the <em>scheme</em> file must still have a project_path, define the postgres database cluster and your superuser credentials allowing you to delete the database. You must also set the process object delete to true:</p>
+<p>The scheme file for setting up the AI4SH database is at:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-  "project_path": "./xspatula", # Absolute or relative path to the root folder of your project for deleting a database
-  "postgresdb": {
-    "host": "localhost", # The host of your database
-    "port": 5432, # The port that your database is attached to
-    "db": "name_of_db_to_delete", # The name of the postgreSQL database to delete
-    "user_name": "your_superuser_for_postgres", # Only required if host_netrc_id not stated
-    "password": "your_superuser_password_for_posgres", # Only required if host_netrc_id not stated
-  },
-  "process": [ # Default settings for all processes called from this scheme file
-    {
-      "execute": true,
-      "verbose": 1,
-      "overwrite": false,
-      "delete": true # Must be set to true to delete a database
-    }
-  ]
-}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/scheme_ai4sh_local_setup.json
 </code></pre></div></div>
 
-<h3 id="job-file-project-file">Job file (project file)</h3>
+<p>You must edit this file before running the notebook. At minimum change the postgreSQL superuser credentials and the database name:</p>
 
-<p>The <em>scheme</em> file object <span class="job_file">project_path</span> defines the path to the root directory of your actual project to run. A project is built up using a hierarchy of command files, with a JSON <em>job_file</em> at the top. In the <em>job_file</em> there are three options for linking to the <em>process_files</em> you want to run:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"project_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./ai4sh"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"postgresdb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">5432</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"db"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai4sh"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your_postgres_superuser"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your_postgres_superuser_password"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"db_users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"community_admin"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"guessing-rubble-garden-opera"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"community_admin"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login_evaluation"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hippodrome-bicycle-concert-shuttle"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login_evaluation"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tablecloth-summerleaf-riverbasin-vacuumcleaner"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_0"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secret-parsimony-archipelago-hedgehog"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_1"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sailing-courageous-upsidedown-castle"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_2"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_3"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rollerscates-forever-skyline-coconut"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_3"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_4"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"superfluid-altruistic-guitarplayer-climatechange"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_4"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_5"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fireplace-olympicgames-grassroot-luminescence"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_cat_5"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"execute"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"verbose"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"overwrite"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"delete"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
-<ul>
-  <li>directly to a single JSON <em>process_file</em>,</li>
-  <li>defining an array of JSON <em>process_files</em>, or</li>
-  <li>via a simple text <em>pilot_file</em> listing the <em>process_files</em> to run.</li>
-</ul>
+<p>You can alternatively use a <code class="language-plaintext highlighter-rouge">.netrc</code> file for credentials — replace <code class="language-plaintext highlighter-rouge">user_name</code> and <code class="language-plaintext highlighter-rouge">password</code> with <code class="language-plaintext highlighter-rouge">"host_netrc_id": "your_netrc_machine_code"</code>. See <a href="https://xspatula.github.io/setup_core_db_docs/setup_db/netrc/">.netrc setup</a> in the core documentation.</p>
 
-<p>The default setting in the Xspatula GitHub online repository is linking to a <em>pilot_file</em>.</p>
+<p>Change the default passwords for all <code class="language-plaintext highlighter-rouge">db_users</code> before deploying to any non-local environment.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-  "process": {
-    "job_folder": "setup_db",
-    "process_sub_folder": "jsonsql",
-    "pilot_file": "db_xspatula_setup.txt"
-    ]
-  }
-}
+<h2 id="the-pilot-file">The pilot file</h2>
+
+<p>The job file points to the pilot file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/ai4sh/setup_db/db_xspatula_ai4sh_setup.txt
 </code></pre></div></div>
 
-<p>See the document on <a href="../framework/job_file/">job files</a> for details.</p>
+<p>This text file lists all process JSON files in the order they must be executed. The order matters because of foreign key dependencies — schemas must exist before tables, and reference tables before tables that reference them.</p>
 
-<h3 id="pilot-file">Pilot file</h3>
+<p>The full execution order is:</p>
 
-<p>A pilot file is a simple text file, where empty lines and lines starting with a hash-tag (#) are ignored when executing. The advantage with a pilot file is that you can write notes and turn individual process files on and off by using a hash-tag. The example below shows the process files that must be run to setup any Xspatula dataset using the framework default settings.</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">schema/schema_v10_sql.json</code> — create all 9 schemas</li>
+  <li><code class="language-plaintext highlighter-rouge">utility/utility_v10_sql.json</code> — utility tables</li>
+  <li><code class="language-plaintext highlighter-rouge">utility/utility_territory_v10_sql.json</code> — territory reference data</li>
+  <li><code class="language-plaintext highlighter-rouge">community/</code> — user categories, organisations and users</li>
+  <li><code class="language-plaintext highlighter-rouge">process/</code> — process and process parameter tables</li>
+  <li><code class="language-plaintext highlighter-rouge">observation_utility/</code> — ~30 reference catalogue tables (independent first, then dependent)</li>
+  <li><code class="language-plaintext highlighter-rouge">observation/</code> — dataset, campaign, sample and observation tables</li>
+  <li><code class="language-plaintext highlighter-rouge">landscape/</code> — landscape utility and observation tables</li>
+  <li><code class="language-plaintext highlighter-rouge">edna/</code> — eDNA utility and observation tables</li>
+</ol>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#################################################
-##### DEFINE XSPATULA DB SCHEMAS AND TABELS #####
-#################################################
+<p>Each section is described in detail in the following pages.</p>
 
-###===========================================###
-### SCHEMAS ###
-###===========================================###
-#!!!!! The schemas must be defined before the tables
+<h2 id="default-community-records">Default community records</h2>
 
-schema_v10_sql.json
+<p>Before running the notebook, also edit the default organisation and user records:</p>
 
-###===========================================###
-### GENERAL UTILITIES AND TERRITORIES###
-###===========================================###
-#!!!!! Territory codes are required by community
-
-utility_v10_sql.json
-
-utility_territory_v10_sql.json
-
-###===========================================###
-### COMMUNITY ###
-###===========================================###
-#!!!!! user categories required for adding users
-
-community_user_categories_v10_sql.json
-
-community_user_categories_records_v10_sql.json
-
-#!!!!! organisations required for adding users
-community_organisation_v10_sql.json
-
-#!!!!! EDIT TO INCLUDE AT LEAST ONE DEFAULT ORGANISATION
-community_organisation_records_v10_sql.json
-
-#!!!!! users required for adding processes
-community_user_v10_sql.json
-
-#!!!!! EDIT TO INCLUDE AT LEAST ONE USER THAT WILL BE THE CREATOR OF THE PROCESSES
-community_user_records_v10_sql.json
-
-###===========================================###
-### PROCESSES ###
-###===========================================###
-#!!!!! processes required for adding processes
-
-processes_v10_sql.json
-
-#!!!!! processes records adds the processes for adding all other processes
-processes_records_v10_sql.json
-
-...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/ai4sh/setup_db/json_ai4sh/community/community_organisation_records_v10_sql.json
+./setup/zzz/ai4sh/setup_db/json_ai4sh/community/community_user_records_v10_sql.json
 </code></pre></div></div>
 
-<p>To learn more, see the document on <a href="../framework/pilot_file/">pilot file</a>.</p>
+<p>These files insert at least one default organisation and user into the database. The inserted user name and password must match the <code class="language-plaintext highlighter-rouge">user_project</code> credentials in subsequent (non-setup) scheme files.</p>
 
-<h3 id="process-file">Process file</h3>
+<h2 id="run-the-notebook">Run the notebook</h2>
 
-<p>All JSON <em>process_files</em> are built from the same objects and arrays. The example below shows the process for creating schemas, a process that is as simple as it gets in the framework. The example also shows how it is possible to stack any number of processes in a single <em>process_file</em>.</p>
+<p>With the scheme file edited and the notebook pointing to it, run all cells in <code class="language-plaintext highlighter-rouge">setup_db.ipynb</code>. The framework will connect to your postgreSQL cluster, create the database, and execute all process files in pilot file order.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-  "process": [
-    {
-      "process_id": "create_schema",
-      "parameters": {
-        "schema": "observation"
-      }
-    },
-    ...
-    ...
-    {
-      "process_id": "create_schema",
-      "parameters": {
-        "schema": "community"
-      }
-    }
-  ]
-}
+<p>To delete and rebuild the database, use:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/delete_db.ipynb
 </code></pre></div></div>
 
-<p>To learn more, see the document on <a href="../framework/process_file/">process file</a>.</p>
-
-<h4 id="define-the-community-accessing-the-database">Define the community accessing the database</h4>
-
-<p>The default setting is to create a schema called community, including the following tables:</p>
-
-<ul>
-  <li>user_categories</li>
-  <li>organisation</li>
-  <li>user</li>
-  <li>user_media</li>
-  <li>user_activity</li>
-</ul>
-
-<p>The table user and the columns <em>user_name</em>, <em>password</em>, and <em>stratum_code</em> are searched each time a user is trying to login. The <em>stratum_code</em> defines which .env file a user is entering the database with and thus the privileges that that user has in the database. If you change the name of either the schema, the table or these columns, you need to update the python source code accordingly.</p>
-
-<p>For details on defining tables and columns, see the document on [tables][#]. NOT YET AVAILABLE.</p>
-
-<h4 id="community-organisations-and-users">Community organisations and users</h4>
-
-<p>The process_files community_organisation_records_v10<em>sql.json and community_user_records_v10_sql.json directly inserts records in the community schema tables organisation and user. The users inserted will get immediate access to the created database. This the user name name you have to state in the _scheme</em> object user_project:user_name. The password can also be given as an object in the <em>scheme_file</em> (user_project:user_password). Alternatively you can put the password in a <a href="./netrc/">.netrc</a>.</p>
-
-<p>The figure below illustrates the content and connections for the schema community after setting up the Xspatula framework.</p>
-
-<figure>
-  <img src="/assets/media/xspatula_db_community_schema.png" alt="Schema community tables and connections" />
-</figure>
-
-<h4 id="processes">Processes</h4>
-
-<p>The process_file processes_v10_sql.json defines the table structure for definition of processes that the framework should include. It defines the following tables:</p>
-
-<ul>
-  <li>root_process (for agglomerating a family of sub_processes),</li>
-  <li>process (actual processes that the framework can run),</li>
-  <li>process_parameter (definition of all parameters required by a specific process),</li>
-  <li>process_parameter_set_value (if a text parameter can take on only a predefined set of values),</li>
-  <li>process_parameter_minmax (if a numerical parameter is restricted to a range)</li>
-  <li>process_parameter_schema_table (the target table for any particular parameter),</li>
-  <li>process_parameter_permission (if a set parameter is allowed to be updated or deleted), and</li>
-  <li>process_parameter_default (default parameter values if no value is given by user).</li>
-</ul>
-
-<p>The figure below illustrates the content and connections for the schema process after setting up the Xspatula framework.</p>
-
-<figure>
-  <img src="/assets/media/xspatula_db_process_schema.png" alt="Schema process tables and connections" />
-</figure>
-
-<h4 id="initial-process-records">Initial process records</h4>
-
-<p>Running processes_records_v10_sql.json inserts the root process and processes required for managing all other processes in the framework.</p>
-
-<h3 id="project-file-hierarchy">Project file hierarchy</h3>
-
-<p>The directory structure for the project defined in the scheme_file and the job_file above looks like this:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── scheme_setup.json # scheme_file
-└── xspatula # project root directory (can be put anywhere - path given in scheme_file)
-    ├── job_setup_db.json # job file (should be in a directory under the project root - path given in scheme_file)
-    ├── setup_db # Should be a directory under the project root - path given in object job_folder in the job_file
-        ├── db_xspatula_setup.txt # pilote_file - name given as object pilot_file in the job_file
-        └── jsonsql # directory with process_files - path given as object process_sub_folder in job_file
-            ├── schema_v10_sql.json # process_file listed in pilot_file
-            ├── community_organisation_v10_sql.json
-            ├── community_organisation_records_v10_sql.json
-            ├── community_user_v10_sql.json
-            ├── community_user_records_v10_sql.json
-            ├── processes_v10_sql.json
-            ├── processes_records_v10_sql.json
-            ...
-</code></pre></div></div>
+<p>with a scheme file where <code class="language-plaintext highlighter-rouge">"delete": true</code>.</p>
 
 
         
@@ -580,7 +395,7 @@ processes_records_v10_sql.json
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-29">March 29, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-31">March 31, 2026</time></p>
 
       </footer>
 
@@ -589,10 +404,10 @@ processes_records_v10_sql.json
       
   <nav class="pagination">
     
-      <a href="/setup_db/anaconda/" class="pagination--pager" title="Anaconda - virtual python environments">Previous</a>
+      <a href="/setup_db/edna/" class="pagination--pager" title="eDNA Schema">Previous</a>
     
     
-      <a href="/setup_db/netrc/" class="pagination--pager" title=".netrc - keeping your logins hidden">Next</a>
+      <a href="/setup_db/landscape/" class="pagination--pager" title="Landscape Schema">Next</a>
     
   </nav>
 
