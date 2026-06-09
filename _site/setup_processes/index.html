@@ -10,8 +10,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Anaconda - virtual python environments - Xspatula</title>
-<meta name="description" content="Anaconda is an application that allows setting up virtual Python environments. You define the Python version and packages to include with each virtual environment and then Anaconda creates a self-contained Python environment for you.">
+<!-- begin _includes/seo.html --><title>Setup Xspatula processes</title>
+<meta name="description" content="After setting up the database, the next step is to register the processes that the framework should be able to run. Process registration uses the setup_processes notebook and a category-5 user — not the postgres superuser.">
 
 
   <meta name="author" content="Thomas Gumbricht">
@@ -23,32 +23,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Xspatula">
-<meta property="og:title" content="Anaconda - virtual python environments">
-<meta property="og:url" content="http://localhost:4000/setup_db/anaconda/">
+<meta property="og:title" content="Setup Xspatula processes">
+<meta property="og:url" content="http://localhost:4000/setup_processes/">
 
 
-  <meta property="og:description" content="Anaconda is an application that allows setting up virtual Python environments. You define the Python version and packages to include with each virtual environment and then Anaconda creates a self-contained Python environment for you.">
-
-
-
+  <meta property="og:description" content="After setting up the database, the next step is to register the processes that the framework should be able to run. Process registration uses the setup_processes notebook and a category-5 user — not the postgres superuser.">
 
 
 
 
-  <meta property="article:published_time" content="2026-03-15T15:13:03+01:00">
 
 
 
-  <meta property="article:modified_time" content="2026-03-29T20:13:03+02:00">
+  <meta property="article:published_time" content="2026-06-09T00:00:00+02:00">
 
 
 
-  
+  <meta property="article:modified_time" content="2026-06-09T00:00:00+02:00">
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/setup_db/anaconda/">
+
+<link rel="canonical" href="http://localhost:4000/setup_processes/">
 
 
 
@@ -187,23 +187,19 @@
       
         <li>
           
-            <span class="nav__sub-title">Setup DB</span>
+            <span class="nav__sub-title">Setup processes</span>
           
 
           
           <ul>
             
-              <li><a href="/setup_db/">Synopsis</a></li>
+              <li><a href="/setup_processes/" class="active">Synopsis</a></li>
             
-              <li><a href="/setup_db/postgres/">PostgreSQL</a></li>
+              <li><a href="/setup_processes/scheme_file">Scheme file</a></li>
             
-              <li><a href="/setup_db/anaconda/" class="active">Anaconda</a></li>
+              <li><a href="/setup_processes/define_process">Define process</a></li>
             
-              <li><a href="/setup_db/netrc/">.netrc</a></li>
-            
-              <li><a href="/setup_db/schemas_tables/">Defining schemas & tables</a></li>
-            
-              <li><a href="/setup_db/schemas_tables/#table-insert">Defining default users</a></li>
+              <li><a href="/setup_processes/edit_process">Edit process</a></li>
             
           </ul>
           
@@ -220,16 +216,16 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Anaconda - virtual python environments">
-    <meta itemprop="description" content="Anaconda is an application that allows setting up virtual Python environments. You define the Python version and packages to include with each virtual environment and then Anaconda creates a self-contained Python environment for you.">
-    <meta itemprop="datePublished" content="2026-03-15T15:13:03+01:00">
-    <meta itemprop="dateModified" content="2026-03-29T20:13:03+02:00">
+    <meta itemprop="headline" content="Setup Xspatula processes">
+    <meta itemprop="description" content="After setting up the database, the next step is to register the processes that the framework should be able to run. Process registration uses the setup_processes notebook and a category-5 user — not the postgres superuser.">
+    <meta itemprop="datePublished" content="2026-06-09T00:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-06-09T00:00:00+02:00">
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="http://localhost:4000/setup_db/anaconda/" itemprop="url">Anaconda - virtual python environments
+            <a href="http://localhost:4000/setup_processes/" itemprop="url">Setup Xspatula processes
 </a>
           </h1>
           
@@ -240,42 +236,68 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>Anaconda is an application that allows setting up virtual Python environments. You define the Python version and packages to include with each virtual environment and then Anaconda creates a self-contained Python environment for you.</p>
+        <p>After setting up the Xspatula database, the next step is to register the processes that the framework should be able to run. Process definitions are stored in the database and the framework looks them up at runtime to validate parameters and execute the correct functions.</p>
 
-<h2 id="prerequisits">Prerequisits</h2>
+<p>Process registration is handled by the notebook:</p>
 
-<p>To setup an Anaconda (conda for short) environment you need to <a href="https://www.anaconda.com/download">download</a> the distribution for your operation system and then follow the <a href="https://www.anaconda.com/docs/getting-started/anaconda/install/overview">online installation guide</a>.</p>
-
-<h2 id="framework-virtual-python-environment">Framework virtual python environment</h2>
-
-<p>To create a virtual python environment for the database functions of the framework you can use the file <em>xspatula_py_3.12.yml</em>. It is included in the Xspatula repo under the path ./setup/anaconda and shown below.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: xspatula_py_3.12
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - python=3.12
-  - numpy
-  - pandas
-  - openpyxl
-  - matplotlib
-  - pyserial
-  - psycopg2
-  - scipy
-  - python-dotenv
-  - tabulate
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/setup_processes.ipynb
 </code></pre></div></div>
 
-<p>Open a Terminal window and navigate to the folder that contains <em>xspatula_py_3.12.yml</em>. Then execute the command <em>conda env create</em> as shown below. When you start a notebook in the framework package for the first time you will be asked to select Python environment. Select the <em>xspatula_py_3.12.yml</em> as the Python environment.</p>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda env create --file xspatula_py_3.12.yml
+<p>Before running <code class="language-plaintext highlighter-rouge">setup_processes.ipynb</code>, the database must already exist. See the <a href="../../setup_db/">Setup DB</a> section for instructions on creating the database.</p>
+
+<p>Process registration uses an ordinary database user — not the postgres superuser. The scheme file for this step therefore has a different structure from the one used during <a href="../../setup_db/">database setup</a>. See the <a href="../scheme_file/">Scheme file</a> page for details.</p>
+
+<h2 id="file-hierarchy">File hierarchy</h2>
+
+<p>The same four-level hierarchy used for database setup applies here:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── scheme_xspatula_local_use.json   # scheme file — project path + user credentials
+└── xspatula/
+    ├── job_setup_processes.json     # job file — points to job folder, sub-folder and pilot file
+    └── setup_processes/
+        ├── xspatula_setup_processes.txt   # pilot file — lists process JSON files to run
+        └── json_xspatula/                 # process sub-folder
+            ├── root_process/
+            │   └── root_processes_v10_sql.json
+            ├── translate/
+            │   └── translate_tabular_data_v10_sql.json
+            └── utility/
+                └── territory_v10_sql.json
 </code></pre></div></div>
 
-<p>If you want to remove the virtual environment, run the command:</p>
+<h2 id="running-setup_processesipynb">Running setup_processes.ipynb</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda remove --name xspatula_py_3.12 --all
+<p>The notebook has the same three-block structure as all Xspatula notebooks. Code block 2 sets the scheme file:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scheme_file</span> <span class="o">=</span> <span class="sh">'</span><span class="s">./zzz/scheme_xspatula_local_use.json</span><span class="sh">'</span>
 </code></pre></div></div>
+
+<p>Code block 3 loads the job file and runs the processes:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#%%script false --no-raise-error
+</span><span class="n">job_file</span> <span class="o">=</span> <span class="sh">'</span><span class="s">job_setup_processes.json</span><span class="sh">'</span>
+
+<span class="n">structured_process_D</span><span class="p">,</span> <span class="n">scheme_params_D</span> <span class="o">=</span> <span class="nc">Initiate_process</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">,</span> <span class="n">scheme_file</span><span class="p">,</span> <span class="n">job_file</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">structured_process_D</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+
+    <span class="nc">Run_process</span><span class="p">(</span><span class="n">structured_process_D</span><span class="p">,</span> <span class="n">scheme_params_D</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="default-processes-registered">Default processes registered</h2>
+
+<p>The default pilot file registers three groups of processes in order:</p>
+
+<ol>
+  <li><strong>Root processes</strong> — two root process groups (<code class="language-plaintext highlighter-rouge">manage_table_data</code> and <code class="language-plaintext highlighter-rouge">translate_data</code>) that parent all other processes</li>
+  <li><strong>translate_tabular_data</strong> — converts Excel or CSV files to Xspatula JSON process files</li>
+  <li><strong>manage_territory</strong> — inserts, updates or deletes territory records in <code class="language-plaintext highlighter-rouge">utility.territory</code></li>
+</ol>
+
+<p>For details on defining your own processes, see <a href="../define_process/">Define process</a>.</p>
 
 <h2 id="input-files">Input files</h2>
 
@@ -288,8 +310,16 @@ dependencies:
   </thead>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">xspatula_py_3.12.yml</code></td>
-      <td>Conda environment definition; specifies Python 3.12 with numpy, pandas, openpyxl, matplotlib, pyserial, psycopg2, scipy, python-dotenv and tabulate</td>
+      <td><code class="language-plaintext highlighter-rouge">scheme_xspatula_local_use.json</code></td>
+      <td>Scheme file for process registration; defines project path and a category-5 user login — no superuser credentials</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">job_setup_processes.json</code></td>
+      <td>Job file; points to the <code class="language-plaintext highlighter-rouge">setup_processes</code> job folder, <code class="language-plaintext highlighter-rouge">json_xspatula</code> sub-folder and <code class="language-plaintext highlighter-rouge">xspatula_setup_processes.txt</code> pilot file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xspatula_setup_processes.txt</code></td>
+      <td>Pilot file; lists the three JSON process files to run in order</td>
     </tr>
   </tbody>
 </table>
@@ -305,7 +335,7 @@ dependencies:
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-29">March 29, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-06-09">June 9, 2026</time></p>
 
       </footer>
 
@@ -314,10 +344,10 @@ dependencies:
       
   <nav class="pagination">
     
-      <a href="#" class="pagination--pager disabled">Previous</a>
+      <a href="/setup_processes/edit_process/" class="pagination--pager" title="Edit or delete a process">Previous</a>
     
     
-      <a href="/setup_db/" class="pagination--pager" title="Setup Xspatula DB">Next</a>
+      <a href="/setup_processes/scheme_file/" class="pagination--pager" title="Scheme file for process setup">Next</a>
     
   </nav>
 

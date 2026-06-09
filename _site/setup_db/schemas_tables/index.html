@@ -104,10 +104,10 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
         
         <a class="site-title" href="https://xspatula.github.io">
-          Script your own environment
+          Script your own environ
           <span class="site-subtitle">Database-integrated Python modelling</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
@@ -121,7 +121,19 @@
                 href="/setup_db/"
                  title="Setting up a postgreSQL database with Xspatula framework"
                 
-              >Setup Xspatula DB</a>
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
             </li><li class="masthead__menu-item">
               <a
                 href="/about/"
@@ -175,7 +187,7 @@
       
         <li>
           
-            <span class="nav__sub-title">Setup Xspatula DB</span>
+            <span class="nav__sub-title">Setup DB</span>
           
 
           
@@ -232,7 +244,7 @@
 
 <h2 id="create-schema">Create schema</h2>
 
-<p>Defining a schema is simple, you just create a process file, or edit the default JSON process file for creating schema with the path ./setup/zzz/xspatula/setup_db/jsonsql/schema_v10_sql.json:</p>
+<p>Defining a schema is simple, you just create a process file, or edit the default JSON process file for creating schema with the path ./schema_v10_sql.json:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
   "process": [
@@ -409,9 +421,66 @@
 
 <p>The handling of processes is fairly complex. If you are in for a deeper understanding please have a look in the JSON process files setting up and inserting the data for defining processes:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/xspatula/setup_db/jsonsql/processes_v10_sql.json
-./setup/zzz/xspatula/setup_db/jsonsql/processes_records_v10_sql.json
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/xspatula/setup_db/processes_v10_sql.json
+./setup/zzz/xspatula/setup_db/json_core/processes_records_v10_sql.json
 </code></pre></div></div>
+
+<h2 id="input-files">Input files</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">db_xspatula_core_setup.txt</code></td>
+      <td>Pilot file; defines the execution order for all 10 process files below</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">schema_v10_sql.json</code></td>
+      <td>Creates the three core schemas: <code class="language-plaintext highlighter-rouge">utility</code>, <code class="language-plaintext highlighter-rouge">community</code> and <code class="language-plaintext highlighter-rouge">process</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">utility_territory_v10_sql.json</code></td>
+      <td>Creates the <code class="language-plaintext highlighter-rouge">utility.territory</code> table for ISO country codes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">community_user_categories_v10_sql.json</code></td>
+      <td>Creates the <code class="language-plaintext highlighter-rouge">community.user_categories</code> table defining privilege strata</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">community_user_categories_records_v10_sql.json</code></td>
+      <td>Inserts the predefined user category records into <code class="language-plaintext highlighter-rouge">community.user_categories</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">community_organisation_v10_sql.json</code></td>
+      <td>Creates the <code class="language-plaintext highlighter-rouge">community.organisation</code> table</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">community_organisation_records_v10_sql.json</code></td>
+      <td>Inserts a default organisation record — edit before running</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">community_user_v10_sql.json</code></td>
+      <td>Creates the <code class="language-plaintext highlighter-rouge">community.user</code> table with all user columns including <code class="language-plaintext highlighter-rouge">stratum_code</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">community_user_records_v10_sql.json</code></td>
+      <td>Inserts default users including <code class="language-plaintext highlighter-rouge">ini_cat_5_user</code> and <code class="language-plaintext highlighter-rouge">jane_doe</code> — edit before running</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">processes_v10_sql.json</code></td>
+      <td>Creates the <code class="language-plaintext highlighter-rouge">process</code> schema tables for defining framework processes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">processes_records_v10_sql.json</code></td>
+      <td>Inserts root process records enabling all other process management</td>
+    </tr>
+  </tbody>
+</table>
 
 
         

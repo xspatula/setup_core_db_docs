@@ -14,7 +14,7 @@ In the Xspatula framework, schemas and tables are defined as part of the databas
 
 ## Create schema
 
-Defining a schema is simple, you just create a process file, or edit the default JSON process file for creating schema with the path ./setup/zzz/xspatula/setup_db/jsonsql/schema_v10_sql.json:
+Defining a schema is simple, you just create a process file, or edit the default JSON process file for creating schema with the path ./schema_v10_sql.json:
 
 ```
 {
@@ -191,9 +191,25 @@ The most important insert process is the adding of the root and sub processes th
 The handling of processes is fairly complex. If you are in for a deeper understanding please have a look in the JSON process files setting up and inserting the data for defining processes:
 
 ```
-./setup/zzz/xspatula/setup_db/jsonsql/processes_v10_sql.json
-./setup/zzz/xspatula/setup_db/jsonsql/processes_records_v10_sql.json
+./setup/zzz/xspatula/setup_db/processes_v10_sql.json
+./setup/zzz/xspatula/setup_db/json_core/processes_records_v10_sql.json
 ```
+
+## Input files
+
+| File | Purpose |
+|---|---|
+| `db_xspatula_core_setup.txt` | Pilot file; defines the execution order for all 10 process files below |
+| `schema_v10_sql.json` | Creates the three core schemas: `utility`, `community` and `process` |
+| `utility_territory_v10_sql.json` | Creates the `utility.territory` table for ISO country codes |
+| `community_user_categories_v10_sql.json` | Creates the `community.user_categories` table defining privilege strata |
+| `community_user_categories_records_v10_sql.json` | Inserts the predefined user category records into `community.user_categories` |
+| `community_organisation_v10_sql.json` | Creates the `community.organisation` table |
+| `community_organisation_records_v10_sql.json` | Inserts a default organisation record — edit before running |
+| `community_user_v10_sql.json` | Creates the `community.user` table with all user columns including `stratum_code` |
+| `community_user_records_v10_sql.json` | Inserts default users including `ini_cat_5_user` and `jane_doe` — edit before running |
+| `processes_v10_sql.json` | Creates the `process` schema tables for defining framework processes |
+| `processes_records_v10_sql.json` | Inserts root process records enabling all other process management |
 
 [vscode]: https://code.visualstudio.com
 

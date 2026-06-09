@@ -104,10 +104,10 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
         
         <a class="site-title" href="https://xspatula.github.io">
-          Script your own environment
+          Script your own environ
           <span class="site-subtitle">Database-integrated Python modelling</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
@@ -121,7 +121,19 @@
                 href="/setup_db/"
                  title="Setting up a postgreSQL database with Xspatula framework"
                 
-              >Setup Xspatula DB</a>
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
             </li><li class="masthead__menu-item">
               <a
                 href="/about/"
@@ -175,7 +187,7 @@
       
         <li>
           
-            <span class="nav__sub-title">Setup Xspatula DB</span>
+            <span class="nav__sub-title">Setup DB</span>
           
 
           
@@ -356,7 +368,7 @@ DB_PASSWORD=db_user_password
 
 <p>The postgres superuser defined in the <em>scheme</em> file for setting up your new database will become both the owner and a superuser for your new database. The default processes defined for setting up a new database include the definition of ordinary user(s) (not pg_users) in the database. The default user (Jane Doe) in the online repository has the user name <em>jane_doe</em> and the password is <em>hello-xspatula</em>. It is recommended that you change the names and passwords of the default users in the file</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/xspatula/setup_db/jsonsql/community_user_records_v10_sql.json.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/xspatula/setup_db/json_core/community_user_records_v10_sql.json.
 </code></pre></div></div>
 
 <p>You must then also change the login credentials in the subsequent <em>scheme</em> files for ordinary login (not database setup). You can also always login with the superuser that you used for setting up the database.</p>
@@ -402,8 +414,8 @@ DB_PASSWORD=db_user_password
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
   "process": {
     "job_folder": "setup_db",
-    "process_sub_folder": "jsonsql",
-    "pilot_file": "db_xspatula_setup.txt"
+    "process_sub_folder": "json_core",
+    "pilot_file": "db_xspatula_core_setup.txt"
     ]
   }
 }
@@ -557,8 +569,8 @@ processes_records_v10_sql.json
 └── xspatula # project root directory (can be put anywhere - path given in scheme_file)
     ├── job_setup_db.json # job file (should be in a directory under the project root - path given in scheme_file)
     ├── setup_db # Should be a directory under the project root - path given in object job_folder in the job_file
-        ├── db_xspatula_setup.txt # pilote_file - name given as object pilot_file in the job_file
-        └── jsonsql # directory with process_files - path given as object process_sub_folder in job_file
+        ├── db_xspatula_core_setup.txt # pilote_file - name given as object pilot_file in the job_file
+        └── json_core # directory with process_files - path given as object process_sub_folder in job_file
             ├── schema_v10_sql.json # process_file listed in pilot_file
             ├── community_organisation_v10_sql.json
             ├── community_organisation_records_v10_sql.json
@@ -568,6 +580,31 @@ processes_records_v10_sql.json
             ├── processes_records_v10_sql.json
             ...
 </code></pre></div></div>
+
+<h2 id="input-files">Input files</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">scheme_xspatula_local_setup.json</code></td>
+      <td>Scheme file for database setup; defines postgres superuser credentials, pg_users and default process settings</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">job_setup_db.json</code></td>
+      <td>Job file for database setup; points to the pilot file and process file directory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">db_xspatula_core_setup.txt</code></td>
+      <td>Pilot file; lists the 10 JSON process files to execute in order for a full database setup</td>
+    </tr>
+  </tbody>
+</table>
 
 
         

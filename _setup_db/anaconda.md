@@ -18,7 +18,7 @@ To setup an Anaconda (conda for short) environment you need to [download][downlo
 
 ## Framework virtual python environment
 
-To create a virtual python environment for the database functions of the framework you can use the file _xspatula_py_3.12.yml_. It is included in the Xspatula repo under the path ./anaconda and shown below.
+To create a virtual python environment for the database functions of the framework you can use the file _xspatula_py_3.12.yml_. It is included in the Xspatula repo under the path ./setup/anaconda and shown below.
 
 ```
 name: xspatula_py_3.12
@@ -29,8 +29,13 @@ dependencies:
   - python=3.12
   - numpy
   - pandas
+  - openpyxl
+  - matplotlib
+  - pyserial
   - psycopg2
+  - scipy
   - python-dotenv
+  - tabulate
 ```
 
 Open a Terminal window and navigate to the folder that contains _xspatula_py_3.12.yml_. Then execute the command _conda env create_ as shown below. When you start a notebook in the framework package for the first time you will be asked to select Python environment. Select the _xspatula_py_3.12.yml_ as the Python environment.
@@ -44,6 +49,12 @@ If you want to remove the virtual environment, run the command:
 ```
 conda remove --name xspatula_py_3.12 --all
 ```
+
+## Input files
+
+| File | Purpose |
+|---|---|
+| `xspatula_py_3.12.yml` | Conda environment definition; specifies Python 3.12 with numpy, pandas, openpyxl, matplotlib, pyserial, psycopg2, scipy, python-dotenv and tabulate |
 
 [download_anaconda]: https://www.anaconda.com/download
 

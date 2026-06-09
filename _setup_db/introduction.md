@@ -137,7 +137,7 @@ In the example of a _scheme_ file for setting up a database below I have added s
 The postgres superuser defined in the _scheme_ file for setting up your new database will become both the owner and a superuser for your new database. The default processes defined for setting up a new database include the definition of ordinary user(s) (not pg_users) in the database. The default user (Jane Doe) in the online repository has the user name _jane_doe_ and the password is _hello-xspatula_. It is recommended that you change the names and passwords of the default users in the file
 
 ```
-./setup/zzz/xspatula/setup_db/jsonsql/community_user_records_v10_sql.json.
+./setup/zzz/xspatula/setup_db/json_core/community_user_records_v10_sql.json.
 ```
 
 You must then also change the login credentials in the subsequent _scheme_ files for ordinary login (not database setup). You can also always login with the superuser that you used for setting up the database.
@@ -183,8 +183,8 @@ The default setting in the Xspatula GitHub online repository is linking to a _pi
 {
   "process": {
     "job_folder": "setup_db",
-    "process_sub_folder": "jsonsql",
-    "pilot_file": "db_xspatula_setup.txt"
+    "process_sub_folder": "json_core",
+    "pilot_file": "db_xspatula_core_setup.txt"
     ]
   }
 }
@@ -337,8 +337,8 @@ The directory structure for the project defined in the scheme_file and the job_f
 └── xspatula # project root directory (can be put anywhere - path given in scheme_file)
     ├── job_setup_db.json # job file (should be in a directory under the project root - path given in scheme_file)
     ├── setup_db # Should be a directory under the project root - path given in object job_folder in the job_file
-        ├── db_xspatula_setup.txt # pilote_file - name given as object pilot_file in the job_file
-        └── jsonsql # directory with process_files - path given as object process_sub_folder in job_file
+        ├── db_xspatula_core_setup.txt # pilote_file - name given as object pilot_file in the job_file
+        └── json_core # directory with process_files - path given as object process_sub_folder in job_file
             ├── schema_v10_sql.json # process_file listed in pilot_file
             ├── community_organisation_v10_sql.json
             ├── community_organisation_records_v10_sql.json
@@ -348,6 +348,14 @@ The directory structure for the project defined in the scheme_file and the job_f
             ├── processes_records_v10_sql.json
             ...
 ```
+
+## Input files
+
+| File | Purpose |
+|---|---|
+| `scheme_xspatula_local_setup.json` | Scheme file for database setup; defines postgres superuser credentials, pg_users and default process settings |
+| `job_setup_db.json` | Job file for database setup; points to the pilot file and process file directory |
+| `db_xspatula_core_setup.txt` | Pilot file; lists the 10 JSON process files to execute in order for a full database setup |
 
 [vscode]: ../framework/vscode/
 

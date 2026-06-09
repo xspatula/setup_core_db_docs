@@ -277,6 +277,13 @@ To define explicit default settings, the scheme file could for example look like
 
 As noted above, if any of the default values appear in an individual process JSON command that setting takes precedence over the default settings in the scheme file.
 
+## Input files
+
+| File | Purpose |
+|---|---|
+| `scheme_xspatula_local_setup.json` | Scheme file for creating a new database; defines postgres cluster credentials, the pg_users and default process settings |
+| `scheme_xspatula_local_use.json` | Scheme file for using an existing database; defines a single project user — no superuser credentials required |
+
 [notebook]: ../notebook/
 
 [netrc]: ../../setup_db/netrc/

@@ -31,7 +31,7 @@ repository               : # "karttur-v2/site-setup"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # ===== START edits by TG 20251115 =====
 logo                     : "/assets/media/xspectre_logo-trans_480.png"
-masthead_title           : "Script your own environment" # overrides the website title displayed in the masthead, use " " for no title
+masthead_title           : "Script your own environ" # overrides the website title displayed in the masthead, use " " for no title
 # ===== END edits by TG 20251115 =====
 breadcrumbs              : # true, false (default)
 words_per_minute         : 200

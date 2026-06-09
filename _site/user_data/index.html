@@ -10,8 +10,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Anaconda - virtual python environments - Xspatula</title>
-<meta name="description" content="Anaconda is an application that allows setting up virtual Python environments. You define the Python version and packages to include with each virtual environment and then Anaconda creates a self-contained Python environment for you.">
+<!-- begin _includes/seo.html --><title>Add user data - Xspatula</title>
+<meta name="description" content="User data — such as tabular records from Excel files — can be loaded into the database via a two-step pipeline: first translate the spreadsheet to a JSON process file, then run that file to insert the records.">
 
 
   <meta name="author" content="Thomas Gumbricht">
@@ -23,32 +23,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Xspatula">
-<meta property="og:title" content="Anaconda - virtual python environments">
-<meta property="og:url" content="http://localhost:4000/setup_db/anaconda/">
+<meta property="og:title" content="Add user data">
+<meta property="og:url" content="http://localhost:4000/user_data/">
 
 
-  <meta property="og:description" content="Anaconda is an application that allows setting up virtual Python environments. You define the Python version and packages to include with each virtual environment and then Anaconda creates a self-contained Python environment for you.">
-
-
-
+  <meta property="og:description" content="User data — such as tabular records from Excel files — can be loaded into the database via a two-step pipeline: first translate the spreadsheet to a JSON process file, then run that file to insert the records.">
 
 
 
 
-  <meta property="article:published_time" content="2026-03-15T15:13:03+01:00">
 
 
 
-  <meta property="article:modified_time" content="2026-03-29T20:13:03+02:00">
+  <meta property="article:published_time" content="2026-06-09T00:00:00+02:00">
 
 
 
-  
+  <meta property="article:modified_time" content="2026-06-09T00:00:00+02:00">
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/setup_db/anaconda/">
+
+<link rel="canonical" href="http://localhost:4000/user_data/">
 
 
 
@@ -187,23 +187,17 @@
       
         <li>
           
-            <span class="nav__sub-title">Setup DB</span>
+            <span class="nav__sub-title">Add user data</span>
           
 
           
           <ul>
             
-              <li><a href="/setup_db/">Synopsis</a></li>
+              <li><a href="/user_data/" class="active">Synopsis</a></li>
             
-              <li><a href="/setup_db/postgres/">PostgreSQL</a></li>
+              <li><a href="/user_data/translate_excel">Translate excel</a></li>
             
-              <li><a href="/setup_db/anaconda/" class="active">Anaconda</a></li>
-            
-              <li><a href="/setup_db/netrc/">.netrc</a></li>
-            
-              <li><a href="/setup_db/schemas_tables/">Defining schemas & tables</a></li>
-            
-              <li><a href="/setup_db/schemas_tables/#table-insert">Defining default users</a></li>
+              <li><a href="/user_data/insert_data">Insert data</a></li>
             
           </ul>
           
@@ -220,16 +214,16 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Anaconda - virtual python environments">
-    <meta itemprop="description" content="Anaconda is an application that allows setting up virtual Python environments. You define the Python version and packages to include with each virtual environment and then Anaconda creates a self-contained Python environment for you.">
-    <meta itemprop="datePublished" content="2026-03-15T15:13:03+01:00">
-    <meta itemprop="dateModified" content="2026-03-29T20:13:03+02:00">
+    <meta itemprop="headline" content="Add user data">
+    <meta itemprop="description" content="User data — such as tabular records from Excel files — can be loaded into the database via a two-step pipeline: first translate the spreadsheet to a JSON process file, then run that file to insert the records.">
+    <meta itemprop="datePublished" content="2026-06-09T00:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-06-09T00:00:00+02:00">
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="http://localhost:4000/setup_db/anaconda/" itemprop="url">Anaconda - virtual python environments
+            <a href="http://localhost:4000/user_data/" itemprop="url">Add user data
 </a>
           </h1>
           
@@ -240,42 +234,69 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>Anaconda is an application that allows setting up virtual Python environments. You define the Python version and packages to include with each virtual environment and then Anaconda creates a self-contained Python environment for you.</p>
+        <p>User data — records you want to store in the database — must be in JSON format. But instead of writing JSON files, you can also add data from Excel or CSV spreadsheets. The framework converts them to JSON formatted process files and then inserts the records into the appropriate database table.</p>
 
-<h2 id="prerequisits">Prerequisits</h2>
+<p>The pipeline has two steps:</p>
 
-<p>To setup an Anaconda (conda for short) environment you need to <a href="https://www.anaconda.com/download">download</a> the distribution for your operation system and then follow the <a href="https://www.anaconda.com/docs/getting-started/anaconda/install/overview">online installation guide</a>.</p>
+<ol>
+  <li><strong>Translate</strong> — run <code class="language-plaintext highlighter-rouge">translate_tabular_data</code> to convert a spreadsheet to a JSON process file</li>
+  <li><strong>Insert</strong> — run the generated JSON process file to insert the records into the database</li>
+</ol>
 
-<h2 id="framework-virtual-python-environment">Framework virtual python environment</h2>
+<p>Both steps are handled by the notebook:</p>
 
-<p>To create a virtual python environment for the database functions of the framework you can use the file <em>xspatula_py_3.12.yml</em>. It is included in the Xspatula repo under the path ./setup/anaconda and shown below.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: xspatula_py_3.12
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - python=3.12
-  - numpy
-  - pandas
-  - openpyxl
-  - matplotlib
-  - pyserial
-  - psycopg2
-  - scipy
-  - python-dotenv
-  - tabulate
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./project_example/import_data/load_utility_data.ipynb
 </code></pre></div></div>
 
-<p>Open a Terminal window and navigate to the folder that contains <em>xspatula_py_3.12.yml</em>. Then execute the command <em>conda env create</em> as shown below. When you start a notebook in the framework package for the first time you will be asked to select Python environment. Select the <em>xspatula_py_3.12.yml</em> as the Python environment.</p>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda env create --file xspatula_py_3.12.yml
+<p>Before loading user data, both of the following must be complete:</p>
+
+<ul>
+  <li><a href="../../setup_db/">Setup DB</a> — the database must exist with the target schema and table</li>
+  <li><a href="../../setup_processes/">Setup processes</a> — the <code class="language-plaintext highlighter-rouge">translate_tabular_data</code> and <code class="language-plaintext highlighter-rouge">manage_territory</code> processes must be registered in the database</li>
+</ul>
+
+<h2 id="the-project_example">The project_example</h2>
+
+<p>The repository includes a worked example in <code class="language-plaintext highlighter-rouge">project_example/</code> that imports national territory data into the <code class="language-plaintext highlighter-rouge">utility.territory</code> table. The source data is a spreadsheet of ~200 countries with their ISO 3166-1 alpha-2 codes. This example is used throughout this section to illustrate each step.</p>
+
+<h2 id="project-file-structure">Project file structure</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>project_example/
+├── scheme_xspatula.json            # scheme file — project path + user credentials
+└── import_data/
+    └── utility/
+        ├── excel/
+        │   └── territory.xlsx      # source spreadsheet
+        ├── process/
+        │   └── territory.json      # process definition for translate step
+        └── manage_process/
+            └── manage_territory.json   # generated by translate step, used by insert step
 </code></pre></div></div>
 
-<p>If you want to remove the virtual environment, run the command:</p>
+<h2 id="scheme-file">Scheme file</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda remove --name xspatula_py_3.12 --all
-</code></pre></div></div>
+<p>The scheme file for the example project points to the <code class="language-plaintext highlighter-rouge">project_example</code> directory and uses an <code class="language-plaintext highlighter-rouge">ini_cat_5_user</code> login:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"project_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../project_example"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user_project"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ini_cat_5_user"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"armchair-scouting-windowframe-bicycling"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"execute"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"verbose"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"overwrite"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"delete"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Replace <code class="language-plaintext highlighter-rouge">user_name</code> and <code class="language-plaintext highlighter-rouge">password</code> with your own credentials. You can also use <code class="language-plaintext highlighter-rouge">user_netrc_id</code> to read credentials from a <a href="../../setup_db/netrc/">.netrc file</a>.</p>
 
 <h2 id="input-files">Input files</h2>
 
@@ -288,8 +309,8 @@ dependencies:
   </thead>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">xspatula_py_3.12.yml</code></td>
-      <td>Conda environment definition; specifies Python 3.12 with numpy, pandas, openpyxl, matplotlib, pyserial, psycopg2, scipy, python-dotenv and tabulate</td>
+      <td><code class="language-plaintext highlighter-rouge">scheme_xspatula.json</code></td>
+      <td>Scheme file for the example project; defines the project path and <code class="language-plaintext highlighter-rouge">ini_cat_5_user</code> credentials</td>
     </tr>
   </tbody>
 </table>
@@ -305,7 +326,7 @@ dependencies:
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-29">March 29, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-06-09">June 9, 2026</time></p>
 
       </footer>
 
@@ -314,10 +335,10 @@ dependencies:
       
   <nav class="pagination">
     
-      <a href="#" class="pagination--pager disabled">Previous</a>
+      <a href="/user_data/insert_data/" class="pagination--pager" title="Insert data into the database">Previous</a>
     
     
-      <a href="/setup_db/" class="pagination--pager" title="Setup Xspatula DB">Next</a>
+      <a href="/user_data/translate_excel/" class="pagination--pager" title="Translate Excel data to JSON">Next</a>
     
   </nav>
 

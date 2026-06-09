@@ -72,6 +72,12 @@ If you want to change verbosity, execute, overwrite, or delete for a particular 
 }
 ```
 
+## Input files
+
+| File | Purpose |
+|---|---|
+| `schema_v10_sql.json` | Representative example of a process file; defines three `create_schema` processes for the `utility`, `community` and `process` schemas |
+
 [scheme_file]: ../scheme_file
 
 [job_file]: ../job_file

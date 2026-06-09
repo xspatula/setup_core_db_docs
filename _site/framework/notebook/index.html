@@ -104,10 +104,10 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
         
         <a class="site-title" href="https://xspatula.github.io">
-          Script your own environment
+          Script your own environ
           <span class="site-subtitle">Database-integrated Python modelling</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
@@ -121,7 +121,19 @@
                 href="/setup_db/"
                  title="Setting up a postgreSQL database with Xspatula framework"
                 
-              >Setup Xspatula DB</a>
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
             </li><li class="masthead__menu-item">
               <a
                 href="/about/"
@@ -193,6 +205,8 @@
             
               <li><a href="/framework/process_file/">Process file</a></li>
             
+              <li><a href="/framework/vscode/">VScode</a></li>
+            
           </ul>
           
         </li>
@@ -243,7 +257,7 @@
 
 <h2 id="python-environment">Python environment</h2>
 
-<p>To run a Jupyter notebook you need to define the Python environment that must contain all Python packages used by the notebook and its underlying code. In the Xspatula package path ./anaconda there is a prepared .yml file and a short instruction for how to setup the virtual environment. The same information is available in the <a href="../../setup_db/anaconda/">Anaconda</a> document that also links to the Anaconda <a href="https://www.anaconda.com/download">download</a> and <a href="https://www.anaconda.com/docs/getting-started/anaconda/install/overview">installation</a> guides.</p>
+<p>To run a Jupyter notebook you need to define the Python environment that must contain all Python packages used by the notebook and its underlying code. In the Xspatula package path ./setup/anaconda there is a prepared .yml file and a short instruction for how to setup the virtual environment. The same information is available in the <a href="../../setup_db/anaconda/">Anaconda</a> document that also links to the Anaconda <a href="https://www.anaconda.com/download">download</a> and <a href="https://www.anaconda.com/docs/getting-started/anaconda/install/overview">installation</a> guides.</p>
 
 <h2 id="notebook-structure">Notebook structure</h2>
 
@@ -294,16 +308,39 @@ Initiate_database(notebook_path, scheme_file, job_file)
 
 <p>The code in the block calling the job/process file is different when setting up or deleting a database compared to all other notebooks, illustrated below by code block in the notebook <em>setup_processes</em></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>job_file = 'job_setup_processes.json'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#%%script false --no-raise-error
+job_file = 'job_setup_processes.json'
 
-structured_process_D = Initiate_process(notebook_path, scheme_file, job_file)
+structured_process_D, scheme_params_D = Initiate_process(notebook_path, scheme_file, job_file)
 
 if structured_process_D is not None:
 
-    Run_process(structured_process_D)
+    Run_process(structured_process_D, scheme_params_D)
 </code></pre></div></div>
+<p>The first line is commented out (starts with a hashtag, #), if you remove the comment (#), the notebook will skip this cell while executing.</p>
 
 <p>See the documents on <a href="../job_file">job file</a>, <a href="../pilot_file">pilot file</a> and <a href="../process_file">process file</a> for more information.</p>
+
+<h2 id="input-files">Input files</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">scheme_xspatula_local_setup.json</code></td>
+      <td>Scheme file; defines project path, postgres superuser credentials, pg_users and default process settings</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">job_setup_processes.json</code></td>
+      <td>Job file; connects to the processes to run</td>
+    </tr>
+  </tbody>
+</table>
 
 
         

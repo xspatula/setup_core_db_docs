@@ -1,0 +1,123 @@
+---
+title: "Define and register a process"
+layout: single
+sidebar:
+  nav: "setup_processes"
+excerpt: "A process is registered in the database by creating a JSON file with add_root_process or add_process entries and adding it to the pilot file. Running setup_processes.ipynb then inserts the process definitions into the database."
+permalink: /setup_processes/define_process/
+author_profile: false
+date: 2026-06-09
+last_modified_at: 2026-06-09
+---
+
+A process must be registered in the database before it can be called from a [process file][process_file]. Registration stores the process name, parameter definitions and access constraints in the `process` schema tables.
+
+## Process hierarchy
+
+Every process belongs to a root process. You must register the root process before registering the sub-processes under it.
+
+### Registering a root process
+
+Use `add_root_process` to create a new root process group:
+
+```json
+{
+  "process": [
+    {
+      "process": "add_root_process",
+      "overwrite": false,
+      "parameters": {
+        "root_process": "manage_table_data",
+        "title": "Manage table data",
+        "label": "Root for processes for inserting, updating and deleting table data"
+      }
+    }
+  ]
+}
+```
+
+### Registering a sub-process
+
+Use `add_process` to register a process under an existing root. The `nodes` array defines each parameter the process accepts:
+
+```json
+{
+  "process": [
+    {
+      "process": "add_process",
+      "overwrite": false,
+      "parameters": {
+        "root_process": "manage_table_data",
+        "process": "manage_territory",
+        "min_user_stratum": 5,
+        "title": "Manage territory",
+        "label": "Insert, update or delete a territory, using ISO 3166 naming convention."
+      },
+      "nodes": [
+        {
+          "parent": "process",
+          "element": "parameters",
+          "parameter": [
+            {
+              "parameter": "name",
+              "parameter_type": "text",
+              "required": true,
+              "default_value": "",
+              "hint": "Territory name",
+              "schema_table": {
+                "schema": "utility",
+                "table": "territory",
+                "write": true
+              },
+              "permission": {
+                "update": false,
+                "delete": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+The `min_user_stratum` sets the minimum user privilege level required to run the process. The `schema_table` block links a parameter to a target table in the database.
+
+## Adding the process file to the pilot file
+
+Once you have created the JSON process file, add it to the pilot file `xspatula_setup_processes.txt`:
+
+```
+# My new process group
+root_process/my_root_processes.json
+
+my_process/my_process_v10_sql.json
+```
+
+Lines starting with `#` are comments and are skipped. The root process must appear before any sub-processes that reference it.
+
+## Running setup_processes.ipynb
+
+Open `setup/setup_processes.ipynb` and run all three code blocks. The notebook reads the pilot file and registers each process in the database in the listed order. Use `verbose: 2` in the scheme file if you want to see the parameter details as they are inserted.
+
+## Default processes registered
+
+The three JSON files included in the default setup illustrate the pattern described above:
+
+| File | What it registers |
+|---|---|
+| `root_processes_v10_sql.json` | Two root process groups: `manage_table_data` and `translate_data` |
+| `translate_tabular_data_v10_sql.json` | The `translate_tabular_data` sub-process under `translate_data` |
+| `territory_v10_sql.json` | The `manage_territory` sub-process under `manage_table_data` |
+
+## Input files
+
+| File | Purpose |
+|---|---|
+| `xspatula_setup_processes.txt` | Pilot file; lists the JSON process files to register, in execution order |
+| `root_processes_v10_sql.json` | Registers the `manage_table_data` and `translate_data` root process groups |
+| `translate_tabular_data_v10_sql.json` | Registers the `translate_tabular_data` sub-process for converting spreadsheet data to JSON |
+| `territory_v10_sql.json` | Registers the `manage_territory` sub-process for inserting and updating territory records |
+
+[process_file]: ../../framework/process_file/

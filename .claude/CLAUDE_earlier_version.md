@@ -13,7 +13,7 @@ The Xspatula framework is written in Python and uses JSON files to define all ex
 ## Site Architecture
 
 **Theme**: Minimal Mistakes Jekyll theme, version 4.27.3 (local install, not remote)
-**URL (production)**: `https://xspatula.github.io/setup_core_db_docs` (url + baseurl from `_config.yml`)
+**URL (production)**: `https://xspatula.github.io/setup_core_db_docs/docs`
 **Search**: Lunr (client-side, full content)
 
 ### Collections
@@ -22,42 +22,28 @@ The Xspatula framework is written in Python and uses JSON files to define all ex
 |---|---|---|---|
 | `framework` | `_framework/` | true | Framework architecture documentation |
 | `setup_db` | `_setup_db/` | true | Step-by-step database setup guide |
-| `setup_processes` | `_setup_processes/` | true | Step-by-step guide for setting up a process example (translating and adding tabular data to the database)|
-| `user_data` | `_user_data/` | true | Step-by-step guide for adding user specific tabular (excel) data via JSON conversion |
+| `ai4sh` | `ai4sh/` | false | AI4SoilHealth project case study |
 
 ### Navigation Structure
 
 ```
 Top navbar:
-├─ Xspatula framework  →  /framework/
-├─ Setup DB            →  /setup_db/
-├─ Setup processes     →  /setup_processes/
-└─ Add user data       →  /user_data/
+├─ Xspatula framework  →  _framework/
+└─ Setup Xspatula DB   →  _setup_db/
 
 Framework subsection (7 pages):
-  synopsis, notebook, scheme_file, job_file, pilot_file, process_file, vscode
+  introduction, notebook, scheme_file, job_file, pilot_file, process_file, vscode
 
-Setup DB subsection (5 pages + anchor):
-  synopsis, postgres, anaconda, netrc, schemas_tables (+ #table-insert anchor)
-
-Setup processes subsection (4 pages):
-  synopsis, scheme_file, define_process, edit_process
-
-Add user data subsection (3 pages):
-  synopsis, translate_excel, insert_data
+Setup DB subsection (5 pages):
+  introduction, postgres, anaconda, netrc, schemas_tables
 ```
-
-### Notes on Setup DB
-Before you run the setup_db notebook, you must define your initial users in setup/zzz/xspatula/setup_db/json_core/community_user_records_v10_sql.json and then change the creator in setup/zzz/xspatula/setup_db/json_core/processes_records_v10_sql.json to one of the these users, otherwise the script will return an error and not insert the process.
-
-### Notes on Setup processes
-- The scheme_file is changed from the superuser to a category 5 user defined during setup_db (see my notes in _setup_processes/user_scheme_file.md, then just leave this file and do not include it in the site)
 
 ### Key Directories
 
 - `_data/` — `navigation.yml` (site nav) and `ui-text.yml` (theme UI strings)
+- `_setup_processes/` — supplementary process documentation (not in main nav yet)
 - `assets/media/` — logos and schema diagram images
-- `_site/` — generated output
+- `_site/` — generated output (do not edit manually)
 
 ## Configuration Files
 
@@ -81,8 +67,7 @@ The documentation covers:
 1. **Framework fundamentals** — scheme files, job files, pilot files, process files, notebook interface
 2. **Database setup** — PostgreSQL installation, Anaconda environment, `.netrc` credentials, defining schemas and tables
 3. **Security** — use of `.netrc` and `.env` files; six user categories (`user_cat_0` through `user_cat_5`) with varying PostgreSQL privileges
-4. **Process setup** - example of adding user defined process to the Framework
-5. **Add user data** - example of adding user data from tabular sheets (excel) to the database
+4. **AI4SH case study** — EU-funded AI4SoilHealth project using six database schemas: utility, community, process, observation_utility, observation
 
 ## Licenses
 
@@ -96,11 +81,3 @@ The documentation covers:
 | `xspatula/xspatula.github.io` | The framework landing page; sibling directory `../xspatula.github.io` |
 | `xspatula/setup_core_db` | The framework being documented; sibling directory `../setup_core_db` |
 | `mmistakes/minimal-mistakes` | Jekyll theme used for the site |
-
-## Important notes
-
-- Documentation should be generic and useful for any project using the xspatula framework, not just the national-territories example project.
-- The example project (`project_example`) translates Excel data on national territories to JSON format that is then entered into the database. It is used as the concrete example throughout `setup_processes` and `user_data` sections.
-- For every page produced, add a list of all input files (Excel, JSON, etc.) at the end, stating each file's content and purpose.
-- `_setup_processes/user_scheme_file.md` is a reference/draft note explaining the shift from superuser to a category-5 user after initial DB setup. It is **not** a site page — do not include it in any collection or nav.
-- The earlier version of this site (before `setup_processes` and `user_data` were added) is archived in `.claude/CLAUDE_earlier_version.md`.

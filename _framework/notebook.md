@@ -23,7 +23,7 @@ To build your own database, whether on your local machine or a remote server, yo
 
 ## Python environment
 
-To run a Jupyter notebook you need to define the Python environment that must contain all Python packages used by the notebook and its underlying code. In the Xspatula package path ./anaconda there is a prepared .yml file and a short instruction for how to setup the virtual environment. The same information is available in the [Anaconda][anaconda] document that also links to the Anaconda [download][download_anaconda] and [installation][install_anaconda] guides.
+To run a Jupyter notebook you need to define the Python environment that must contain all Python packages used by the notebook and its underlying code. In the Xspatula package path ./setup/anaconda there is a prepared .yml file and a short instruction for how to setup the virtual environment. The same information is available in the [Anaconda][anaconda] document that also links to the Anaconda [download][download_anaconda] and [installation][install_anaconda] guides.
 
 ## Notebook structure
 
@@ -78,16 +78,25 @@ Initiate_database(notebook_path, scheme_file, job_file)
 The code in the block calling the job/process file is different when setting up or deleting a database compared to all other notebooks, illustrated below by code block in the notebook _setup_processes_
 
 ```
+#%%script false --no-raise-error
 job_file = 'job_setup_processes.json'
 
-structured_process_D = Initiate_process(notebook_path, scheme_file, job_file)
+structured_process_D, scheme_params_D = Initiate_process(notebook_path, scheme_file, job_file)
 
 if structured_process_D is not None:
 
-    Run_process(structured_process_D)
+    Run_process(structured_process_D, scheme_params_D)
 ```
+The first line is commented out (starts with a hashtag, #), if you remove the comment (#), the notebook will skip this cell while executing.
 
 See the documents on [job file][job_file], [pilot file][pilot_file] and [process file][process_file] for more information.
+
+## Input files
+
+| File | Purpose |
+|---|---|
+| `scheme_xspatula_local_setup.json` | Scheme file; defines project path, postgres superuser credentials, pg_users and default process settings |
+| `job_setup_processes.json` | Job file; connects to the processes to run |
 
 [vscode]: https://code.visualstudio.com
 

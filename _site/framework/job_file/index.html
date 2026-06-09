@@ -104,10 +104,10 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environment"></a>
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
         
         <a class="site-title" href="https://xspatula.github.io">
-          Script your own environment
+          Script your own environ
           <span class="site-subtitle">Database-integrated Python modelling</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
@@ -121,7 +121,19 @@
                 href="/setup_db/"
                  title="Setting up a postgreSQL database with Xspatula framework"
                 
-              >Setup Xspatula DB</a>
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
             </li><li class="masthead__menu-item">
               <a
                 href="/about/"
@@ -193,6 +205,8 @@
             
               <li><a href="/framework/process_file/">Process file</a></li>
             
+              <li><a href="/framework/vscode/">VScode</a></li>
+            
           </ul>
           
         </li>
@@ -235,6 +249,8 @@
   <li>one of the following three objects: pilot_file, pilot_list or process_file.</li>
 </ol>
 
+<p><strong>NOTE</strong> if you are running a single process file you do not need a job file, you can give the process file directly in the notebook. Process files can also list any number of processes, and if you only have a few processes to run, calling the process file directly from the notebook is probably easier. If your project is large and complex, using an intermediate job file allows you to run processes in logical batches.</p>
+
 <p>Example of a job file linking to an external list of process files in a <a href="../pilot_file/">pilot_file</a>:</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
   "process": {
@@ -274,6 +290,27 @@
 <h3 id="hierarchical-path-structure">Hierarchical path structure</h3>
 
 <p>The directory entered as the object job_folder must be directly under the project_path where the job file itself is saved. There is no option for changing a project hierarchy inside a project. You can, however, name the job_folder freely. The object process_sub_folder in the job file likewise always looks for a folder directly under the job_folder, and this is where you must store the process files that define what the framework should do. You can also freely name the process_sub_folder.</p>
+
+<h2 id="input-files">Input files</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">job_setup_db.json</code></td>
+      <td>Job file for database setup; points to the <code class="language-plaintext highlighter-rouge">setup_db</code> job folder, <code class="language-plaintext highlighter-rouge">json_core</code> process sub-folder, and <code class="language-plaintext highlighter-rouge">db_xspatula_core_setup.txt</code> pilot file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">job_setup_processes.json</code></td>
+      <td>Job file for process registration; points to the <code class="language-plaintext highlighter-rouge">setup_processes</code> job folder, <code class="language-plaintext highlighter-rouge">json_xspatula</code> process sub-folder, and <code class="language-plaintext highlighter-rouge">xspatula_setup_processes.txt</code> pilot file</td>
+    </tr>
+  </tbody>
+</table>
 
 
         

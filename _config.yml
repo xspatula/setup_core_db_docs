@@ -25,14 +25,14 @@ subtitle                 : "Database-integrated Python modelling"
 name                     : "Thomas Gumbricht"
 description              : "Open-source framework for scripting database-integrated Python workflows."
 url                      : "https://xspatula.github.io"
-baseurl                  : ""
+baseurl                  : "setup_core_db_docs"
 repository               : "xspatula/setup_core_db_docs"
 # bundle exec jekyll build -d /Users/thomasgumbricht/GitHub_AI4SH/in-situ_data_docs/docs
 # ===== END edits by TG 20251115 =====
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # ===== START edits by TG 20251115 =====
 logo                     : "/assets/media/xspectre_logo-trans_480.png"
-masthead_title           : "Script your own environment" # overrides the website title displayed in the masthead, use " " for no title
+masthead_title           : "Script your own environ" # overrides the website title displayed in the masthead, use " " for no title
 # ===== END edits by TG 20251115 =====
 breadcrumbs              : # true, false (default)
 words_per_minute         : 200
@@ -351,14 +351,36 @@ collections:
     output: true
   setup_db:
     output: true
-  ai4sh:
-    output: false
+  setup_processes:
+    output: true
+  user_data:
+    output: true
 
 # collection navigation orders
 nav_order:
-  setup_db:
-    - introduction
+  framework:
+    - synopsis
     - notebook
+    - scheme_file
+    - job_file
+    - pilot_file
+    - process_file
+    - vscode
+  setup_db:
+    - synopsis
+    - postgres
+    - anaconda
+    - netrc
+    - schemas_tables
+  setup_processes:
+    - synopsis
+    - scheme_file
+    - define_process
+    - edit_process
+  user_data:
+    - synopsis
+    - translate_excel
+    - insert_data
 
 # Defaults
 defaults:

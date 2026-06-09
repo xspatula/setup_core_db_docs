@@ -1,0 +1,450 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Insert data into the database - Xspatula</title>
+<meta name="description" content="Step 2 of the user data pipeline runs the generated JSON process file to insert each row from the spreadsheet as a record in the target database table.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula">
+<meta property="og:title" content="Insert data into the database">
+<meta property="og:url" content="http://localhost:4000/user_data/insert_data/">
+
+
+  <meta property="og:description" content="Step 2 of the user data pipeline runs the generated JSON process file to insert each row from the spreadsheet as a record in the target database table.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-06-09T00:00:00+02:00">
+
+
+
+  <meta property="article:modified_time" content="2026-06-09T00:00:00+02:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/user_data/insert_data/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
+        
+        <a class="site-title" href="https://xspatula.github.io">
+          Script your own environ
+          <span class="site-subtitle">Database-integrated Python modelling</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">Add user data</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/user_data/">Synopsis</a></li>
+            
+              <li><a href="/user_data/translate_excel">Translate excel</a></li>
+            
+              <li><a href="/user_data/insert_data">Insert data</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Insert data into the database">
+    <meta itemprop="description" content="Step 2 of the user data pipeline runs the generated JSON process file to insert each row from the spreadsheet as a record in the target database table.">
+    <meta itemprop="datePublished" content="2026-06-09T00:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-06-09T00:00:00+02:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/user_data/insert_data/" itemprop="url">Insert data into the database
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Step 2 of the user data pipeline runs the JSON file generated in the <a href="../translate_excel/">translate step</a> and inserts each entry as a record in the target database table.</p>
+
+<p>For the territory example, <code class="language-plaintext highlighter-rouge">manage_territory.json</code> is run to insert ~200 national territories into <code class="language-plaintext highlighter-rouge">utility.territory</code>.</p>
+
+<h2 id="structure-of-the-generated-process-file">Structure of the generated process file</h2>
+
+<p>Each entry in <code class="language-plaintext highlighter-rouge">manage_territory.json</code> calls the <code class="language-plaintext highlighter-rouge">manage_territory</code> process with the parameters for one territory:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"root_process_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"import_tabular_data"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manage_territory"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"delete"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"overwrite"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"afghanistan"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Afghanistan"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"iso_code_a2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"af"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"iso_code_a2_ext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"af"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">delete</code> and <code class="language-plaintext highlighter-rouge">overwrite</code> flags default to <code class="language-plaintext highlighter-rouge">false</code>. Set <code class="language-plaintext highlighter-rouge">overwrite: true</code> to update existing records, or <code class="language-plaintext highlighter-rouge">delete: true</code> to remove them. These can also be set globally in the <a href="../../setup_processes/scheme_file/">scheme file</a>.</p>
+
+<h2 id="running-step-2-in-the-notebook">Running step 2 in the notebook</h2>
+
+<p>Open <code class="language-plaintext highlighter-rouge">project_example/import_data/load_utility_data.ipynb</code>. Step 2 (code block 4) runs the insert process:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#%%script false --no-raise-error
+</span><span class="n">process_file</span> <span class="o">=</span> <span class="sh">'</span><span class="s">import_data/utility/manage_process/manage_territory.json</span><span class="sh">'</span>
+
+<span class="n">structured_process_D</span><span class="p">,</span> <span class="n">scheme_params_D</span> <span class="o">=</span> <span class="nc">Initiate_process</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">,</span> <span class="n">scheme_file</span><span class="p">,</span> <span class="n">process_file</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">structured_process_D</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+
+    <span class="nc">Run_process</span><span class="p">(</span><span class="n">structured_process_D</span><span class="p">,</span> <span class="n">scheme_params_D</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The framework reads each entry in the file and calls the <code class="language-plaintext highlighter-rouge">manage_territory</code> function once per record.</p>
+
+<h2 id="verifying-the-data">Verifying the data</h2>
+
+<p>After the notebook completes, you can verify the inserted records by connecting to the database directly:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">display_name</span><span class="p">,</span> <span class="n">iso_code_a2</span>
+<span class="k">FROM</span> <span class="n">utility</span><span class="p">.</span><span class="n">territory</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">name</span>
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>You should see the territory records inserted from the spreadsheet.</p>
+
+<h2 id="running-for-your-own-data">Running for your own data</h2>
+
+<p>To load your own tabular data:</p>
+
+<ol>
+  <li>Create a spreadsheet with column names matching the parameters of your target process</li>
+  <li>Create a process definition JSON file (see <a href="../translate_excel/">Translate Excel</a>)</li>
+  <li>Run the translate step to generate the JSON process file</li>
+  <li>Run the insert step to load the records into the database</li>
+</ol>
+
+<p>The translate and insert steps are independent — you can re-run either one without affecting the other, as long as <code class="language-plaintext highlighter-rouge">overwrite</code> and <code class="language-plaintext highlighter-rouge">delete</code> are set appropriately.</p>
+
+<h2 id="input-files">Input files</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">manage_territory.json</code></td>
+      <td>Generated by the translate step; contains one <code class="language-plaintext highlighter-rouge">manage_territory</code> process entry per row in <code class="language-plaintext highlighter-rouge">territory.xlsx</code> — ~200 entries in total</td>
+    </tr>
+  </tbody>
+</table>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-06-09">June 9, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/user_data/" class="pagination--pager" title="Add user data">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
