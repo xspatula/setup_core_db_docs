@@ -201,6 +201,8 @@
             
               <li><a href="/setup_processes/edit_process">Edit process</a></li>
             
+              <li><a href="/setup_processes/process_options">Process options</a></li>
+            
           </ul>
           
         </li>
@@ -261,7 +263,16 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<h3 id="registering-a-sub-process">Registering a sub-process</h3>
+<h4 id="root-process-parameters">Root process parameters</h4>
+
+<p>A root process is registered with only 3 parameters:</p>
+<ul>
+  <li>root_process, the name of the root process,</li>
+  <li>title, a short title,</li>
+  <li>label, a short description</li>
+</ul>
+
+<h3 id="registering-a-process">Registering a process</h3>
 
 <p>Use <code class="language-plaintext highlighter-rouge">add_process</code> to register a process under an existing root. The <code class="language-plaintext highlighter-rouge">nodes</code> array defines each parameter the process accepts:</p>
 
@@ -305,8 +316,50 @@
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
+<h4 id="process-parameters-and-nodes">Process parameters and nodes</h4>
 
-<p>The <code class="language-plaintext highlighter-rouge">min_user_stratum</code> sets the minimum user privilege level required to run the process. The <code class="language-plaintext highlighter-rouge">schema_table</code> block links a parameter to a target table in the database.</p>
+<p>A process is registered with 5 parameters:</p>
+<ul>
+  <li>root_process, the name of the root process to which the process belongs,</li>
+  <li>process, the name of process</li>
+  <li>min_user_stratum, minimum user privilege level required to run the process</li>
+  <li>title, a short title,</li>
+  <li>label, a short description</li>
+</ul>
+
+<p>Parameters required for running the process being defined are listed in the <code class="language-plaintext highlighter-rouge">nodes</code> array. Each node object must include objects for <code class="language-plaintext highlighter-rouge">parent</code> and <code class="language-plaintext highlighter-rouge">element</code>, that can be used for creating nested parameter settings. The parameters accepted by a process are defined in the array <code class="language-plaintext highlighter-rouge">parameter</code>, where each entry must contain the following objects:</p>
+<ul>
+  <li>parameter, the name of the parameter</li>
+  <li>parameter_type, the data type of the parameter</li>
+  <li>required, true if compulsory, false if a default value exists</li>
+  <li>default_value, the default value to use if required is set to false and no custom value is set</li>
+  <li>hint, short clue on the objective of the parameter</li>
+</ul>
+
+<p>In addition parameters that are directly translated to records in the database must also have a <code class="language-plaintext highlighter-rouge">schema_table</code> block that links a parameter to a target table in the database. Such parameters also have a <code class="language-plaintext highlighter-rouge">permission</code> block that defines if a parameter can be updated or deleted.</p>
+
+<h4 id="process-parameters-data-type">Process parameters data type</h4>
+
+<p>The following data types are accepted as values for the parameter <code class="language-plaintext highlighter-rouge">parameter_type</code>:</p>
+<ul>
+  <li>string</li>
+  <li>integer</li>
+  <li>float</li>
+  <li>boolean</li>
+  <li>timestamp</li>
+</ul>
+
+<p>If a parameter represents an array, the <code class="language-plaintext highlighter-rouge">parameter</code> value must have the add-on “_array” of the data type defined in <code class="language-plaintext highlighter-rouge">parameter_type</code>.</p>
+
+<h4 id="optional-process-parameter-blocks">Optional process parameter blocks</h4>
+
+<p>There are four additional blocks that can be used for <a href="../process_options">defining process options</a>:</p>
+<ul>
+  <li><a href="../process_options#set-value">set value</a>, lists values accepted as input</li>
+  <li><a href="../process_options#minmax-ranges">minmax</a>, defines the range accepted for numerical values</li>
+  <li><a href="../process_options#inherit">inherit</a>, copies value from existing database record</li>
+  <li><a href="../process_options#automatic-naming">auto naming</a>, assigns an automatic value</li>
+</ul>
 
 <h2 id="adding-the-process-file-to-the-pilot-file">Adding the process file to the pilot file</h2>
 
@@ -403,7 +456,7 @@ my_process/my_process_v10_sql.json
       <a href="#" class="pagination--pager disabled">Previous</a>
     
     
-      <a href="/setup_processes/edit_process/" class="pagination--pager" title="Edit or delete a process">Next</a>
+      <a href="/setup_processes/process_options/" class="pagination--pager" title="Define process options">Next</a>
     
   </nav>
 

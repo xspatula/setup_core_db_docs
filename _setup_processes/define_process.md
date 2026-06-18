@@ -36,7 +36,14 @@ Use `add_root_process` to create a new root process group:
 }
 ```
 
-### Registering a sub-process
+#### Root process parameters
+
+A root process is registered with only 3 parameters:
+- root_process, the name of the root process,
+- title, a short title,
+- label, a short description
+
+### Registering a process
 
 Use `add_process` to register a process under an existing root. The `nodes` array defines each parameter the process accepts:
 
@@ -81,8 +88,42 @@ Use `add_process` to register a process under an existing root. The `nodes` arra
   ]
 }
 ```
+#### Process parameters and nodes
 
-The `min_user_stratum` sets the minimum user privilege level required to run the process. The `schema_table` block links a parameter to a target table in the database.
+A process is registered with 5 parameters:
+- root_process, the name of the root process to which the process belongs,
+- process, the name of process
+- min_user_stratum, minimum user privilege level required to run the process
+- title, a short title,
+- label, a short description
+
+Parameters required for running the process being defined are listed in the `nodes` array. Each node object must include objects for `parent` and `element`, that can be used for creating nested parameter settings. The parameters accepted by a process are defined in the array `parameter`, where each entry must contain the following objects:
+- parameter, the name of the parameter
+- parameter_type, the data type of the parameter
+- required, true if compulsory, false if a default value exists
+- default_value, the default value to use if required is set to false and no custom value is set
+- hint, short clue on the objective of the parameter
+
+In addition parameters that are directly translated to records in the database must also have a `schema_table` block that links a parameter to a target table in the database. Such parameters also have a `permission` block that defines if a parameter can be updated or deleted.
+
+#### Process parameters data type
+
+The following data types are accepted as values for the parameter `parameter_type`:
+- string
+- integer
+- float
+- boolean
+- timestamp
+
+If a parameter represents an array, the `parameter` value must have the add-on "_array" of the data type defined in `parameter_type`.
+
+#### Optional process parameter blocks
+
+There are four additional blocks that can be used for [defining process options][define_process_options]:
+- [set value][define_process_options_set_value], lists values accepted as input
+- [minmax][define_process_options_minmax], defines the range accepted for numerical values
+- [inherit][define_process_options_inherit], copies value from existing database record
+- [auto naming][define_process_options_auto_naming], assigns an automatic value
 
 ## Adding the process file to the pilot file
 
@@ -121,3 +162,8 @@ The three JSON files included in the default setup illustrate the pattern descri
 | `territory_v10_sql.json` | Registers the `manage_territory` sub-process for inserting and updating territory records |
 
 [process_file]: ../../framework/process_file/
+[define_process_options]: ../process_options
+[define_process_options_set_value]: ../process_options#set-value
+[define_process_options_minmax]: ../process_options#minmax-ranges
+[define_process_options_inherit]: ../process_options#inherit
+[define_process_options_auto_naming]: ../process_options#automatic-naming

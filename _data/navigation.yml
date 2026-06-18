@@ -43,6 +43,8 @@ setup_processes:
         url: /setup_processes/define_process
       - title: "Edit process"
         url: /setup_processes/edit_process
+      - title: "Process options"
+        url: /setup_processes/process_options
 
 add_user_data:
   - title: "Add user data"
