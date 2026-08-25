@@ -10,7 +10,7 @@ date: 2026-08-24
 last_modified_at: 2026-08-24
 ---
 
-Auditing is opt-in, declared per table, and the full mechanism is already documented in depth in the [Auditing][auditing_introduction] collection — this page is just the "where does this fit in while I'm building my project" version.
+Auditing is opt-in, declared per table, and the full mechanism is documented in depth in the [Auditing][auditing_introduction] collection — this page is just the "where does this fit in while I'm building my project" version.
 
 ## The one decision: while defining a table
 
@@ -24,7 +24,7 @@ Back in [Setting up the database][building_database], as you write each table's 
 }
 ```
 
-No key at all (or one with every value `false`) means that table simply isn't audited — there's no separate registration step. The rule of thumb, covered in full on the introduction page: full coverage for admin/config/catalogue tables you add to one row at a time; `UPDATE`/`DELETE` only for bulk pipeline-written data, where auditing every `INSERT` would double your write volume for little audit value.
+No key at all (or one with every value `false`) means that table simply isn't audited — there's no separate registration step. The rule of thumb, covered in full on the introduction page: full coverage for admin/config/catalogue tables you add one row at a time; `UPDATE`/`DELETE` for bulk pipeline-written data, where auditing every `INSERT` would double your write volume for little audit value.
 
 ## Turning it on
 

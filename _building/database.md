@@ -10,7 +10,7 @@ date: 2026-08-24
 last_modified_at: 2026-08-24
 ---
 
-A real project needs its own schemas and tables beyond what the framework ships by default. This page covers both defining them, and — for anything beyond simple CRUD — extending the postgres layer with your own project-specific SQL.
+A real project needs its own schemas and tables beyond what the framework ships by default. This page covers both defining them, and — for anything beyond simple CRUD (Create, Read, Update, and Delete) — extending the postgres layer with your own project-specific SQL.
 
 ## Defining your own schemas and tables
 
@@ -68,6 +68,7 @@ class Process_something(Get_schema_table):
         self.pg_session_C = pg_session_C
         self.pg_<project>_C = PG_manage_<Project>(pg_session_C)
 ```
+where the  `__init__` parameter `process_S`is a compiled struct (_S) of the JSON defined process and `pg_session_C` is the activated postgres session class (_C).
 
 You don't have to guess where this goes — the framework's own shipped `src/example_project/import_data/import_data.py` ships a commented-out fossil line marking exactly this spot:
 

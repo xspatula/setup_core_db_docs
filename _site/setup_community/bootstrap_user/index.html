@@ -24,7 +24,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Xspatula">
 <meta property="og:title" content="Bootstrap User">
-<meta property="og:url" content="https://xspatula.github.io/setup_community/bootstrap_user/">
+<meta property="og:url" content="http://localhost:4000/setup_community/bootstrap_user/">
 
 
   <meta property="og:description" content="The very first community.user can’t be created through the Excel-intake workflow, because that workflow requires an already-logged-in user. It still has to be hand-seeded — here’s how, now that passwords are stored as bcrypt hashes.">
@@ -48,7 +48,7 @@
   
 
 
-<link rel="canonical" href="https://xspatula.github.io/setup_community/bootstrap_user/">
+<link rel="canonical" href="http://localhost:4000/setup_community/bootstrap_user/">
 
 
 
@@ -247,7 +247,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="https://xspatula.github.io/setup_community/bootstrap_user/" itemprop="url">Bootstrap User
+            <a href="http://localhost:4000/setup_community/bootstrap_user/" itemprop="url">Bootstrap User
 </a>
           </h1>
           
@@ -262,12 +262,12 @@
 
 <p>Registering a new user through <a href="/setup_community/excel_intake/">Excel intake</a> and <a href="/setup_community/register_notebook/">Register notebook</a> runs through a registered process, <code class="language-plaintext highlighter-rouge">manage_user</code> — and running any process requires an already-logged-in <code class="language-plaintext highlighter-rouge">community.user</code>. That’s fine for the second user onwards, but the <em>first</em> user can’t log in before they exist. Someone has to be seeded directly.</p>
 
-<p>That first-user seed still happens the old way: hand-editing
+<p>That first-user seed still requires: hand-editing
 <code class="language-plaintext highlighter-rouge">setup/zzz/xspatula/setup_db/json_core/community/user_records_v10_sql.json</code> and running <code class="language-plaintext highlighter-rouge">setup_db.ipynb</code>.</p>
 
 <h2 id="passwords-are-bcrypt-hashes-now-not-plaintext">Passwords are bcrypt hashes now, not plaintext</h2>
 
-<p><code class="language-plaintext highlighter-rouge">community.user.password</code> used to be compared as plaintext (<code class="language-plaintext highlighter-rouge">WHERE password = %s</code>). It now stores a bcrypt hash, verified in Python after the row is fetched. That’s safer, but it also means there’s no way to just type a password directly into <code class="language-plaintext highlighter-rouge">user_records_v10_sql.json</code> any more — only a hash belongs in that column.</p>
+<p><code class="language-plaintext highlighter-rouge">community.user.password</code> are stored in the database as bcrypt hash, verified in Python after the row is fetched. That’s safer, but it also means there’s no way to just type a password directly into <code class="language-plaintext highlighter-rouge">user_records_v10_sql.json</code> any more — only a hash belongs in that column.</p>
 
 <h2 id="hashing-a-password-by-hand">Hashing a password by hand</h2>
 
@@ -394,7 +394,7 @@
 </div>
 
 
-<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="https://xspatula.github.io">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

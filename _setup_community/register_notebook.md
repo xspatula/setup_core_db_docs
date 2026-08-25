@@ -30,7 +30,7 @@ Because this runs through the normal login flow (not the raw-superuser `setup_db
 
 ## Troubleshooting: re-running a translate step
 
-`translate_tabular_data` runs with `overwrite: false` by default, so re-running step 1 or 3 after the target JSON file already exists is a no-op — it won't pick up corrections made to the spreadsheet. If a spreadsheet was corrected and needs re-translating, delete the stale `manage_process/*.json` file first, then re-run that translate cell.
+`translate_tabular_data` runs with `overwrite: false` by default, so re-running step 1 or 3 after the target JSON file already exists is a no-op — it won't pick up corrections made to the spreadsheet. If a spreadsheet was corrected and needs re-translating, delete the stale `manage_process/*.json` file first, then re-run that translate cell. 
 
 [setup_community_excel_intake]: /setup_community/excel_intake/
 [setup_community_smtp_email]: /setup_community/smtp_email/

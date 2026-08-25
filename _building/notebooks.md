@@ -10,7 +10,7 @@ date: 2026-08-24
 last_modified_at: 2026-08-24
 ---
 
-Once your own `src/<project>/` module exists (see [Naming a new project][building_project]), every notebook that runs a process still imports `Run_process` from the *old* module name. Each one needs the same one-line fix.
+Once your own `src/<project>/` module exists (see [Naming a new project][building_project]), every notebook that runs a process still imports `Run_process` from the *old* module name. Each notebook needs the same one-line fix.
 
 ## The edit
 

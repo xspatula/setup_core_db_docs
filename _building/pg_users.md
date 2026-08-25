@@ -55,7 +55,7 @@ The shipped defaults happen to make these coincide at the top: stratum 5 resolve
 
 ## Editing and revoking role grants
 
-Every role's grants live in two JSON config files, not hardcoded in Python:
+Every role's grants live in two JSON config files:
 
 - `setup/src_setup/lib_setup/roles_grants.json` — one `GRANT`-style SQL template per role, with `{user}`/`{password}`/`{db}` placeholders.
 - `setup/src_setup/lib_setup/revoke_privileges.json` — the matching `REVOKE`-style template per role, `{user}`/`{db}`.

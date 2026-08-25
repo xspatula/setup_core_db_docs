@@ -24,7 +24,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Xspatula">
 <meta property="og:title" content="Adding a new process">
-<meta property="og:url" content="https://xspatula.github.io/building/processes/">
+<meta property="og:url" content="http://localhost:4000/building/processes/">
 
 
   <meta property="og:description" content="A new root process needs a JSON registration, a line in your pilot file, and a hand-written Python handler — nothing about the wiring between them is automatic beyond one database lookup.">
@@ -48,7 +48,7 @@
   
 
 
-<link rel="canonical" href="https://xspatula.github.io/building/processes/">
+<link rel="canonical" href="http://localhost:4000/building/processes/">
 
 
 
@@ -255,7 +255,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="https://xspatula.github.io/building/processes/" itemprop="url">Adding a new process
+            <a href="http://localhost:4000/building/processes/" itemprop="url">Adding a new process
 </a>
           </h1>
           
@@ -349,6 +349,18 @@
 </span></code></pre></div></div>
 
 <p>Place this under your own <code class="language-plaintext highlighter-rouge">setup/zzz/&lt;project&gt;/setup_processes/json_&lt;project&gt;/report/report_v10_sql.json</code>, add a line for it to your setup-processes pilot file (the root process must come before its sub-processes — within one JSON file, as above, that ordering is handled for you), and run <code class="language-plaintext highlighter-rouge">setup_processes.ipynb</code>. This writes rows into the database’s <code class="language-plaintext highlighter-rouge">process</code> and <code class="language-plaintext highlighter-rouge">root_process</code> tables — nothing runs yet, it’s purely registration.</p>
+
+<h3 id="updating-a-process">Updating a process</h3>
+
+<p>If you discover an error in your process definition, or change the type or name of a parameter, it is safe to user <code class="language-plaintext highlighter-rouge">overwrite: true</code> option. This will recreate the registered process and is a very useful tool when developing the database.</p>
+
+<h3 id="deleting-a-process">Deleting a process</h3>
+
+<p>To delete a process registered in the database set the <code class="language-plaintext highlighter-rouge">delete: true</code> option. If you set both <code class="language-plaintext highlighter-rouge">overwrite: true</code> and <code class="language-plaintext highlighter-rouge">delete: true</code>, overwriting takes precedence.</p>
+
+<h3 id="changing-the-name-of-the-process-itself">Changing the name of the process itself</h3>
+
+<p>If you want to change the name of an existing process, start by using the <code class="language-plaintext highlighter-rouge">delete: true</code> option and run the notebook, then rename the process and set <code class="language-plaintext highlighter-rouge">delete: false</code> and rerun the notebook.</p>
 
 <h2 id="layer-2-what-actually-runs">Layer 2: what actually runs</h2>
 
@@ -511,7 +523,7 @@
 </div>
 
 
-<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="https://xspatula.github.io">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

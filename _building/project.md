@@ -10,7 +10,7 @@ date: 2026-08-24
 last_modified_at: 2026-08-24
 ---
 
-Everything documented so far on this site uses the framework's own shipped example, `project_example`. This collection walks through what changes when you build your own project instead — starting with naming it.
+Everything documented so far on this site uses the framework's own shipped example, `project_example`. The Building pages walk through what changes when you build your own project instead — starting with naming it.
 
 ## Two independent names
 

@@ -24,7 +24,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Xspatula">
 <meta property="og:title" content="Turning on auditing">
-<meta property="og:url" content="https://xspatula.github.io/building/auditing/">
+<meta property="og:url" content="http://localhost:4000/building/auditing/">
 
 
   <meta property="og:description" content="Decide which of your new tables to audit while you define them, then run setup_db.ipynb’s two cells as usual — the mechanism itself is already fully documented in the Auditing collection.">
@@ -48,7 +48,7 @@
   
 
 
-<link rel="canonical" href="https://xspatula.github.io/building/auditing/">
+<link rel="canonical" href="http://localhost:4000/building/auditing/">
 
 
 
@@ -255,7 +255,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="https://xspatula.github.io/building/auditing/" itemprop="url">Turning on auditing
+            <a href="http://localhost:4000/building/auditing/" itemprop="url">Turning on auditing
 </a>
           </h1>
           
@@ -266,7 +266,7 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>Auditing is opt-in, declared per table, and the full mechanism is already documented in depth in the <a href="/auditing/">Auditing</a> collection — this page is just the “where does this fit in while I’m building my project” version.</p>
+        <p>Auditing is opt-in, declared per table, and the full mechanism is documented in depth in the <a href="/auditing/">Auditing</a> collection — this page is just the “where does this fit in while I’m building my project” version.</p>
 
 <h2 id="the-one-decision-while-defining-a-table">The one decision: while defining a table</h2>
 
@@ -279,7 +279,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>No key at all (or one with every value <code class="language-plaintext highlighter-rouge">false</code>) means that table simply isn’t audited — there’s no separate registration step. The rule of thumb, covered in full on the introduction page: full coverage for admin/config/catalogue tables you add to one row at a time; <code class="language-plaintext highlighter-rouge">UPDATE</code>/<code class="language-plaintext highlighter-rouge">DELETE</code> only for bulk pipeline-written data, where auditing every <code class="language-plaintext highlighter-rouge">INSERT</code> would double your write volume for little audit value.</p>
+<p>No key at all (or one with every value <code class="language-plaintext highlighter-rouge">false</code>) means that table simply isn’t audited — there’s no separate registration step. The rule of thumb, covered in full on the introduction page: full coverage for admin/config/catalogue tables you add one row at a time; <code class="language-plaintext highlighter-rouge">UPDATE</code>/<code class="language-plaintext highlighter-rouge">DELETE</code> for bulk pipeline-written data, where auditing every <code class="language-plaintext highlighter-rouge">INSERT</code> would double your write volume for little audit value.</p>
 
 <h2 id="turning-it-on">Turning it on</h2>
 
@@ -397,7 +397,7 @@
 </div>
 
 
-<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="https://xspatula.github.io">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

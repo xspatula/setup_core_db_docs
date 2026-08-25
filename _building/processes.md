@@ -95,6 +95,18 @@ This is exactly the mechanism already documented in [Define and register a proce
 
 Place this under your own `setup/zzz/<project>/setup_processes/json_<project>/report/report_v10_sql.json`, add a line for it to your setup-processes pilot file (the root process must come before its sub-processes — within one JSON file, as above, that ordering is handled for you), and run `setup_processes.ipynb`. This writes rows into the database's `process` and `root_process` tables — nothing runs yet, it's purely registration.
 
+### Updating a process
+
+If you discover an error in your process definition, or change the type or name of a parameter, it is safe to user `overwrite: true` option. This will recreate the registered process and is a very useful tool when developing the database.
+
+### Deleting a process
+
+To delete a process registered in the database set the `delete: true` option. If you set both `overwrite: true` and `delete: true`, overwriting takes precedence.
+
+### Changing the name of the process itself
+
+If you want to change the name of an existing process, start by using the `delete: true` option and run the notebook, then rename the process and set `delete: false` and rerun the notebook.
+
 ## Layer 2: what actually runs
 
 This is the part that's entirely hand-written, and it's worth being explicit about that: **there is no decorator, registry, or naming convention that automatically connects a registered process name to Python code.** You write both connections yourself.

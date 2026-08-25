@@ -24,7 +24,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Xspatula">
 <meta property="og:title" content="Setting up the database">
-<meta property="og:url" content="https://xspatula.github.io/building/database/">
+<meta property="og:url" content="http://localhost:4000/building/database/">
 
 
   <meta property="og:description" content="Define your own schemas and tables the same way the example project’s are, then optionally extend the postgres layer with project-specific SQL helpers, kept separate from the reusable core.">
@@ -48,7 +48,7 @@
   
 
 
-<link rel="canonical" href="https://xspatula.github.io/building/database/">
+<link rel="canonical" href="http://localhost:4000/building/database/">
 
 
 
@@ -255,7 +255,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="https://xspatula.github.io/building/database/" itemprop="url">Setting up the database
+            <a href="http://localhost:4000/building/database/" itemprop="url">Setting up the database
 </a>
           </h1>
           
@@ -266,7 +266,7 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>A real project needs its own schemas and tables beyond what the framework ships by default. This page covers both defining them, and — for anything beyond simple CRUD — extending the postgres layer with your own project-specific SQL.</p>
+        <p>A real project needs its own schemas and tables beyond what the framework ships by default. This page covers both defining them, and — for anything beyond simple CRUD (Create, Read, Update, and Delete) — extending the postgres layer with your own project-specific SQL.</p>
 
 <h2 id="defining-your-own-schemas-and-tables">Defining your own schemas and tables</h2>
 
@@ -321,6 +321,7 @@
         <span class="n">self</span><span class="p">.</span><span class="n">pg_session_C</span> <span class="o">=</span> <span class="n">pg_session_C</span>
         <span class="n">self</span><span class="p">.</span><span class="n">pg_</span><span class="o">&lt;</span><span class="n">project</span><span class="o">&gt;</span><span class="n">_C</span> <span class="o">=</span> <span class="n">PG_manage_</span><span class="o">&lt;</span><span class="n">Project</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pg_session_C</span><span class="p">)</span>
 </code></pre></div></div>
+<p>where the  <code class="language-plaintext highlighter-rouge">__init__</code> parameter <code class="language-plaintext highlighter-rouge">process_S</code>is a compiled struct (_S) of the JSON defined process and <code class="language-plaintext highlighter-rouge">pg_session_C</code> is the activated postgres session class (_C).</p>
 
 <p>You don’t have to guess where this goes — the framework’s own shipped <code class="language-plaintext highlighter-rouge">src/example_project/import_data/import_data.py</code> ships a commented-out fossil line marking exactly this spot:</p>
 
@@ -438,7 +439,7 @@
 </div>
 
 
-<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="https://xspatula.github.io">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
