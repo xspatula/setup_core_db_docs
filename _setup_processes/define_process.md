@@ -108,14 +108,15 @@ In addition parameters that are directly translated to records in the database m
 
 #### Process parameters data type
 
-The following data types are accepted as values for the parameter `parameter_type`:
-- string
-- integer
-- float
-- boolean
-- timestamp
+The following data types are accepted as values for the parameter `parameter_type` — this is the complete, enforced set (see [Bootstrapping process management][manage_process] for where it's defined):
+- text
+- real
+- int
+- intlist
+- textlist
+- bool
 
-If a parameter represents an array, the `parameter` value must have the add-on "_array" of the data type defined in `parameter_type`.
+If a parameter represents an array, it's the parameter's *name* that carries an `_array` suffix (e.g. `substance_array`), not the `parameter_type` value — the suffix on the name is what triggers the framework's array handling.
 
 #### Optional process parameter blocks
 
@@ -183,3 +184,4 @@ The three JSON files included in the default setup illustrate the pattern descri
 [define_process_options_minmax]: ../process_options#minmax-ranges
 [define_process_options_inherit]: ../process_options#inherit
 [define_process_options_auto_naming]: ../process_options#automatic-naming
+[manage_process]: ../../setup_db/manage_process/

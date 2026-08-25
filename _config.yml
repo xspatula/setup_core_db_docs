@@ -378,6 +378,7 @@ nav_order:
     - anaconda
     - netrc
     - schemas_tables
+    - manage_process
   setup_processes:
     - synopsis
     - scheme_file

@@ -24,7 +24,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Xspatula">
 <meta property="og:title" content="Define and register a process">
-<meta property="og:url" content="http://localhost:4000/setup_processes/define_process/">
+<meta property="og:url" content="https://xspatula.github.io/setup_processes/define_process/">
 
 
   <meta property="og:description" content="A process is registered in the database by creating a JSON file with add_root_process or add_process entries and adding it to the pilot file. Running setup_processes.ipynb then inserts the process definitions into the database.">
@@ -48,7 +48,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/setup_processes/define_process/">
+<link rel="canonical" href="https://xspatula.github.io/setup_processes/define_process/">
 
 
 
@@ -245,7 +245,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="http://localhost:4000/setup_processes/define_process/" itemprop="url">Define and register a process
+            <a href="https://xspatula.github.io/setup_processes/define_process/" itemprop="url">Define and register a process
 </a>
           </h1>
           
@@ -358,16 +358,17 @@
 
 <h4 id="process-parameters-data-type">Process parameters data type</h4>
 
-<p>The following data types are accepted as values for the parameter <code class="language-plaintext highlighter-rouge">parameter_type</code>:</p>
+<p>The following data types are accepted as values for the parameter <code class="language-plaintext highlighter-rouge">parameter_type</code> — this is the complete, enforced set (see <a href="../../setup_db/manage_process/">Bootstrapping process management</a> for where it’s defined):</p>
 <ul>
-  <li>string</li>
-  <li>integer</li>
-  <li>float</li>
-  <li>boolean</li>
-  <li>timestamp</li>
+  <li>text</li>
+  <li>real</li>
+  <li>int</li>
+  <li>intlist</li>
+  <li>textlist</li>
+  <li>bool</li>
 </ul>
 
-<p>If a parameter represents an array, the <code class="language-plaintext highlighter-rouge">parameter</code> value must have the add-on “_array” of the data type defined in <code class="language-plaintext highlighter-rouge">parameter_type</code>.</p>
+<p>If a parameter represents an array, it’s the parameter’s <em>name</em> that carries an <code class="language-plaintext highlighter-rouge">_array</code> suffix (e.g. <code class="language-plaintext highlighter-rouge">substance_array</code>), not the <code class="language-plaintext highlighter-rouge">parameter_type</code> value — the suffix on the name is what triggers the framework’s array handling.</p>
 
 <h4 id="optional-process-parameter-blocks">Optional process parameter blocks</h4>
 
@@ -607,7 +608,7 @@ my_process/my_process_v10_sql.json
 </div>
 
 
-<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="https://xspatula.github.io">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

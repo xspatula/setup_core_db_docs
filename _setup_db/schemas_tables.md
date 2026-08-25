@@ -198,7 +198,7 @@ The handling of processes is fairly complex. If you are in for a deeper understa
 ./setup/zzz/xspatula/setup_db/json_core/process/processes_records_v10_sql.json
 ```
 
-For the full column-level reference of every `process` schema table, and how each maps to a registration option, see the [process schema tables][define_process_tables] reference in Setup processes.
+For the full column-level reference of every `process` schema table, and how each maps to a registration option, see the [process schema tables][define_process_tables] reference in Setup processes. For how `processes_records_v10_sql.json` itself bootstraps `add_root_process`/`add_process` and the stratum levels required to use them, see [Bootstrapping process management][manage_process].
 
 ## Input files
 
@@ -231,3 +231,5 @@ For the full column-level reference of every `process` schema table, and how eac
 [setup_db_hash_passwords]: ../#hashing-user-passwords
 
 [define_process_tables]: ../../setup_processes/define_process/#process-schema-tables
+
+[manage_process]: ../manage_process/
