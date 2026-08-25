@@ -1,0 +1,464 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Defining pg_users and their environment files - Xspatula</title>
+<meta name="description" content="pg_users are created only once, by the superuser, when a database is set up. Every ordinary community.user row logs in through whichever pg_user its stratum_code points to — decide your roster before that first run.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula">
+<meta property="og:title" content="Defining pg_users and their environment files">
+<meta property="og:url" content="https://xspatula.github.io/building/pg_users/">
+
+
+  <meta property="og:description" content="pg_users are created only once, by the superuser, when a database is set up. Every ordinary community.user row logs in through whichever pg_user its stratum_code points to — decide your roster before that first run.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-25T00:00:00+02:00">
+
+
+
+  <meta property="article:modified_time" content="2026-08-25T00:00:00+02:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://xspatula.github.io/building/pg_users/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
+        
+        <a class="site-title" href="https://xspatula.github.io">
+          Script your own environ
+          <span class="site-subtitle">Database-integrated Python modelling</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">Building</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/building/">Project</a></li>
+            
+              <li><a href="/building/notebooks">Notebooks</a></li>
+            
+              <li><a href="/building/database">Database</a></li>
+            
+              <li><a href="/building/auditing">Auditing</a></li>
+            
+              <li><a href="/building/initial_user">Initial user</a></li>
+            
+              <li><a href="/building/pg_users">Pg_users</a></li>
+            
+              <li><a href="/building/smtp">SMTP</a></li>
+            
+              <li><a href="/building/add_users">Add users</a></li>
+            
+              <li><a href="/building/processes">Processes</a></li>
+            
+              <li><a href="/building/postgres">Postgres</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Defining pg_users and their environment files">
+    <meta itemprop="description" content="pg_users are created only once, by the superuser, when a database is set up. Every ordinary community.user row logs in through whichever pg_user its stratum_code points to — decide your roster before that first run.">
+    <meta itemprop="datePublished" content="2026-08-25T00:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-08-25T00:00:00+02:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="https://xspatula.github.io/building/pg_users/" itemprop="url">Defining pg_users and their environment files
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Your project needs its own set of pg_users — the postgres-level roles ordinary logins actually run under — defined in your own setup scheme file. This page covers the mechanics of how that works and why it has to be decided up front.</p>
+
+<h2 id="where-pg_users-are-defined">Where pg_users are defined</h2>
+
+<p>In the <code class="language-plaintext highlighter-rouge">postgresdb.db_users</code> array of your project’s own setup scheme file, mirroring the shipped <code class="language-plaintext highlighter-rouge">setup/zzz/scheme_xspatula_local_setup.json</code>. The full JSON shape, the 8 predefined role names, and how to add one pg_user per role are already documented in <a href="/framework/scheme_file/">Scheme file</a> — that page is the syntax reference; this one covers what happens once you run it.</p>
+
+<h2 id="only-the-superuser-can-create-pg_users">Only the superuser can create pg_users</h2>
+
+<p><a href="/framework/scheme_file/">Scheme file</a> already states this; here’s concretely why it’s true, not just asserted. Creating postgres roles (<code class="language-plaintext highlighter-rouge">Create_db_roles</code>) and writing their <code class="language-plaintext highlighter-rouge">.env</code> credential files (<code class="language-plaintext highlighter-rouge">Create_db_environment_dot</code>) both happen inside <code class="language-plaintext highlighter-rouge">Initiate_database</code> — the function driven by <code class="language-plaintext highlighter-rouge">setup_db.ipynb</code> — and only run after the operator has authenticated as the postgres superuser and confirmed the “Set up database?” prompt. No other code path in the framework creates a pg_user or rewrites an <code class="language-plaintext highlighter-rouge">.env</code> file. There’s no way for an ordinary logged-in user, even a stratum-5 one, to add a pg_user later.</p>
+
+<p><strong>Practical implication</strong>: decide your full pg_user roster — which of the 8 roles you actually need — before your first <code class="language-plaintext highlighter-rouge">setup_db.ipynb</code> run. Adding one afterward means running database setup again as the superuser.</p>
+
+<h2 id="how-the-env-files-actually-get-created">How the .env files actually get created</h2>
+
+<p>One file per <code class="language-plaintext highlighter-rouge">db_users</code> entry, named <code class="language-plaintext highlighter-rouge">.&lt;user_id&gt;.env</code>, written under <code class="language-plaintext highlighter-rouge">src/postgres/environment/</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DB_NAME=&lt;db&gt;
+DB_USER=&lt;user_id&gt;
+DB_PASSWORD=&lt;password&gt;
+DB_HOST=&lt;host&gt;
+DB_PORT=&lt;port&gt;
+</code></pre></div></div>
+
+<p>So a <code class="language-plaintext highlighter-rouge">db_users</code> entry with <code class="language-plaintext highlighter-rouge">"user_id": "user_cat_3"</code> produces <code class="language-plaintext highlighter-rouge">src/postgres/environment/.user_cat_3.env</code>. These files are generated, not hand-edited — re-running database setup regenerates them from whatever your scheme file’s <code class="language-plaintext highlighter-rouge">db_users</code> array currently says.</p>
+
+<h2 id="how-an-ordinary-user-links-to-a-pg_user-at-login">How an ordinary user links to a pg_user at login</h2>
+
+<p><code class="language-plaintext highlighter-rouge">community.user.stratum_code</code> is turned into a pg_user name by plain string formatting — <code class="language-plaintext highlighter-rouge">stratum_code = 3</code> becomes the string <code class="language-plaintext highlighter-rouge">user_cat_3</code>, and from there the filename <code class="language-plaintext highlighter-rouge">.user_cat_3.env</code>. There’s no lookup table and no validation: if no <code class="language-plaintext highlighter-rouge">.env</code> file exists for that exact stratum, login fails outright rather than falling back to something less privileged.</p>
+
+<p>This applies identically no matter how the <code class="language-plaintext highlighter-rouge">community.user</code> row was created — seeded directly (see <a href="/building/initial_user/">Setting up the initial user</a>) or self-registered through <a href="/building/add_users/">Excel intake</a>, which defaults <code class="language-plaintext highlighter-rouge">stratum_code</code> to <code class="language-plaintext highlighter-rouge">0</code> if the spreadsheet leaves it blank. Either way, <strong>your pg_user roster has to include an entry for every stratum_code value any of your users will actually have</strong>, decided before setup, per the section above.</p>
+
+<p>Under the hood, logging in is a two-connection handoff: password verification always happens over a fixed <code class="language-plaintext highlighter-rouge">login_evaluation</code> connection, regardless of who’s logging in. Only after that succeeds does a second, separate connection open using the stratum-specific <code class="language-plaintext highlighter-rouge">.env</code> file’s credentials — that second connection is what the rest of the session actually runs under. This is why a missing <code class="language-plaintext highlighter-rouge">.env</code> file doesn’t degrade gracefully: the password check can succeed while the follow-up connection has nothing to connect with.</p>
+
+<h2 id="a-gotcha-there-is-no-user_cat_0-role">A gotcha: there is no user_cat_0 role</h2>
+
+<p>Look closely at the shipped scheme file and you’ll notice the <code class="language-plaintext highlighter-rouge">db_users</code> entry for <code class="language-plaintext highlighter-rouge">user_cat_0</code> has <code class="language-plaintext highlighter-rouge">"role": "user_cat_1"</code>, not <code class="language-plaintext highlighter-rouge">"role": "user_cat_0"</code>. That’s not a typo — leave it alone. The framework’s underlying role/privilege definitions simply don’t include a <code class="language-plaintext highlighter-rouge">user_cat_0</code> entry at all; only <code class="language-plaintext highlighter-rouge">community_admin</code>, <code class="language-plaintext highlighter-rouge">login_evaluation</code>, and <code class="language-plaintext highlighter-rouge">user_cat_1</code> through <code class="language-plaintext highlighter-rouge">user_cat_5</code> exist. If you changed that entry to <code class="language-plaintext highlighter-rouge">"role": "user_cat_0"</code>, role creation would silently skip it (printing an error) while the <code class="language-plaintext highlighter-rouge">.env</code> file would still get written — leaving a stratum-0 user with credentials pointing at a postgres role that was never created, and login failing. As shipped, stratum-0 users simply get <code class="language-plaintext highlighter-rouge">user_cat_1</code>’s grants.</p>
+
+<h2 id="stratum_code-vs-pg_user-tier--two-different-layers">stratum_code vs. pg_user tier — two different layers</h2>
+
+<p>It’s easy to conflate these, since the shipped defaults use the same numbers for both, but they’re separate systems:</p>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">min_user_stratum</code></strong> (covered in <a href="/setup_db/manage_process/">Bootstrapping process management</a>) is an application-level check — which processes a logged-in user is allowed to <em>call</em>.</li>
+  <li><strong>The pg_user tier</strong> a <code class="language-plaintext highlighter-rouge">stratum_code</code> resolves to is a postgres-level role — what the underlying database <em>connection</em> is actually permitted to do.</li>
+</ul>
+
+<p>The shipped defaults happen to make these coincide at the top: stratum 5 resolves to <code class="language-plaintext highlighter-rouge">user_cat_5</code>, which is created <code class="language-plaintext highlighter-rouge">WITH SUPERUSER</code> — a real postgres superuser, not just “allowed to call <code class="language-plaintext highlighter-rouge">add_root_process</code>.” Below that, privileges scale by tier: <code class="language-plaintext highlighter-rouge">user_cat_1</code> through <code class="language-plaintext highlighter-rouge">user_cat_4</code> get connect-only grants (no schema access) by default; <code class="language-plaintext highlighter-rouge">community_admin</code>/<code class="language-plaintext highlighter-rouge">login_evaluation</code> get their fixed <code class="language-plaintext highlighter-rouge">community</code> (and, for <code class="language-plaintext highlighter-rouge">login_evaluation</code>, <code class="language-plaintext highlighter-rouge">audit</code>) grants; <code class="language-plaintext highlighter-rouge">user_cat_5</code> alone gets explicit <code class="language-plaintext highlighter-rouge">utility</code>/<code class="language-plaintext highlighter-rouge">process</code> schema grants on top of its superuser status. If your project needs finer-grained access for tiers 1-4 — read access to your own domain schemas, say — that means extending the framework’s own role definitions, which is a source-level decision this page doesn’t walk through.</p>
+
+<h2 id="input-files">Input files</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">setup/zzz/scheme_&lt;project&gt;_local_setup.json</code></td>
+      <td>Your project’s setup scheme file; its <code class="language-plaintext highlighter-rouge">postgresdb.db_users</code> array defines the pg_user roster</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">src/postgres/environment/.&lt;user_id&gt;.env</code></td>
+      <td>Generated, one per <code class="language-plaintext highlighter-rouge">db_users</code> entry — never hand-edit, re-running setup regenerates them</td>
+    </tr>
+  </tbody>
+</table>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-25">August 25, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/building/smtp/" class="pagination--pager" title="SMTP setup">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="https://xspatula.github.io">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -27,7 +27,7 @@ To run a Jupyter notebook you need to define the Python environment that must co
 
 ## Notebook structure
 
-All Xspatula framework notebooks have the same basic structure with only three code blocks. The first code block loads the underlying python packages, the second defines the [scheme][scheme_file] file, and the third points to either a [job][job_file] or [process][process_file] file and the actual processes to run.
+All Xspatula framework notebooks have the same basic structure. A first code block loads the underlying python packages, the second defines the [scheme][scheme_file] file, and the following points to either a [job][job_file] or [process][process_file] file and the actual processes to run.
 
 ### Code block 1 - imports and setup
 
@@ -65,9 +65,9 @@ The default path for the _scheme_ file for setting up the database is in the (sl
 
 See the document on [scheme file][scheme_file] for more information.
 
-### Code block 3 - job or process file
+### Code block 3+ - job or process file
 
-The third code block points to either a _job_ file or a _process_ file (the framework will recognise which type it is and act accordingly).
+The third and following code block(s) points to either a _job_ file or a _process_ file (the framework will recognise which type it is and act accordingly).
 
 ```
 job_file = 'job_setup_db.json'
@@ -75,7 +75,7 @@ job_file = 'job_setup_db.json'
 Initiate_database(notebook_path, scheme_file, job_file)
 ```
 
-The code in the block calling the job/process file is different when setting up or deleting a database compared to all other notebooks, illustrated below by code block in the notebook _setup_processes_
+The code in the block(s) calling the job/process file is different when setting up or deleting a database compared to all other notebooks, illustrated below by code block in the notebook _setup_processes_
 
 ```
 #%%script false --no-raise-error

@@ -279,7 +279,7 @@
 
 <h2 id="notebook-structure">Notebook structure</h2>
 
-<p>All Xspatula framework notebooks have the same basic structure with only three code blocks. The first code block loads the underlying python packages, the second defines the <a href="../scheme_file">scheme</a> file, and the third points to either a <a href="../job_file">job</a> or <a href="../process_file">process</a> file and the actual processes to run.</p>
+<p>All Xspatula framework notebooks have the same basic structure. A first code block loads the underlying python packages, the second defines the <a href="../scheme_file">scheme</a> file, and the following points to either a <a href="../job_file">job</a> or <a href="../process_file">process</a> file and the actual processes to run.</p>
 
 <h3 id="code-block-1---imports-and-setup">Code block 1 - imports and setup</h3>
 
@@ -315,16 +315,16 @@ from src_setup.lib_setup import Initiate_database
 
 <p>See the document on <a href="../scheme_file">scheme file</a> for more information.</p>
 
-<h3 id="code-block-3---job-or-process-file">Code block 3 - job or process file</h3>
+<h3 id="code-block-3---job-or-process-file">Code block 3+ - job or process file</h3>
 
-<p>The third code block points to either a <em>job</em> file or a <em>process</em> file (the framework will recognise which type it is and act accordingly).</p>
+<p>The third and following code block(s) points to either a <em>job</em> file or a <em>process</em> file (the framework will recognise which type it is and act accordingly).</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>job_file = 'job_setup_db.json'
 
 Initiate_database(notebook_path, scheme_file, job_file)
 </code></pre></div></div>
 
-<p>The code in the block calling the job/process file is different when setting up or deleting a database compared to all other notebooks, illustrated below by code block in the notebook <em>setup_processes</em></p>
+<p>The code in the block(s) calling the job/process file is different when setting up or deleting a database compared to all other notebooks, illustrated below by code block in the notebook <em>setup_processes</em></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#%%script false --no-raise-error
 job_file = 'job_setup_processes.json'

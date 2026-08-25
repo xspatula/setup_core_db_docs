@@ -44,7 +44,7 @@ Framework subsection (7 pages):
   synopsis, notebook, scheme_file, job_file, pilot_file, process_file, vscode
 
 Setup DB subsection (5 pages + anchor):
-  synopsis, postgres, anaconda, netrc, schemas_tables (+ #table-insert anchor)
+  synopsis, postgres, anaconda, netrc, schemas_tables (+ #table-insert anchor), manage_process
 
 Setup processes subsection (5 pages):
   synopsis, scheme_file, define_process, edit_process, process_options
@@ -62,9 +62,13 @@ Building subsection (9 pages):
   project, notebooks, database, auditing, initial user(s), SMTP, more users, processes, postgres
 ```
 
-### Setup DB
+### Setup DB - already done
 
-In setup DB one more page is require - a detailed outline of how the initial root process `manage_process` is defined - the setting of the stratum_code that is allowed to manage root process is especially important. The same goes for how the initial process `process` is defined and the stratum_code required for managing a `process`. These processes are defined in the file    `setup/zzz/xspatula/setup_db/json_core/process/processes_records_v10_sql.json`, that so to say hands over the right from the superuser to the database users with at least the defined stratum_code levels to add new root process and processes. I think using excerpts from the file `setup/zzz/xspatula/setup_db/json_core/process/processes_records_v10_sql.json` is a good idea to show how it works. 
+In setup DB one more page is require - a detailed outline of how the initial root process `manage_process` is defined - the setting of the stratum_code that is allowed to manage root process is especially important. The same goes for how the initial process `process` is defined and the stratum_code required for managing a `process`. These processes are defined in the file    `setup/zzz/xspatula/setup_db/json_core/process/processes_records_v10_sql.json`, that so to say hands over the right from the superuser to the database users with at least the defined stratum_code levels to add new root process and processes. I think using excerpts from the file `setup/zzz/xspatula/setup_db/json_core/process/processes_records_v10_sql.json` is a good idea to show how it works.
+
+### Building
+
+The building collection requires one more page -  a details ouline of how to define pg_users in the scheme file for setup_db `setup/zzz/scheme_xspatula_local_setup.json` in the code repo. The page should explain how the environment files for the defined pg_users are created at runtime and how they link to ordinary database users defined either during setup_db or with the process `manage_user` (from excel or csv files). Insert this new page after page `initial_user`in the Building collection and include the fact that only the superuser can create new pg_users (see `_framework/scheme_file.md` in this repo).
 
 ## Important notes
 

@@ -10,7 +10,7 @@ date: 2026-06-09
 last_modified_at: 2026-06-09
 ---
 
-A process must be registered in the database before it can be called from a [process file][process_file]. Registration stores the process name, parameter definitions and access constraints in the `process` schema tables.
+A process must be registered in the database before it can be called from a [process file][process_file]. Registration stores the process name, parameter definitions and access constraints in the `process` schema tables. By default only stratum 5 users have the rights to register new processes.
 
 ## Process hierarchy
 

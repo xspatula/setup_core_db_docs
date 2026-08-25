@@ -99,6 +99,8 @@ building:
         url: /building/auditing
       - title: "Initial user"
         url: /building/initial_user
+      - title: "Pg_users"
+        url: /building/pg_users
       - title: "SMTP"
         url: /building/smtp
       - title: "Add users"

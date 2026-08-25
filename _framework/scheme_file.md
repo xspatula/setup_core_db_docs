@@ -19,7 +19,7 @@ Scheme files are written in JSON format.
 
 A good practice is to define one scheme file per project, where the first project should be setting up the database, and the second to setup the processes that the framework should be able to run. If you want to delete parts of, or the whole, database, that should also be a separate project.
 
-The scheme file, and thus project, to run is set directly in the Jupyter [notebook][notebook] or in the command line if you run the framework with a command line interface (CLI) [NOT YET IMPLEMENTED].
+The scheme file, and thus project, to run is set directly in the Jupyter [notebook][notebook] or in the command line if you run the framework with a command line interface (CLI).
 
 ## Scheme file structure
 
@@ -134,7 +134,7 @@ The privileges for the user categories listed above are granted and revoked from
 ./setup/src_setup/lib_setup/revoke_privileges.json
 ```
 
-These are only meant as a starting point. You can later add more pg_users through a separate process [NOT YET IMPLEMENTED]. It is recommended that you at least include the pg_user for login_evaluation when you setup a new database.
+You can change the user categories, their names and privileges to fit your own needs. But changing them will have downstream effects in other settings that you then must also accommodate. **Note** that only the superuser that owns the database can change the pg_users and their privileges.
 
 The scheme file example below shows how to set up one pg_user per predefined pg_user group.
 ```
@@ -193,11 +193,7 @@ The scheme file example below shows how to set up one pg_user per predefined pg_
       "execute": true,
       "verbose": 1,
       "overwrite": false,
-      "delete": false,
-      "src_path": {
-        "volume": ".",
-        "ext": "json"
-      }
+      "delete": false
     }
   ]
 }

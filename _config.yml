@@ -406,6 +406,7 @@ nav_order:
     - database
     - auditing
     - initial_user
+    - pg_users
     - smtp
     - add_users
     - processes
