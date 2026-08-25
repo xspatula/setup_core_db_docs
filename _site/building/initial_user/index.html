@@ -285,8 +285,8 @@ conda activate &lt;your-environment-name&gt;
 
 <p>You’ll be prompted twice, with hidden input (nothing appears on screen as you type — that’s expected):</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Password to hash: 
-Repeat password: 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Password to hash:
+Repeat password:
 </code></pre></div></div>
 
 <p>Type the plain-text password you want your first user to log in with, and repeat it. If the two don’t match, the script exits with an error and prints nothing — just run it again.</p>
@@ -298,7 +298,7 @@ Repeat password:
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$2b$12$KIXQ7z3nJ8mR5vT1wYbP9uL6oE2cN4sD0hG7fA3xZ8qW1yV6tR9mS
 </code></pre></div></div>
 
-<p>Select and copy that entire string. This is what goes into the seed file — never the plain-text password itself.</p>
+<p>Select and copy that entire string. This is what goes into the JSON seed file — never the plain-text password itself.</p>
 
 <p>You can also pass the password directly as a command-line argument (<code class="language-plaintext highlighter-rouge">python3 setup/hash_password.py 'some-password'</code>), which skips the prompts, but avoid this on a shared machine — the plain-text password then briefly appears in your shell history and process list.</p>
 

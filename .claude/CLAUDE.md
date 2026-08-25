@@ -66,9 +66,13 @@ Building subsection (9 pages):
 
 In setup DB one more page is require - a detailed outline of how the initial root process `manage_process` is defined - the setting of the stratum_code that is allowed to manage root process is especially important. The same goes for how the initial process `process` is defined and the stratum_code required for managing a `process`. These processes are defined in the file    `setup/zzz/xspatula/setup_db/json_core/process/processes_records_v10_sql.json`, that so to say hands over the right from the superuser to the database users with at least the defined stratum_code levels to add new root process and processes. I think using excerpts from the file `setup/zzz/xspatula/setup_db/json_core/process/processes_records_v10_sql.json` is a good idea to show how it works.
 
-### Building
+### Building - already done
 
 The building collection requires one more page -  a details ouline of how to define pg_users in the scheme file for setup_db `setup/zzz/scheme_xspatula_local_setup.json` in the code repo. The page should explain how the environment files for the defined pg_users are created at runtime and how they link to ordinary database users defined either during setup_db or with the process `manage_user` (from excel or csv files). Insert this new page after page `initial_user`in the Building collection and include the fact that only the superuser can create new pg_users (see `_framework/scheme_file.md` in this repo).
+
+### Building 2
+
+After the previous session/run (the ### Building - already done, above) I discovered that I had missed a code change in the code repo under `setup/src_setup/lib_setup/setup_db.py`. I changed the hardcoded dictionaries `REVOKE_D` and `ROLES_D`to be read from 2 JSON files (see code). This change allows users to easier define and revoke roles. Please update the section `stratum_code vs. pg_user tier — two different layers` in the file `_building/pg_users.md` and add instructions for how to edit and revoke roles to this page.
 
 ## Important notes
 

@@ -44,10 +44,6 @@ This applies identically no matter how the `community.user` row was created — 
 
 Under the hood, logging in is a two-connection handoff: password verification always happens over a fixed `login_evaluation` connection, regardless of who's logging in. Only after that succeeds does a second, separate connection open using the stratum-specific `.env` file's credentials — that second connection is what the rest of the session actually runs under. This is why a missing `.env` file doesn't degrade gracefully: the password check can succeed while the follow-up connection has nothing to connect with.
 
-## A gotcha: there is no user_cat_0 role
-
-Look closely at the shipped scheme file and you'll notice the `db_users` entry for `user_cat_0` has `"role": "user_cat_1"`, not `"role": "user_cat_0"`. That's not a typo — leave it alone. The framework's underlying role/privilege definitions simply don't include a `user_cat_0` entry at all; only `community_admin`, `login_evaluation`, and `user_cat_1` through `user_cat_5` exist. If you changed that entry to `"role": "user_cat_0"`, role creation would silently skip it (printing an error) while the `.env` file would still get written — leaving a stratum-0 user with credentials pointing at a postgres role that was never created, and login failing. As shipped, stratum-0 users simply get `user_cat_1`'s grants.
-
 ## stratum_code vs. pg_user tier — two different layers
 
 It's easy to conflate these, since the shipped defaults use the same numbers for both, but they're separate systems:
@@ -55,7 +51,31 @@ It's easy to conflate these, since the shipped defaults use the same numbers for
 - **`min_user_stratum`** (covered in [Bootstrapping process management][manage_process]) is an application-level check — which processes a logged-in user is allowed to *call*.
 - **The pg_user tier** a `stratum_code` resolves to is a postgres-level role — what the underlying database *connection* is actually permitted to do.
 
-The shipped defaults happen to make these coincide at the top: stratum 5 resolves to `user_cat_5`, which is created `WITH SUPERUSER` — a real postgres superuser, not just "allowed to call `add_root_process`." Below that, privileges scale by tier: `user_cat_1` through `user_cat_4` get connect-only grants (no schema access) by default; `community_admin`/`login_evaluation` get their fixed `community` (and, for `login_evaluation`, `audit`) grants; `user_cat_5` alone gets explicit `utility`/`process` schema grants on top of its superuser status. If your project needs finer-grained access for tiers 1-4 — read access to your own domain schemas, say — that means extending the framework's own role definitions, which is a source-level decision this page doesn't walk through.
+The shipped defaults happen to make these coincide at the top: stratum 5 resolves to `user_cat_5`, which is created `WITH SUPERUSER` — a real postgres superuser, not just "allowed to call `add_root_process`." Below that, privileges scale by tier: `user_cat_1` through `user_cat_4` get connect-only grants (no schema access) by default; `community_admin`/`login_evaluation` get their fixed `community` (and, for `login_evaluation`, `audit`) grants; `user_cat_5` alone gets explicit `utility`/`process` schema grants on top of its superuser status. If your project needs finer-grained access for tiers 1-4 — read access to your own domain schemas, say — see [Editing and revoking role grants](#editing-and-revoking-role-grants) below.
+
+## Editing and revoking role grants
+
+Every role's grants live in two JSON config files, not hardcoded in Python:
+
+- `setup/src_setup/lib_setup/roles_grants.json` — one `GRANT`-style SQL template per role, with `{user}`/`{password}`/`{db}` placeholders.
+- `setup/src_setup/lib_setup/revoke_privileges.json` — the matching `REVOKE`-style template per role, `{user}`/`{db}`.
+
+Both files sit in the framework's own shared setup tooling, not under your project's `setup/zzz/<project>/` tree — that's deliberate, not an exception to "keep core files untouched" elsewhere in this collection. A postgres role is a single-cluster concept, not something namespaced per project the way schemas and tables are, so this is the framework's intended, supported place to customize it.
+
+A representative entry from each file — `user_cat_1`'s connect-only pair:
+
+```json
+"user_cat_1": "CREATE USER {user} WITH LOGIN PASSWORD '{password}'; GRANT CONNECT ON DATABASE {db} TO {user};"
+```
+```json
+"user_cat_1": "REVOKE CONNECT ON DATABASE {db} FROM {user};"
+```
+
+**Changing an existing role's grants**: edit its value in `roles_grants.json` (and update the matching `revoke_privileges.json` entry to match), then re-run `setup_db.ipynb`'s main "Setup database" cell as the superuser — nothing else. Role creation is idempotent and self-healing: each run hashes the role's configured grant SQL and compares it against a hash stored as a comment on the postgres role from the last run. Unchanged roles are skipped; a changed role has its old grants automatically revoked (via `revoke_privileges.json`) before the new grants are applied and the new hash stored. There's no manual `REVOKE`/`GRANT` to write and no need to rebuild the database — re-running when nothing changed is a safe no-op.
+
+**Adding a brand-new role**: add a new key to both JSON files, then reference that role name in your scheme file's `db_users` entries via the `"role"` field (see [Scheme file][framework_scheme_file]).
+
+**Keep both files' key sets in sync.** If a role exists in `roles_grants.json` but has no matching key in `revoke_privileges.json`, revoking it silently does nothing — no error, no print, the grants just stay in place.
 
 ## Input files
 
@@ -63,6 +83,8 @@ The shipped defaults happen to make these coincide at the top: stratum 5 resolve
 |---|---|
 | `setup/zzz/scheme_<project>_local_setup.json` | Your project's setup scheme file; its `postgresdb.db_users` array defines the pg_user roster |
 | `src/postgres/environment/.<user_id>.env` | Generated, one per `db_users` entry — never hand-edit, re-running setup regenerates them |
+| `setup/src_setup/lib_setup/roles_grants.json` | Framework-level; GRANT SQL template per role — edit to change or add a role's privileges |
+| `setup/src_setup/lib_setup/revoke_privileges.json` | Framework-level; matching REVOKE SQL template per role — keep in sync with the file above |
 
 [framework_scheme_file]: /framework/scheme_file/
 [manage_process]: /setup_db/manage_process/

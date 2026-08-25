@@ -32,8 +32,8 @@ python3 setup/hash_password.py
 You'll be prompted twice, with hidden input (nothing appears on screen as you type — that's expected):
 
 ```
-Password to hash: 
-Repeat password: 
+Password to hash:
+Repeat password:
 ```
 
 Type the plain-text password you want your first user to log in with, and repeat it. If the two don't match, the script exits with an error and prints nothing — just run it again.
@@ -46,7 +46,7 @@ On success, the tool prints a single line — a bcrypt hash that looks like this
 $2b$12$KIXQ7z3nJ8mR5vT1wYbP9uL6oE2cN4sD0hG7fA3xZ8qW1yV6tR9mS
 ```
 
-Select and copy that entire string. This is what goes into the seed file — never the plain-text password itself.
+Select and copy that entire string. This is what goes into the JSON seed file — never the plain-text password itself.
 
 You can also pass the password directly as a command-line argument (`python3 setup/hash_password.py 'some-password'`), which skips the prompts, but avoid this on a shared machine — the plain-text password then briefly appears in your shell history and process list.
 
