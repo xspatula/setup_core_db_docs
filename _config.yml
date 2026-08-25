@@ -355,6 +355,12 @@ collections:
     output: true
   user_data:
     output: true
+  auditing:
+    output: true
+  setup_community:
+    output: true
+  building:
+    output: true
 
 # collection navigation orders
 nav_order:
@@ -381,6 +387,28 @@ nav_order:
     - synopsis
     - translate_excel
     - insert_data
+    - single_step_insert
+  auditing:
+    - introduction
+    - setup
+    - queries
+  setup_community:
+    - introduction
+    - bootstrap_user
+    - smtp_email
+    - excel_intake
+    - register_notebook
+    - welcome_email
+  building:
+    - project
+    - notebooks
+    - database
+    - auditing
+    - initial_user
+    - smtp
+    - add_users
+    - processes
+    - postgres
 
 # Defaults
 defaults:

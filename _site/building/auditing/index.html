@@ -1,0 +1,419 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Turning on auditing - Xspatula</title>
+<meta name="description" content="Decide which of your new tables to audit while you define them, then run setup_db.ipynb’s two cells as usual — the mechanism itself is already fully documented in the Auditing collection.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula">
+<meta property="og:title" content="Turning on auditing">
+<meta property="og:url" content="http://localhost:4000/building/auditing/">
+
+
+  <meta property="og:description" content="Decide which of your new tables to audit while you define them, then run setup_db.ipynb’s two cells as usual — the mechanism itself is already fully documented in the Auditing collection.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-24T00:00:00+02:00">
+
+
+
+  <meta property="article:modified_time" content="2026-08-24T00:00:00+02:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/building/auditing/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
+        
+        <a class="site-title" href="https://xspatula.github.io">
+          Script your own environ
+          <span class="site-subtitle">Database-integrated Python modelling</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">Building</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/building/">Project</a></li>
+            
+              <li><a href="/building/notebooks">Notebooks</a></li>
+            
+              <li><a href="/building/database">Database</a></li>
+            
+              <li><a href="/building/auditing">Auditing</a></li>
+            
+              <li><a href="/building/initial_user">Initial user</a></li>
+            
+              <li><a href="/building/smtp">SMTP</a></li>
+            
+              <li><a href="/building/add_users">Add users</a></li>
+            
+              <li><a href="/building/processes">Processes</a></li>
+            
+              <li><a href="/building/postgres">Postgres</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Turning on auditing">
+    <meta itemprop="description" content="Decide which of your new tables to audit while you define them, then run setup_db.ipynb’s two cells as usual — the mechanism itself is already fully documented in the Auditing collection.">
+    <meta itemprop="datePublished" content="2026-08-24T00:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-08-24T00:00:00+02:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/building/auditing/" itemprop="url">Turning on auditing
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Auditing is opt-in, declared per table, and the full mechanism is already documented in depth in the <a href="/auditing/">Auditing</a> collection — this page is just the “where does this fit in while I’m building my project” version.</p>
+
+<h2 id="the-one-decision-while-defining-a-table">The one decision: while defining a table</h2>
+
+<p>Back in <a href="/building/database/">Setting up the database</a>, as you write each table’s <code class="language-plaintext highlighter-rouge">create_table</code> definition, add an <code class="language-plaintext highlighter-rouge">audit</code> key alongside its <code class="language-plaintext highlighter-rouge">parameters</code>:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"audit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"INSERT"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"UPDATE"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"DELETE"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>No key at all (or one with every value <code class="language-plaintext highlighter-rouge">false</code>) means that table simply isn’t audited — there’s no separate registration step. The rule of thumb, covered in full on the introduction page: full coverage for admin/config/catalogue tables you add to one row at a time; <code class="language-plaintext highlighter-rouge">UPDATE</code>/<code class="language-plaintext highlighter-rouge">DELETE</code> only for bulk pipeline-written data, where auditing every <code class="language-plaintext highlighter-rouge">INSERT</code> would double your write volume for little audit value.</p>
+
+<h2 id="turning-it-on">Turning it on</h2>
+
+<p>Nothing extra to run — <code class="language-plaintext highlighter-rouge">setup_db.ipynb</code>’s existing two cells handle it:</p>
+
+<ol>
+  <li>The main “Setup database” cell you’re already running to create your schemas and tables also, as a side effect, assembles the audit-trigger configuration for every table that declared an <code class="language-plaintext highlighter-rouge">audit</code> key. This is pure file writing — no audit objects exist in the database yet.</li>
+  <li>The second, optional “Apply audit triggers” cell actually creates <code class="language-plaintext highlighter-rouge">audit.logged_actions</code>, the trigger function, and every table’s trigger. Skip it and your database simply has no auditing; run it (safe to re-run any time) to switch it on.</li>
+</ol>
+
+<p>Full detail — every column of <code class="language-plaintext highlighter-rouge">audit.logged_actions</code>, the self-audit gotcha, read-access grants, and copy-paste SQL for actually querying the log — is in <a href="/auditing/">Auditing</a> and <a href="/auditing/queries/">Auditing queries</a>.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-24">August 24, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/building/add_users/" class="pagination--pager" title="Adding organisations and users via Excel">Previous</a>
+    
+    
+      <a href="/building/database/" class="pagination--pager" title="Setting up the database">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

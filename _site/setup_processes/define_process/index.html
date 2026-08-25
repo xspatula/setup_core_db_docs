@@ -136,6 +136,24 @@
               >Add user data</a>
             </li><li class="masthead__menu-item">
               <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
                 href="/about/"
                 
                 
@@ -242,7 +260,7 @@
 
 <h2 id="process-hierarchy">Process hierarchy</h2>
 
-<p>Every process belongs to a root process. You must register the root process before registering the sub-processes under it.</p>
+<p>Every process belongs to a root process. You must register the root process before registering the actual processes under it.</p>
 
 <h3 id="registering-a-root-process">Registering a root process</h3>
 
@@ -360,6 +378,57 @@
   <li><a href="../process_options#inherit">inherit</a>, copies value from existing database record</li>
   <li><a href="../process_options#automatic-naming">auto naming</a>, assigns an automatic value</li>
 </ul>
+
+<h2 id="process-schema-tables">Process schema tables</h2>
+
+<p>Everything described above is stored in nine tables in the <code class="language-plaintext highlighter-rouge">process</code> schema. You’ll rarely query these directly — the notebook and JSON files do that for you — but knowing what each table holds helps when troubleshooting a registration:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Table</th>
+      <th>Objective</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">root_process</code></td>
+      <td>Groups related processes into a named root category (e.g. <code class="language-plaintext highlighter-rouge">manage_table_data</code>) that sub-processes register under.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">process</code></td>
+      <td>Registers each individual process: its name, parent root process, and the minimum user privilege stratum (<code class="language-plaintext highlighter-rouge">min_user_stratum</code>) required to run it.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">process_parameter</code></td>
+      <td>Defines every parameter a process accepts — type, whether required, default value, and hint text.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">process_parameter_set_value</code></td>
+      <td>Restricts a parameter to a predefined <a href="../process_options#set-value">set of accepted values</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">process_parameter_minmax</code></td>
+      <td>Restricts a numerical parameter to a <a href="../process_options#minmax-ranges">min/max range</a>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">process_parameter_schema_table</code></td>
+      <td>Links a parameter to the target <code class="language-plaintext highlighter-rouge">schema.table</code> it writes to in the database (the <code class="language-plaintext highlighter-rouge">schema_table</code> block).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">process_parameter_permission</code></td>
+      <td>Records whether a parameter’s underlying column may be updated or deleted once set (the <code class="language-plaintext highlighter-rouge">permission</code> block).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">process_parameter_inherit</code></td>
+      <td>Lets a parameter <a href="../process_options#inherit">default to a value copied</a> from an existing database record.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">process_parameter_auto_name</code></td>
+      <td>Stores the <a href="../process_options#automatic-naming">concatenation pattern</a> used to auto-generate a parameter’s value from other parameters in the same process.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="adding-the-process-file-to-the-pilot-file">Adding the process file to the pilot file</h2>
 

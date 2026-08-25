@@ -1,0 +1,460 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Setting up the database - Xspatula</title>
+<meta name="description" content="Define your own schemas and tables the same way the example project’s are, then optionally extend the postgres layer with project-specific SQL helpers, kept separate from the reusable core.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula">
+<meta property="og:title" content="Setting up the database">
+<meta property="og:url" content="http://localhost:4000/building/database/">
+
+
+  <meta property="og:description" content="Define your own schemas and tables the same way the example project’s are, then optionally extend the postgres layer with project-specific SQL helpers, kept separate from the reusable core.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-24T00:00:00+02:00">
+
+
+
+  <meta property="article:modified_time" content="2026-08-24T00:00:00+02:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/building/database/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
+        
+        <a class="site-title" href="https://xspatula.github.io">
+          Script your own environ
+          <span class="site-subtitle">Database-integrated Python modelling</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">Building</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/building/">Project</a></li>
+            
+              <li><a href="/building/notebooks">Notebooks</a></li>
+            
+              <li><a href="/building/database">Database</a></li>
+            
+              <li><a href="/building/auditing">Auditing</a></li>
+            
+              <li><a href="/building/initial_user">Initial user</a></li>
+            
+              <li><a href="/building/smtp">SMTP</a></li>
+            
+              <li><a href="/building/add_users">Add users</a></li>
+            
+              <li><a href="/building/processes">Processes</a></li>
+            
+              <li><a href="/building/postgres">Postgres</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Setting up the database">
+    <meta itemprop="description" content="Define your own schemas and tables the same way the example project’s are, then optionally extend the postgres layer with project-specific SQL helpers, kept separate from the reusable core.">
+    <meta itemprop="datePublished" content="2026-08-24T00:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-08-24T00:00:00+02:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/building/database/" itemprop="url">Setting up the database
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>A real project needs its own schemas and tables beyond what the framework ships by default. This page covers both defining them, and — for anything beyond simple CRUD — extending the postgres layer with your own project-specific SQL.</p>
+
+<h2 id="defining-your-own-schemas-and-tables">Defining your own schemas and tables</h2>
+
+<p>Follow exactly the pattern already documented in <a href="/setup_db/">Setup DB</a> / <a href="/setup_db/schemas_tables/">Defining schemas &amp; tables</a> — <code class="language-plaintext highlighter-rouge">create_schema</code> and <code class="language-plaintext highlighter-rouge">create_table</code> process files, run through <code class="language-plaintext highlighter-rouge">setup_db.ipynb</code>. The only thing that changes for your own project is where these files live: create your own tree mirroring the framework’s own <code class="language-plaintext highlighter-rouge">setup/zzz/xspatula/setup_db/json_core/</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setup/zzz/&lt;project&gt;/setup_db/json_&lt;project&gt;/
+├── schema/          # create_schema definitions
+├── community/        # (if you extend the default community tables)
+├── process/           # (if you extend the default process tables)
+├── utility/            # (if you extend the default utility tables)
+├── audit/               # generated — see Auditing below, don't hand-edit
+└── &lt;your_domain&gt;/         # your own project-specific schemas and tables
+</code></pre></div></div>
+
+<p>While you’re defining each table, decide whether it should be audited — see <a href="/building/auditing/">Auditing</a> on this collection for the one decision you need to make at this stage.</p>
+
+<h2 id="extending-the-postgres-layer-optional">Extending the postgres layer (optional)</h2>
+
+<p>Most projects eventually need SQL queries that don’t fit the framework’s generic insert/update/select machinery — a lookup that spans several tables, a custom aggregation, something specific to your data model. The framework’s convention for this keeps that code <strong>out of the reusable core</strong> entirely, in its own small class.</p>
+
+<p>A real project doing exactly this exists as a worked example: <code class="language-plaintext highlighter-rouge">xspatula_ai4sh</code> adds <code class="language-plaintext highlighter-rouge">src/postgres/pg_ai4sh.py</code>, defining a class of custom SQL helper methods used only by that project’s own application modules. The core <code class="language-plaintext highlighter-rouge">src/postgres/</code> files (<code class="language-plaintext highlighter-rouge">pg_session.py</code>, <code class="language-plaintext highlighter-rouge">pg_common.py</code>, <code class="language-plaintext highlighter-rouge">pg_processes.py</code>, <code class="language-plaintext highlighter-rouge">pg_get_schema_table.py</code>) are untouched — that one new file is the entire footprint on the postgres layer.</p>
+
+<h3 id="the-shape-of-the-class">The shape of the class</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PG_manage_</span><span class="o">&lt;</span><span class="n">Project</span><span class="o">&gt;</span><span class="p">:</span>
+    <span class="sh">'''</span><span class="s">
+    Project-specific SQL helpers for &lt;project&gt;.
+    </span><span class="sh">'''</span>
+
+    <span class="k">def</span> <span class="nf">_Retrieve_something</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">query_D</span><span class="p">,</span> <span class="n">pg_session_C</span><span class="p">):</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="sh">"</span><span class="s">SELECT ... FROM &lt;schema&gt;.&lt;table&gt; WHERE ... = </span><span class="sh">'</span><span class="s">%(some_key)s</span><span class="sh">'</span><span class="s">;</span><span class="sh">"</span> <span class="o">%</span> <span class="n">query_D</span>
+
+        <span class="n">rec</span> <span class="o">=</span> <span class="n">pg_session_C</span><span class="p">.</span><span class="nf">_Execute_search_single_sql</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rec</span>
+</code></pre></div></div>
+
+<p>Worth calling out plainly, since it looks unusual at first glance: each method takes the database session (<code class="language-plaintext highlighter-rouge">pg_session_C</code>) as an explicit parameter, rather than the class storing it once in <code class="language-plaintext highlighter-rouge">__init__</code> and reusing it internally. That’s the real, working shape of this pattern in practice — not a mistake to “fix.” Think of the class as a bundle of related SQL helper functions grouped under one name, not a stateful connection wrapper.</p>
+
+<h3 id="hooking-it-into-your-project-module">Hooking it into your project module</h3>
+
+<p>In whichever of your <code class="language-plaintext highlighter-rouge">src/&lt;project&gt;/</code> handler classes needs it (often <code class="language-plaintext highlighter-rouge">process.py</code>, or a handler module like the one covered in <a href="/building/processes/">Adding a new process</a>), import your class and construct it right next to where you already store the session:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">from</span> <span class="n">src</span><span class="p">.</span><span class="n">postgres</span><span class="p">.</span><span class="n">pg_</span><span class="o">&lt;</span><span class="n">project</span><span class="o">&gt;</span> <span class="kn">import</span> <span class="n">PG_manage_</span><span class="o">&lt;</span><span class="n">Project</span><span class="o">&gt;</span>
+
+<span class="k">class</span> <span class="nc">Process_something</span><span class="p">(</span><span class="n">Get_schema_table</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">process_S</span><span class="p">,</span> <span class="n">pg_session_C</span><span class="p">):</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="n">process_S</span> <span class="o">=</span> <span class="n">process_S</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">pg_session_C</span> <span class="o">=</span> <span class="n">pg_session_C</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">pg_</span><span class="o">&lt;</span><span class="n">project</span><span class="o">&gt;</span><span class="n">_C</span> <span class="o">=</span> <span class="n">PG_manage_</span><span class="o">&lt;</span><span class="n">Project</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pg_session_C</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>You don’t have to guess where this goes — the framework’s own shipped <code class="language-plaintext highlighter-rouge">src/example_project/import_data/import_data.py</code> ships a commented-out fossil line marking exactly this spot:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#from src.postgres.pg_ai4sh import PG_manage_AI4SH
+</span></code></pre></div></div>
+
+<p>That’s a leftover from how the shipped example itself was derived from a real project — replace it with your own import and instantiation line, following the shape above.</p>
+
+<p>From then on, call your helpers through that attribute, passing the session explicitly, the same way the class’s methods expect it: <code class="language-plaintext highlighter-rouge">self.pg_&lt;project&gt;_C._Retrieve_something(query_D, self.pg_session_C)</code>.</p>
+
+<p>See <a href="/building/postgres/">Postgres — summary of edits</a> for the complete list of files this pattern touches, alongside the process-registration pattern in <a href="/building/processes/">Adding a new process</a>.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-24">August 24, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/building/auditing/" class="pagination--pager" title="Turning on auditing">Previous</a>
+    
+    
+      <a href="/building/initial_user/" class="pagination--pager" title="Setting up the initial user">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

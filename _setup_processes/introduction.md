@@ -22,7 +22,7 @@ Process registration is handled by the notebook:
 
 Before running `setup_processes.ipynb`, the database must already exist. See the [Setup DB][setup_db] section for instructions on creating the database.
 
-Process registration uses an ordinary database user — not the postgres superuser. The scheme file for this step therefore has a different structure from the one used during [database setup][setup_db]. See the [Scheme file][scheme_file] page for details.
+Process registration uses an ordinary database user — not the postgres superuser. The initial run of `setup_processes.ipynb` must thus use one of the users defined with the [database setup][setup_db]. The scheme file for this step therefore has a different structure from the one used during [database setup](http://127.0.0.1:4000/setup_db/schemas_tables/#table-insert). See the [Scheme file][scheme_file] page for details.
 
 ## File hierarchy
 
@@ -46,7 +46,7 @@ The same four-level hierarchy used for database setup applies here:
 
 ## Running setup_processes.ipynb
 
-The notebook has the same three-block structure as all Xspatula notebooks. Code block 2 sets the scheme file:
+The notebook has the same block structure as all Xspatula notebooks. With code block 1 importing the required python packages and modules, and code block 2 setting the scheme file:
 
 ```python
 scheme_file = './zzz/scheme_xspatula_local_use.json'
@@ -67,13 +67,17 @@ if structured_process_D is not None:
 
 ## Default processes registered
 
-The default pilot file registers three groups of processes in order:
+The default pilot file registers processes in order:
 
-1. **Root processes** — two root process groups (`manage_table_data` and `translate_data`) that parent all other processes
-2. **translate_tabular_data** — converts Excel or CSV files to Xspatula JSON process files
-3. **manage_territory** — inserts, updates or deletes territory records in `utility.territory`
+1. **Root processes** — two root process groups (`manage_table_data` and `translate_data`) that parent the processes
+2. **translate_tabular_data** — converts Excel or CSV files to Xspatula JSON process files in 2-step process
+3. **insert_tabular_data** — converts Excel or CSV files to Xspatula JSON process files in 1-step process
+4. **foregin_key** — inserts, updates or deletes foreign key records in `utility.foreign_key`
+5. **manage_territory** — inserts, updates or deletes territory records in `utility.territory`
+6. **manage_organisation** — inserts, updates or deletes organisation records in `community.organisation`
+7. **manage_user** — inserts, updates or deletes user records in `community.user`
 
-For details on defining your own processes, see [Define process][define_process].
+For details on defining your own processes, see [Define and register a process][define_process].
 
 ## Input files
 
@@ -81,10 +85,10 @@ For details on defining your own processes, see [Define process][define_process]
 |---|---|
 | `scheme_xspatula_local_use.json` | Scheme file for process registration; defines project path and a category-5 user login — no superuser credentials |
 | `job_setup_processes.json` | Job file; points to the `setup_processes` job folder, `json_xspatula` sub-folder and `xspatula_setup_processes.txt` pilot file |
-| `xspatula_setup_processes.txt` | Pilot file; lists the three JSON process files to run in order |
+| `xspatula_setup_processes.txt` | Pilot file; lists the JSON process files to run in order |
 
 [setup_db]: ../../setup_db/
 
-[scheme_file]: ../scheme_file/
+[scheme_file]: /setup_processes/scheme_file/
 
-[define_process]: ../define_process/
+[define_process]: /setup_processes/define_process/

@@ -15,7 +15,7 @@ separate, optional step from creating the database at all.
 
 ## Declaring coverage on a table
 
-Every table's `create_table` definition (under `setup/zzz/ai4sh/setup_db/json_ai4sh/...`) may
+Every table's `create_table` definition (under `setup/zzz/xspatula/setup_db/json_core/...`) may
 carry a sibling `"audit"` key:
 
 ```json
@@ -42,10 +42,17 @@ from it automatically.
 1. **"Setup database"** — the cell you already run to create/update every schema and table.
    As a side effect, it scans every table's `"audit"` key across the whole pilot list
    and (re)writes the per-schema `audit_triggers_<schema>_v10_sql.json` files, plus a
-   generated pilot file, `db_xspatula_ai4sh_audit.txt` (its own header says "do not
-   hand-edit" — treat it the same way you'd treat any other build artifact). This step is
-   **pure file assembly** — it does not touch the database, create any audit objects, or need
-   a live Postgres connection. After running only this cell, no audit triggers exist yet.
+   generated pilot file (its own header says "do not hand-edit" — treat it the same way
+   you'd treat any other build artifact). This step is **pure file assembly** — it does not
+   touch the database, create any audit objects, or need a live Postgres connection. After
+   running only this cell, no audit triggers exist yet.
+
+   The generated pilot file's name is an opaque, generated string, not something to rely on
+   or hand-edit — and worth calling out explicitly: as of today it's literally
+   `db_xspatula_ai4sh_audit.txt` regardless of what project you're running this in. That's a
+   naming quirk in an internal constant in the framework code, not a per-project setting —
+   don't expect it to match your own project's name, and don't be surprised to see "ai4sh" in
+   it on an unrelated project. The file works identically either way.
 2. **"Apply audit triggers"** (`job_setup_audit.json`) — a second, separate, **optional** cell.
    This is what actually creates `audit.logged_actions`, `audit.if_modified_func()`, and every
    table's trigger in the database, by calling `Initiate_audit()`. Skip it and the database
@@ -69,7 +76,7 @@ exist, cell 2 skips straight to applying the current trigger config.
 
 ## Config files: shipped vs. generated
 
-Everything lives under `setup/zzz/ai4sh/setup_db/json_ai4sh/audit/`, but the files there fall
+Everything lives under `setup/zzz/xspatula/setup_db/json_core/audit/`, but the files there fall
 into two very different categories.
 
 **Shipped with the framework** — these 3 files come with xspatula itself and don't change per
@@ -82,23 +89,20 @@ project or per table:
 | `audit_triggers_audit_v10_sql.json` | The `audit` schema's own self-audit trigger (see the self-audit gotcha above) |
 
 **Auto-generated on every "Setup database" run** — one file per audited schema, written fresh
-each time from every table's `"audit"` key. For AI4SH today that's 7 files (every schema except
-`audit` itself, which is covered by the shipped file above):
+each time from every table's `"audit"` key. For the framework's own default install today
+that's 3 files, one per default schema:
 
 | File | Schema |
 |---|---|
 | `audit_triggers_community_v10_sql.json` | `community` |
-| `audit_triggers_landscape_v10_sql.json` | `landscape` |
-| `audit_triggers_landscape_utility_v10_sql.json` | `landscape_utility` |
-| `audit_triggers_observation_v10_sql.json` | `observation` |
-| `audit_triggers_observation_utility_v10_sql.json` | `observation_utility` |
 | `audit_triggers_process_v10_sql.json` | `process` |
 | `audit_triggers_utility_v10_sql.json` | `utility` |
 
-Plus, at the pilot-file level: `setup/zzz/ai4sh/setup_db/db_xspatula_ai4sh_audit.txt` — the
-generated pilot file cell 2 runs. All 7 generated files (and the pilot file) are build
-artifacts. If you edit one by hand, the next "Setup database" run will overwrite your edit —
-change the source table's `"audit"` key instead.
+A project that adds its own schemas gets one more generated file per audited schema it adds.
+Plus, at the pilot-file level: the generated pilot file cell 2 runs (see the naming note
+above). All the generated files (and the pilot file) are build artifacts. If you edit one by
+hand, the next "Setup database" run will overwrite your edit — change the source table's
+`"audit"` key instead.
 
 ## Checking what's actually covered
 
@@ -116,6 +120,23 @@ ORDER BY 1, 2;
 
 A dry-run script, `setup/scripts/verify_audit_system.py`, does the equivalent check without
 touching the database — useful if you want to confirm the assembled trigger-config files match
-every table's declared `"audit"` key before applying anything.
+every table's declared `"audit"` key before applying anything. Run it from the `setup/`
+directory, passing your own scheme file explicitly (its own built-in default points at a file
+that won't exist in a fresh project, so don't rely on running it with no arguments):
+
+```
+python scripts/verify_audit_system.py zzz/scheme_xspatula_local_setup.json
+```
+
+## Input files
+
+| File | Purpose |
+|---|---|
+| `audit_table_v10_sql.json` | Shipped; defines the `audit.logged_actions` table |
+| `audit_function_v10_sql.json` | Shipped; defines the `audit.if_modified_func()` trigger function |
+| `audit_triggers_audit_v10_sql.json` | Shipped; the `audit` schema's own self-audit trigger |
+| `audit_triggers_<schema>_v10_sql.json` | Generated; one per audited schema — do not hand-edit |
+| generated pilot file (cell 2's manifest) | Generated; lists every audit config file cell 2 should apply — do not hand-edit |
+| `setup/scripts/verify_audit_system.py` | Optional dry-run check; confirms the assembled config matches every table's `"audit"` key without touching the database |
 
 [auditing_introduction]: /auditing/

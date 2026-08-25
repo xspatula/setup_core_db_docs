@@ -1,0 +1,453 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Setting up the initial user - Xspatula</title>
+<meta name="description" content="Before you can register any process for your new project, you need at least one working login — and community.user.password stores a bcrypt hash, so it has to be generated with a small CLI before it goes anywhere near the JSON file.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula">
+<meta property="og:title" content="Setting up the initial user">
+<meta property="og:url" content="http://localhost:4000/building/initial_user/">
+
+
+  <meta property="og:description" content="Before you can register any process for your new project, you need at least one working login — and community.user.password stores a bcrypt hash, so it has to be generated with a small CLI before it goes anywhere near the JSON file.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-24T00:00:00+02:00">
+
+
+
+  <meta property="article:modified_time" content="2026-08-24T00:00:00+02:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/building/initial_user/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
+        
+        <a class="site-title" href="https://xspatula.github.io">
+          Script your own environ
+          <span class="site-subtitle">Database-integrated Python modelling</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">Building</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/building/">Project</a></li>
+            
+              <li><a href="/building/notebooks">Notebooks</a></li>
+            
+              <li><a href="/building/database">Database</a></li>
+            
+              <li><a href="/building/auditing">Auditing</a></li>
+            
+              <li><a href="/building/initial_user">Initial user</a></li>
+            
+              <li><a href="/building/smtp">SMTP</a></li>
+            
+              <li><a href="/building/add_users">Add users</a></li>
+            
+              <li><a href="/building/processes">Processes</a></li>
+            
+              <li><a href="/building/postgres">Postgres</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Setting up the initial user">
+    <meta itemprop="description" content="Before you can register any process for your new project, you need at least one working login — and community.user.password stores a bcrypt hash, so it has to be generated with a small CLI before it goes anywhere near the JSON file.">
+    <meta itemprop="datePublished" content="2026-08-24T00:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-08-24T00:00:00+02:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/building/initial_user/" itemprop="url">Setting up the initial user
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Registering processes for your new project — the JSON registration in <a href="/building/processes/">Adding a new process</a>, and inserting through any registered process at all — requires an already-logged-in <code class="language-plaintext highlighter-rouge">community.user</code>. There’s no user until you seed one, and <code class="language-plaintext highlighter-rouge">community.user.password</code> stores a bcrypt hash rather than plain text, so that hash has to be generated <em>before</em> you write it into the seed file. This page walks through doing that from scratch.</p>
+
+<h2 id="step-1-open-a-terminal">Step 1: open a terminal</h2>
+
+<p>Open a terminal window and navigate to your local copy of the framework — the directory containing the <code class="language-plaintext highlighter-rouge">setup/</code> folder. If you’re using an Anaconda environment, activate it first:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /path/to/setup_core_db
+conda activate &lt;your-environment-name&gt;
+</code></pre></div></div>
+
+<h2 id="step-2-run-the-hashing-cli">Step 2: run the hashing CLI</h2>
+
+<p>Run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 setup/hash_password.py
+</code></pre></div></div>
+
+<p>You’ll be prompted twice, with hidden input (nothing appears on screen as you type — that’s expected):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Password to hash: 
+Repeat password: 
+</code></pre></div></div>
+
+<p>Type the plain-text password you want your first user to log in with, and repeat it. If the two don’t match, the script exits with an error and prints nothing — just run it again.</p>
+
+<h2 id="step-3-copy-the-printed-hash">Step 3: copy the printed hash</h2>
+
+<p>On success, the tool prints a single line — a bcrypt hash that looks like this (yours will be different every time, even for the same password):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$2b$12$KIXQ7z3nJ8mR5vT1wYbP9uL6oE2cN4sD0hG7fA3xZ8qW1yV6tR9mS
+</code></pre></div></div>
+
+<p>Select and copy that entire string. This is what goes into the seed file — never the plain-text password itself.</p>
+
+<p>You can also pass the password directly as a command-line argument (<code class="language-plaintext highlighter-rouge">python3 setup/hash_password.py 'some-password'</code>), which skips the prompts, but avoid this on a shared machine — the plain-text password then briefly appears in your shell history and process list.</p>
+
+<h2 id="step-4-paste-the-hash-into-your-seed-file">Step 4: paste the hash into your seed file</h2>
+
+<p>Open your project’s copy of the user-seed file — for the shipped example this is <code class="language-plaintext highlighter-rouge">setup/zzz/xspatula/setup_db/json_core/community/user_records_v10_sql.json</code>; for your own project it’s the equivalent file under your own <code class="language-plaintext highlighter-rouge">json_&lt;project&gt;/community/</code> — and paste the hash in as the <code class="language-plaintext highlighter-rouge">password</code> value for your first user:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$2b$12$KIXQ7z3nJ8mR5vT1wYbP9uL6oE2cN4sD0hG7fA3xZ8qW1yV6tR9mS"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Repeat steps 2-4 once per default user you’re seeding — each needs its own freshly-generated hash.</p>
+
+<h2 id="step-5-run-setup_dbipynb">Step 5: run setup_db.ipynb</h2>
+
+<p>With the hash (or hashes) in place, run <code class="language-plaintext highlighter-rouge">setup_db.ipynb</code>’s main “Setup database” cell as normal — this is the same run that creates your schemas and tables from <a href="/building/database/">Setting up the database</a>. Your seeded user now exists with a working, hashed password, and can log in to register the processes covered in <a href="/building/processes/">Adding a new process</a>.</p>
+
+<h2 id="if-the-database-already-exists">If the database already exists</h2>
+
+<p>If you’re adding a first user to a database you’ve already set up (rather than seeding it at creation), skip the JSON file and run the hash straight against the live database instead:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="n">community</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">password</span> <span class="o">=</span> <span class="s1">'&lt;hash&gt;'</span> <span class="k">WHERE</span> <span class="n">user_name</span> <span class="o">=</span> <span class="s1">'...'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="more-detail">More detail</h2>
+
+<p>This is the same CLI and mechanism documented in full on <a href="/setup_db/#hashing-user-passwords">Hashing user passwords</a> (Setup DB) and <a href="/setup_community/bootstrap_user/">Bootstrap user</a> (Setup Community) — the latter covers the same “chicken-and-egg” problem in the specific context of registering later users through the Excel-intake workflow once this first one exists.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-24">August 24, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/building/database/" class="pagination--pager" title="Setting up the database">Previous</a>
+    
+    
+      <a href="/building/notebooks/" class="pagination--pager" title="Editing the notebooks">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

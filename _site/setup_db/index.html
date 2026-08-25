@@ -136,6 +136,24 @@
               >Add user data</a>
             </li><li class="masthead__menu-item">
               <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
                 href="/about/"
                 
                 
@@ -315,7 +333,7 @@ DB_PASSWORD=db_user_password
 
 <h4 id="scheme-file-for-database-setup">Scheme file for database setup</h4>
 
-<p>The scheme file for setting up your database must define both the postgres superuser that will own the database as well as other postgres users (pg_user) that can access the database.</p>
+<p>The scheme file for setting up your database must define both the postgres superuser that will own the database and at least one user that is then used for setting up processes and adding other users. Explained in more detail below.</p>
 
 <p>In the example of a <em>scheme</em> file for setting up a database below I have added some comments indicated by a hashtag (#). These comments are not allowed in a production version of a <em>scheme</em> file.</p>
 
@@ -368,12 +386,38 @@ DB_PASSWORD=db_user_password
 
 <p>The postgres superuser defined in the <em>scheme</em> file for setting up your new database will become both the owner and a superuser for your new database. The default processes defined for setting up a new database include the definition of ordinary user(s) (not pg_users) in the database. The default user (Jane Doe) in the online repository has the user name <em>jane_doe</em> and the password is <em>hello-xspatula</em>. It is recommended that you change the names and passwords of the default users in the file</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/xspatula/setup_db/json_core/community_user_records_v10_sql.json.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/xspatula/setup_db/json_core/community/user_records_v10_sql.json.
 </code></pre></div></div>
 
 <p>You must then also change the login credentials in the subsequent <em>scheme</em> files for ordinary login (not database setup). You can also always login with the superuser that you used for setting up the database.</p>
 
 <p>For details on including default users as part of the database setup, see the document on <a href="./schemas_tables/">defining schemas and tables</a>.</p>
+
+<h4 id="hashing-user-passwords">Hashing user passwords</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">password</code> column in <code class="language-plaintext highlighter-rouge">community.user</code> does not store plain text. It stores a bcrypt hash, and the framework verifies a login attempt by hashing the entered password and comparing it against that stored hash — it never compares plain text directly. This means the <code class="language-plaintext highlighter-rouge">"hello-xspatula"</code> shown above for Jane Doe is the password you’d actually type in at login, not what belongs in the JSON file: the JSON must hold the hash produced by a small command-line tool the framework ships with, <code class="language-plaintext highlighter-rouge">setup/hash_password.py</code>.</p>
+
+<p>To generate a hash, open a terminal, <code class="language-plaintext highlighter-rouge">cd</code> into your local copy of the framework (the directory containing the <code class="language-plaintext highlighter-rouge">setup/</code> folder), activate your Anaconda environment if you’re using one, and run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 setup/hash_password.py
+</code></pre></div></div>
+
+<p>You’ll be prompted twice, with hidden input:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Password to hash:
+Repeat password:
+</code></pre></div></div>
+
+<p>The tool prints a bcrypt hash that looks like <code class="language-plaintext highlighter-rouge">$2b$12$KIXQ7z3n...</code> (yours will differ). Copy that whole string — it’s what you paste into the <code class="language-plaintext highlighter-rouge">password</code> value in <code class="language-plaintext highlighter-rouge">community_user_records_v10_sql.json</code>, not the password itself.</p>
+
+<p>You can also pass the password directly as an argument:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 setup/hash_password.py 'some-password'
+</code></pre></div></div>
+
+<p>This is quicker but leaves the plain-text password visible in your shell history and process list, so prefer the no-argument, prompted form on any machine you share with others.</p>
+
+<p>Do this once per default user before running <code class="language-plaintext highlighter-rouge">setup_db.ipynb</code>, and again any time you want to reset a user’s password by hand-editing the database (<code class="language-plaintext highlighter-rouge">UPDATE community.user SET password = '&lt;hash&gt;' WHERE user_name = '...';</code>).</p>
 
 <h4 id="scheme-file-for-database-delete">Scheme file for database delete</h4>
 
@@ -523,11 +567,13 @@ processes_records_v10_sql.json
 
 <p>The table user and the columns <em>user_name</em>, <em>password</em>, and <em>stratum_code</em> are searched each time a user is trying to login. The <em>stratum_code</em> defines which .env file a user is entering the database with and thus the privileges that that user has in the database. If you change the name of either the schema, the table or these columns, you need to update the python source code accordingly.</p>
 
-<p>For details on defining tables and columns, see the document on [tables][#]. NOT YET AVAILABLE.</p>
+<p>For details on defining tables and columns, see the document on <a href="../setup_db/schemas_tables/#create-table">Defining schemas and tables</a>.</p>
 
 <h4 id="community-organisations-and-users">Community organisations and users</h4>
 
-<p>The process_files community_organisation_records_v10<em>sql.json and community_user_records_v10_sql.json directly inserts records in the community schema tables organisation and user. The users inserted will get immediate access to the created database. This the user name name you have to state in the _scheme</em> object user_project:user_name. The password can also be given as an object in the <em>scheme_file</em> (user_project:user_password). Alternatively you can put the password in a <a href="./netrc/">.netrc</a>.</p>
+<p>The <em>process</em> files <code class="language-plaintext highlighter-rouge">"community_organisation_records_v10_sql.json"</code> and <code class="language-plaintext highlighter-rouge">"community_user_records_v10_sql.json"</code> directly inserts records in the community schema tables organisation and user. The users inserted will get immediate access to the created database.</p>
+
+<p>Note that this is a different password to the ones in the postgres pg_user <em>scheme</em> file shown above: the pg_user password authenticates the <em>database connection</em> itself, while <code class="language-plaintext highlighter-rouge">community.user.password</code> authenticates an individual <em>application login</em> and must be pre-hashed as described in <a href="#hashing-user-passwords">hashing user passwords</a>. This setup-time route is meant for your initial, default users. Once the database is running, organisations and users can also be added by non-technical staff filling in an Excel sheet — see <a href="/setup_community/">Setup Community</a>.</p>
 
 <p>The figure below illustrates the content and connections for the schema community after setting up the Xspatula framework.</p>
 
@@ -546,9 +592,12 @@ processes_records_v10_sql.json
   <li>process_parameter_set_value (if a text parameter can take on only a predefined set of values),</li>
   <li>process_parameter_minmax (if a numerical parameter is restricted to a range)</li>
   <li>process_parameter_schema_table (the target table for any particular parameter),</li>
-  <li>process_parameter_permission (if a set parameter is allowed to be updated or deleted), and</li>
-  <li>process_parameter_default (default parameter values if no value is given by user).</li>
+  <li>process_parameter_permission (if a set parameter is allowed to be updated or deleted),</li>
+  <li>process_parameter_inherit (if a parameter can default to a value copied from an existing database record), and</li>
+  <li>process_parameter_auto_name (if a parameter’s value is auto-generated by concatenating other parameters in the same process).</li>
 </ul>
+
+<p>For the full column-level reference of every <code class="language-plaintext highlighter-rouge">process</code> schema table, see the <a href="../setup_processes/define_process/#process-schema-tables">process schema tables</a> reference in Setup processes.</p>
 
 <p>The figure below illustrates the content and connections for the schema process after setting up the Xspatula framework.</p>
 
@@ -559,6 +608,43 @@ processes_records_v10_sql.json
 <h4 id="initial-process-records">Initial process records</h4>
 
 <p>Running processes_records_v10_sql.json inserts the root process and processes required for managing all other processes in the framework.</p>
+
+<h4 id="turning-on-auditing">Turning on auditing</h4>
+
+<p><code class="language-plaintext highlighter-rouge">setup_db.ipynb</code> has a second, optional cell after the main “Setup database” cell you’ve just walked through: <strong>Apply audit triggers</strong>. It is worth understanding what each cell does before you run either:</p>
+
+<ul>
+  <li><strong>The “Setup database” cell</strong>, as a side effect of running it, always scans every table’s definition for an inline <code class="language-plaintext highlighter-rouge">audit</code> key and (re)writes a set of audit-trigger configuration files to disk — one per schema — plus a matching pilot file. This is pure file bookkeeping: it never touches the database and creates no audit objects, so running it changes nothing about whether auditing is actually active.</li>
+  <li><strong>The “Apply audit triggers” cell</strong> reads those freshly-written files and applies them to the database: it creates an <code class="language-plaintext highlighter-rouge">audit</code> schema with a <code class="language-plaintext highlighter-rouge">logged_actions</code> table, a shared trigger function, and one trigger per audited table. This is the step that actually switches auditing on. It’s optional — skip it and your database simply has no audit triggers — and safe to (re-)run any time, including repeatedly, since it always applies the complete current configuration rather than only what changed.</li>
+</ul>
+
+<p>A table opts into auditing by carrying an <code class="language-plaintext highlighter-rouge">audit</code> key next to its <code class="language-plaintext highlighter-rouge">parameters</code> in its <code class="language-plaintext highlighter-rouge">create_table</code> process block:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"audit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"INSERT"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"UPDATE"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"DELETE"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>No <code class="language-plaintext highlighter-rouge">audit</code> key (or one with every value <code class="language-plaintext highlighter-rouge">false</code>) means that table simply isn’t audited — there’s no other configuration step required. The cell looks like this in the notebook:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Apply audit triggers (optional, separate step)
+
+Every table's audit setting is declared inline on its own create_table process
+block via an "audit" key. Running the cell above already assembled the
+per-schema audit trigger config files and a matching pilot file
+(db_&lt;project&gt;_audit.txt) from those keys, purely as files - it did not touch
+the database.
+
+Run the cell below any time after the cell above - immediately, later, or
+repeatedly - to actually apply that config to the database.
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">audit_job_file</span> <span class="o">=</span> <span class="sh">'</span><span class="s">job_setup_audit.json</span><span class="sh">'</span>
+<span class="nc">Initiate_audit</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">,</span> <span class="n">scheme_file</span><span class="p">,</span> <span class="n">audit_job_file</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Full instructions for using the audit system once it’s switched on — what gets logged, how to query it, and which tables are worth auditing on <code class="language-plaintext highlighter-rouge">INSERT</code> versus only <code class="language-plaintext highlighter-rouge">UPDATE</code>/<code class="language-plaintext highlighter-rouge">DELETE</code> — are in the <a href="/auditing/">Auditing</a> collection.</p>
 
 <h3 id="project-file-hierarchy">Project file hierarchy</h3>
 

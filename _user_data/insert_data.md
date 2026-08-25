@@ -81,6 +81,8 @@ To load your own tabular data:
 
 The translate and insert steps are independent — you can re-run either one without affecting the other, as long as `overwrite` and `delete` are set appropriately.
 
+If you don't need to inspect or hand-edit the generated JSON, the [single-step insert route][single_step_insert] does both steps above in one notebook cell.
+
 ## Input files
 
 | File | Purpose |
@@ -90,3 +92,5 @@ The translate and insert steps are independent — you can re-run either one wit
 [translate_excel]: ../translate_excel/
 
 [scheme_file]: ../../setup_processes/scheme_file/
+
+[single_step_insert]: ../single_step_insert/

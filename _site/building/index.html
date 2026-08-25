@@ -1,0 +1,475 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Naming a new project - Xspatula</title>
+<meta name="description" content="Building a new Xspatula project means choosing two independent names — a project directory and a Python module — and creating the module every notebook will call into.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula">
+<meta property="og:title" content="Naming a new project">
+<meta property="og:url" content="http://localhost:4000/building/">
+
+
+  <meta property="og:description" content="Building a new Xspatula project means choosing two independent names — a project directory and a Python module — and creating the module every notebook will call into.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-24T00:00:00+02:00">
+
+
+
+  <meta property="article:modified_time" content="2026-08-24T00:00:00+02:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/building/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
+        
+        <a class="site-title" href="https://xspatula.github.io">
+          Script your own environ
+          <span class="site-subtitle">Database-integrated Python modelling</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">Building</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/building/" class="active">Project</a></li>
+            
+              <li><a href="/building/notebooks">Notebooks</a></li>
+            
+              <li><a href="/building/database">Database</a></li>
+            
+              <li><a href="/building/auditing">Auditing</a></li>
+            
+              <li><a href="/building/initial_user">Initial user</a></li>
+            
+              <li><a href="/building/smtp">SMTP</a></li>
+            
+              <li><a href="/building/add_users">Add users</a></li>
+            
+              <li><a href="/building/processes">Processes</a></li>
+            
+              <li><a href="/building/postgres">Postgres</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Naming a new project">
+    <meta itemprop="description" content="Building a new Xspatula project means choosing two independent names — a project directory and a Python module — and creating the module every notebook will call into.">
+    <meta itemprop="datePublished" content="2026-08-24T00:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-08-24T00:00:00+02:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/building/" itemprop="url">Naming a new project
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Everything documented so far on this site uses the framework’s own shipped example, <code class="language-plaintext highlighter-rouge">project_example</code>. This collection walks through what changes when you build your own project instead — starting with naming it.</p>
+
+<h2 id="two-independent-names">Two independent names</h2>
+
+<p>Building a new project means choosing, and keeping straight, two separate names that have nothing to do with each other:</p>
+
+<ol>
+  <li><strong>The project directory</strong> — wherever <code class="language-plaintext highlighter-rouge">project_path</code> in your <a href="/framework/scheme_file/">scheme file</a> points. This is purely a filesystem path. The framework never inspects it for anything except finding your job/process files.</li>
+  <li><strong>The Python module under <code class="language-plaintext highlighter-rouge">src/</code></strong> — <code class="language-plaintext highlighter-rouge">src/&lt;project&gt;/</code>, the package every notebook imports <code class="language-plaintext highlighter-rouge">Run_process</code> from.</li>
+</ol>
+
+<p>The shipped example makes this distinction concrete on purpose: the directory is <code class="language-plaintext highlighter-rouge">project_example/</code>, but the Python module is <code class="language-plaintext highlighter-rouge">src/example_project/</code> — deliberately different words, so nothing about the framework’s own behavior implies they have to match. It’s easy to assume otherwise if the first real project you look at is one where they happen to coincide (a project named, say, <code class="language-plaintext highlighter-rouge">ai4sh</code> typically ends up with both a directory and a module called <code class="language-plaintext highlighter-rouge">ai4sh</code>) — but that’s a coincidence of that project’s choice, not a rule.</p>
+
+<p>You can name your directory and your module the same thing if you like — most projects do, since it’s less to keep track of — just don’t treat it as required.</p>
+
+<h2 id="what-to-create-under-srcproject">What to create under <code class="language-plaintext highlighter-rouge">src/&lt;project&gt;/</code></h2>
+
+<p>Mirror the shipped <code class="language-plaintext highlighter-rouge">src/example_project/</code> structure:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/&lt;project&gt;/
+├── __init__.py
+├── version.py
+├── process.py
+└── import_data/
+    ├── __init__.py
+    ├── import_data.py
+    ├── structure_json_for_db.py
+    └── version.py
+</code></pre></div></div>
+
+<p>Copy <code class="language-plaintext highlighter-rouge">src/example_project/</code> wholesale to start, then rename the top-level directory. Almost nothing inside needs editing:</p>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">__init__.py</code></strong> — needs no change. It’s a generic relative-import re-export (<code class="language-plaintext highlighter-rouge">from .process import Run_process</code>), which is exactly what makes <code class="language-plaintext highlighter-rouge">from src.&lt;project&gt; import Run_process</code> work at the package level once you rename the directory.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">version.py</code></strong> — cosmetic metadata, harmless to leave as-is.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">import_data/__init__.py</code>, <code class="language-plaintext highlighter-rouge">import_data/import_data.py</code>, <code class="language-plaintext highlighter-rouge">import_data/structure_json_for_db.py</code></strong> — copy unchanged to start; you’ll extend these as your project grows.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">process.py</code></strong> — the one file with a required edit, covered next.</li>
+</ul>
+
+<h2 id="the-one-required-edit">The one required edit</h2>
+
+<p>Inside <code class="language-plaintext highlighter-rouge">src/&lt;project&gt;/process.py</code>, find the import line that pulls in the generic import/insert handler:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">src.example_project.import_data</span> <span class="kn">import</span> <span class="n">Process_import_JSON</span>
+</code></pre></div></div>
+
+<p>Change it to point at your own module:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">from</span> <span class="n">src</span><span class="p">.</span><span class="o">&lt;</span><span class="n">project</span><span class="o">&gt;</span><span class="p">.</span><span class="n">import_data</span> <span class="kn">import</span> <span class="n">Process_import_JSON</span>
+</code></pre></div></div>
+
+<p>That’s the entire renaming edit inside <code class="language-plaintext highlighter-rouge">process.py</code> itself. Nothing else in <code class="language-plaintext highlighter-rouge">Run_process</code>’s signature, docstring, or dispatch logic needs to change — you’ll come back to this same file in <a href="/building/processes/">Adding a new process</a> once you start registering processes beyond the generic translate/insert ones.</p>
+
+<h2 id="everything-this-phase-touches-at-a-glance">Everything this phase touches, at a glance</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>What</th>
+      <th>Why</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">src/&lt;project&gt;/</code> (new directory)</td>
+      <td>Your project’s Python entry point — see above</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">src/&lt;project&gt;/process.py</code></td>
+      <td>One import line to edit — see above</td>
+    </tr>
+    <tr>
+      <td>Every notebook calling <code class="language-plaintext highlighter-rouge">Run_process</code></td>
+      <td>Each one imports from the old module name — see <a href="/building/notebooks/">Editing the notebooks</a></td>
+    </tr>
+    <tr>
+      <td>Scheme file <code class="language-plaintext highlighter-rouge">project_path</code></td>
+      <td>Just a directory path — no change required unless you also want to rename the directory</td>
+    </tr>
+  </tbody>
+</table>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-24">August 24, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/building/processes/" class="pagination--pager" title="Adding a new process">Previous</a>
+    
+    
+      <a href="/building/smtp/" class="pagination--pager" title="SMTP setup">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -136,6 +136,24 @@
               >Add user data</a>
             </li><li class="masthead__menu-item">
               <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
                 href="/about/"
                 
                 
@@ -249,7 +267,7 @@
 
 <p>Before running <code class="language-plaintext highlighter-rouge">setup_processes.ipynb</code>, the database must already exist. See the <a href="../../setup_db/">Setup DB</a> section for instructions on creating the database.</p>
 
-<p>Process registration uses an ordinary database user — not the postgres superuser. The scheme file for this step therefore has a different structure from the one used during <a href="../../setup_db/">database setup</a>. See the <a href="../scheme_file/">Scheme file</a> page for details.</p>
+<p>Process registration uses an ordinary database user — not the postgres superuser. The initial run of <code class="language-plaintext highlighter-rouge">setup_processes.ipynb</code> must thus use one of the users defined with the <a href="../../setup_db/">database setup</a>. The scheme file for this step therefore has a different structure from the one used during <a href="http://127.0.0.1:4000/setup_db/schemas_tables/#table-insert">database setup</a>. See the <a href="/setup_processes/scheme_file/">Scheme file</a> page for details.</p>
 
 <h2 id="file-hierarchy">File hierarchy</h2>
 
@@ -272,7 +290,7 @@
 
 <h2 id="running-setup_processesipynb">Running setup_processes.ipynb</h2>
 
-<p>The notebook has the same three-block structure as all Xspatula notebooks. Code block 2 sets the scheme file:</p>
+<p>The notebook has the same block structure as all Xspatula notebooks. With code block 1 importing the required python packages and modules, and code block 2 setting the scheme file:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scheme_file</span> <span class="o">=</span> <span class="sh">'</span><span class="s">./zzz/scheme_xspatula_local_use.json</span><span class="sh">'</span>
 </code></pre></div></div>
@@ -291,15 +309,19 @@
 
 <h2 id="default-processes-registered">Default processes registered</h2>
 
-<p>The default pilot file registers three groups of processes in order:</p>
+<p>The default pilot file registers processes in order:</p>
 
 <ol>
-  <li><strong>Root processes</strong> — two root process groups (<code class="language-plaintext highlighter-rouge">manage_table_data</code> and <code class="language-plaintext highlighter-rouge">translate_data</code>) that parent all other processes</li>
-  <li><strong>translate_tabular_data</strong> — converts Excel or CSV files to Xspatula JSON process files</li>
+  <li><strong>Root processes</strong> — two root process groups (<code class="language-plaintext highlighter-rouge">manage_table_data</code> and <code class="language-plaintext highlighter-rouge">translate_data</code>) that parent the processes</li>
+  <li><strong>translate_tabular_data</strong> — converts Excel or CSV files to Xspatula JSON process files in 2-step process</li>
+  <li><strong>insert_tabular_data</strong> — converts Excel or CSV files to Xspatula JSON process files in 1-step process</li>
+  <li><strong>foregin_key</strong> — inserts, updates or deletes foreign key records in <code class="language-plaintext highlighter-rouge">utility.foreign_key</code></li>
   <li><strong>manage_territory</strong> — inserts, updates or deletes territory records in <code class="language-plaintext highlighter-rouge">utility.territory</code></li>
+  <li><strong>manage_organisation</strong> — inserts, updates or deletes organisation records in <code class="language-plaintext highlighter-rouge">community.organisation</code></li>
+  <li><strong>manage_user</strong> — inserts, updates or deletes user records in <code class="language-plaintext highlighter-rouge">community.user</code></li>
 </ol>
 
-<p>For details on defining your own processes, see <a href="../define_process/">Define process</a>.</p>
+<p>For details on defining your own processes, see <a href="/setup_processes/define_process/">Define and register a process</a>.</p>
 
 <h2 id="input-files">Input files</h2>
 
@@ -321,7 +343,7 @@
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">xspatula_setup_processes.txt</code></td>
-      <td>Pilot file; lists the three JSON process files to run in order</td>
+      <td>Pilot file; lists the JSON process files to run in order</td>
     </tr>
   </tbody>
 </table>

@@ -10,7 +10,7 @@ date:   2026-03-15 16:13:03 +0200
 last_modified_at:   2026-03-29 21:01:15 +0200
 ---
 
-[PostgreSQL][postgres] (or postgres for short) is a powerful, open-source relational database system used to store, manage, and query structured data reliably. It supports advanced features like complex queries, transactions, extensibility, and compliance with SQL standards. Known for its robustness and scalability, it’s widely used in applications ranging from small projects to large enterprise systems. Postgres forms the backbone of the framework system laid on on this site.
+[PostgreSQL][postgres] (or postgres for short) is a powerful, open-source relational database system used to store, manage, and query structured data reliably. It supports advanced features like complex queries, transactions, extensibility, and compliance with SQL standards. Known for its robustness and scalability, it’s widely used in applications ranging from small projects to large enterprise systems. Postgres forms the backbone of the framework system laid out on this site.
 
 ## Installing PostgreSQL
 

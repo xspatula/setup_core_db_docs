@@ -1,0 +1,535 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Single-step insert (no translate step) - Xspatula</title>
+<meta name="description" content="The insert_tabular_data process translates a spreadsheet and inserts the records into the database in one step, with no manual hand-off between a separate translate and insert step.">
+
+
+  <meta name="author" content="Thomas Gumbricht">
+  
+  <meta property="article:author" content="Thomas Gumbricht">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Xspatula">
+<meta property="og:title" content="Single-step insert (no translate step)">
+<meta property="og:url" content="http://localhost:4000/user_data/single_step_insert/">
+
+
+  <meta property="og:description" content="The insert_tabular_data process translates a spreadsheet and inserts the records into the database in one step, with no manual hand-off between a separate translate and insert step.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-24T00:00:00+02:00">
+
+
+
+  <meta property="article:modified_time" content="2026-08-24T00:00:00+02:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/user_data/single_step_insert/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Xspatula Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="https://xspectre.com" target="_blank" rel="noopener noreferrer"><img src="/assets/media/xspectre_logo-trans_480.png" alt="Script your own environ"></a>
+        
+        <a class="site-title" href="https://xspatula.github.io">
+          Script your own environ
+          <span class="site-subtitle">Database-integrated Python modelling</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/framework/"
+                 title="Structure and function of the Xspatula framework"
+                
+              >Xspatula framework</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_db/"
+                 title="Setting up a postgreSQL database with Xspatula framework"
+                
+              >Setup DB</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_processes/"
+                 title="Setting up processes in the Xspatula postgreSQL database"
+                
+              >Setup processes</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/user_data/"
+                 title="Add user data to the Xspatula postgreSQL database"
+                
+              >Add user data</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      <nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      
+      
+        <li>
+          
+            <span class="nav__sub-title">Add user data</span>
+          
+
+          
+          <ul>
+            
+              <li><a href="/user_data/">Synopsis</a></li>
+            
+              <li><a href="/user_data/translate_excel">Translate excel</a></li>
+            
+              <li><a href="/user_data/insert_data">Insert data</a></li>
+            
+              <li><a href="/user_data/single_step_insert">Single-step insert</a></li>
+            
+          </ul>
+          
+        </li>
+      
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Single-step insert (no translate step)">
+    <meta itemprop="description" content="The insert_tabular_data process translates a spreadsheet and inserts the records into the database in one step, with no manual hand-off between a separate translate and insert step.">
+    <meta itemprop="datePublished" content="2026-08-24T00:00:00+02:00">
+    <meta itemprop="dateModified" content="2026-08-24T00:00:00+02:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/user_data/single_step_insert/" itemprop="url">Single-step insert (no translate step)
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>The <code class="language-plaintext highlighter-rouge">insert_tabular_data</code> process does the same translation as <code class="language-plaintext highlighter-rouge">translate_tabular_data</code> — reading an Excel or CSV file and turning each row into a process command — but then immediately applies the result to the database, in the same step. There’s no generated JSON file to hand off to a second, manually-run process: one notebook cell reads the spreadsheet and the records exist in the database.</p>
+
+<p>This route is <strong>INSERT-only by construction</strong>: an existing record (matched on its natural key, the same lookup the two-step route’s <code class="language-plaintext highlighter-rouge">manage_territory</code> step uses) is left untouched — never updated, never duplicated. That makes it safe to re-run the same cell as many times as you like, for example after adding new rows to the spreadsheet.</p>
+
+<h2 id="which-route-should-i-use">Which route should I use?</h2>
+
+<ul>
+  <li>Use <strong>single-step insert</strong> when you just want the rows in your spreadsheet to end up in the database, and you don’t need to inspect or hand-edit the generated JSON, or ever update existing rows through this route.</li>
+  <li>Use the <strong>two-step route</strong> (<a href="../translate_excel/">Translate excel</a> then <a href="../insert_data/">Insert data</a>) when you need to update existing records, your source is already a JSON file with no spreadsheet at all, or you want to inspect or hand-edit the generated JSON before it’s applied to the database.</li>
+</ul>
+
+<p>Both routes can be used side by side — nothing about setting one up disables the other.</p>
+
+<h2 id="process-definition-file">Process definition file</h2>
+
+<p>The parameters are identical to <code class="language-plaintext highlighter-rouge">translate_tabular_data</code>’s — only the process name differs:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"overwrite"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insert_tabular_data"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manage_territory"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tabular_data_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"import_data/utility/excel/territory.xlsx"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"dst_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"import_data/utility/general/insert_process/staging"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">process</code></td>
+      <td>The target process name that will be written into each entry of the generated staging file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tabular_data_path</code></td>
+      <td>Path to the source spreadsheet</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dst_path</code></td>
+      <td>Destination directory for the generated staging JSON file</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The generated staging file is a debug/audit trail, not something you’re meant to hand-edit — unlike the two-step route’s generated file, it’s read and applied to the database in the same run it’s written in.</p>
+
+<h2 id="project-file-structure">Project file structure</h2>
+
+<p>The single-step route adds a parallel set of files alongside the ones <a href="../">Add user data</a> already documents — it never touches the existing <code class="language-plaintext highlighter-rouge">process/</code>/<code class="language-plaintext highlighter-rouge">manage_process/</code> folders:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>project_example/import_data/utility/
+├── insert_process/
+│   └── territory.json          # process definition for the single-step route
+├── general/insert_process/staging/
+│   └── manage_territory.json   # generated AND applied immediately by this route
+├── job_insert_utility.json     # job file for the single-step route
+└── insert_utility.txt          # pilot file for the single-step route
+</code></pre></div></div>
+
+<h3 id="job-file">Job file</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"job_folder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"import_data/utility"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"process_sub_folder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insert_process"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pilot_file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insert_utility.txt"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">process_sub_folder</code> points at <code class="language-plaintext highlighter-rouge">insert_process</code> — the folder searched for per-table process definitions for this route, distinct from <code class="language-plaintext highlighter-rouge">process/</code> (two-step translate) and <code class="language-plaintext highlighter-rouge">manage_process/</code> (two-step generated output).</p>
+
+<h3 id="pilot-file">Pilot file</h3>
+
+<p>Like any <a href="../../framework/pilot_file/">pilot file</a>, <code class="language-plaintext highlighter-rouge">insert_utility.txt</code> lists one process file per table you want this route to cover, and a <code class="language-plaintext highlighter-rouge">#</code> in front of a line disables it for that run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>###===================###
+### UTILITIES ###
+###===================###
+
+territory.json
+
+# Add more tables the same way — one insert_process/&lt;table&gt;.json per line
+# foreign_key.json
+</code></pre></div></div>
+
+<h2 id="running-it-in-the-notebook">Running it in the notebook</h2>
+
+<p>Open <code class="language-plaintext highlighter-rouge">project_example/import_data/insert_utility_data.ipynb</code> — the single-step sibling to <code class="language-plaintext highlighter-rouge">load_utility_data.ipynb</code>. Its imports and scheme-file cells are identical to that notebook; the difference is the cell that actually runs the process:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#%%script false --no-raise-error
+</span><span class="n">job_file</span> <span class="o">=</span> <span class="sh">'</span><span class="s">import_data/utility/job_insert_utility.json</span><span class="sh">'</span>
+
+<span class="n">structured_process_D</span><span class="p">,</span> <span class="n">scheme_params_D</span> <span class="o">=</span> <span class="nc">Initiate_process</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">,</span> <span class="n">scheme_file</span><span class="p">,</span> <span class="n">job_file</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">structured_process_D</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+
+    <span class="nc">Run_process</span><span class="p">(</span><span class="n">structured_process_D</span><span class="p">,</span> <span class="n">scheme_params_D</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Note this cell passes a <strong>job file</strong>, not a raw process file the way the two-step notebook’s cells do — the job file is what resolves to the pilot list of per-table <code class="language-plaintext highlighter-rouge">insert_process/*.json</code> files above, so a single cell can cover every table the pilot file lists.</p>
+
+<h2 id="verifying-the-data">Verifying the data</h2>
+
+<p>Same as the two-step route — connect to the database directly:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">display_name</span><span class="p">,</span> <span class="n">iso_code_a2</span>
+<span class="k">FROM</span> <span class="n">utility</span><span class="p">.</span><span class="n">territory</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">name</span>
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="input-files">Input files</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">territory.xlsx</code></td>
+      <td>Source spreadsheet; same file the two-step route reads</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">job_insert_utility.json</code></td>
+      <td>Job file; points at the <code class="language-plaintext highlighter-rouge">insert_process</code> folder and the pilot file below</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">insert_utility.txt</code></td>
+      <td>Pilot file; lists which <code class="language-plaintext highlighter-rouge">insert_process/&lt;table&gt;.json</code> files to run, in order</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">insert_process/territory.json</code></td>
+      <td>Process definition for the single-step route; specifies the target process, source spreadsheet path and staging output directory</td>
+    </tr>
+  </tbody>
+</table>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-24">August 24, 2026</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/user_data/translate_excel/" class="pagination--pager" title="Translate Excel data to JSON">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/karttur-v2/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/thomas-gumbricht-588a2a23" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://scholar.google.com/citations?user=v9-kWvcAAAAJ&hl=en" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i> Google scholar</a></li>
+        
+      
+        
+          <li><a href="https://orcid.org/0000-0002-5125-4487" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-orcid" aria-hidden="true"></i> Orcid</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2013 - 2026 <a href="http://localhost:4000">Xspatula</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

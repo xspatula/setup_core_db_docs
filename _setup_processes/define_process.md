@@ -14,7 +14,7 @@ A process must be registered in the database before it can be called from a [pro
 
 ## Process hierarchy
 
-Every process belongs to a root process. You must register the root process before registering the sub-processes under it.
+Every process belongs to a root process. You must register the root process before registering the actual processes under it.
 
 ### Registering a root process
 
@@ -124,6 +124,22 @@ There are four additional blocks that can be used for [defining process options]
 - [minmax][define_process_options_minmax], defines the range accepted for numerical values
 - [inherit][define_process_options_inherit], copies value from existing database record
 - [auto naming][define_process_options_auto_naming], assigns an automatic value
+
+## Process schema tables
+
+Everything described above is stored in nine tables in the `process` schema. You'll rarely query these directly — the notebook and JSON files do that for you — but knowing what each table holds helps when troubleshooting a registration:
+
+| Table | Objective |
+|---|---|
+| `root_process` | Groups related processes into a named root category (e.g. `manage_table_data`) that sub-processes register under. |
+| `process` | Registers each individual process: its name, parent root process, and the minimum user privilege stratum (`min_user_stratum`) required to run it. |
+| `process_parameter` | Defines every parameter a process accepts — type, whether required, default value, and hint text. |
+| `process_parameter_set_value` | Restricts a parameter to a predefined [set of accepted values][define_process_options_set_value]. |
+| `process_parameter_minmax` | Restricts a numerical parameter to a [min/max range][define_process_options_minmax]. |
+| `process_parameter_schema_table` | Links a parameter to the target `schema.table` it writes to in the database (the `schema_table` block). |
+| `process_parameter_permission` | Records whether a parameter's underlying column may be updated or deleted once set (the `permission` block). |
+| `process_parameter_inherit` | Lets a parameter [default to a value copied][define_process_options_inherit] from an existing database record. |
+| `process_parameter_auto_name` | Stores the [concatenation pattern][define_process_options_auto_naming] used to auto-generate a parameter's value from other parameters in the same process. |
 
 ## Adding the process file to the pilot file
 

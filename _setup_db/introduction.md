@@ -82,7 +82,7 @@ The _scheme_ file and the JSON command files can be located anywhere on your sys
 
 #### Scheme file for database setup
 
-The scheme file for setting up your database must define both the postgres superuser that will own the database as well as other postgres users (pg_user) that can access the database.
+The scheme file for setting up your database must define both the postgres superuser that will own the database and at least one user that is then used for setting up processes and adding other users. Explained in more detail below.
 
 In the example of a _scheme_ file for setting up a database below I have added some comments indicated by a hashtag (#). These comments are not allowed in a production version of a _scheme_ file.
 
@@ -137,12 +137,41 @@ In the example of a _scheme_ file for setting up a database below I have added s
 The postgres superuser defined in the _scheme_ file for setting up your new database will become both the owner and a superuser for your new database. The default processes defined for setting up a new database include the definition of ordinary user(s) (not pg_users) in the database. The default user (Jane Doe) in the online repository has the user name _jane_doe_ and the password is _hello-xspatula_. It is recommended that you change the names and passwords of the default users in the file
 
 ```
-./setup/zzz/xspatula/setup_db/json_core/community_user_records_v10_sql.json.
+./setup/zzz/xspatula/setup_db/json_core/community/user_records_v10_sql.json.
 ```
 
 You must then also change the login credentials in the subsequent _scheme_ files for ordinary login (not database setup). You can also always login with the superuser that you used for setting up the database.
 
 For details on including default users as part of the database setup, see the document on [defining schemas and tables][schemas_tables].
+
+#### Hashing user passwords
+
+The `password` column in `community.user` does not store plain text. It stores a bcrypt hash, and the framework verifies a login attempt by hashing the entered password and comparing it against that stored hash — it never compares plain text directly. This means the `"hello-xspatula"` shown above for Jane Doe is the password you'd actually type in at login, not what belongs in the JSON file: the JSON must hold the hash produced by a small command-line tool the framework ships with, `setup/hash_password.py`.
+
+To generate a hash, open a terminal, `cd` into your local copy of the framework (the directory containing the `setup/` folder), activate your Anaconda environment if you're using one, and run:
+
+```
+python3 setup/hash_password.py
+```
+
+You'll be prompted twice, with hidden input:
+
+```
+Password to hash:
+Repeat password:
+```
+
+The tool prints a bcrypt hash that looks like `$2b$12$KIXQ7z3n...` (yours will differ). Copy that whole string — it's what you paste into the `password` value in `community_user_records_v10_sql.json`, not the password itself.
+
+You can also pass the password directly as an argument:
+
+```
+python3 setup/hash_password.py 'some-password'
+```
+
+This is quicker but leaves the plain-text password visible in your shell history and process list, so prefer the no-argument, prompted form on any machine you share with others.
+
+Do this once per default user before running `setup_db.ipynb`, and again any time you want to reset a user's password by hand-editing the database (`UPDATE community.user SET password = '<hash>' WHERE user_name = '...';`).
 
 #### Scheme file for database delete
 
@@ -292,11 +321,13 @@ The default setting is to create a schema called community, including the follow
 
 The table user and the columns _user_name_, _password_, and _stratum_code_ are searched each time a user is trying to login. The _stratum_code_ defines which .env file a user is entering the database with and thus the privileges that that user has in the database. If you change the name of either the schema, the table or these columns, you need to update the python source code accordingly.
 
-For details on defining tables and columns, see the document on [tables][#]. NOT YET AVAILABLE.
+For details on defining tables and columns, see the document on [Defining schemas and tables](../setup_db/schemas_tables/#create-table).
 
 #### Community organisations and users
 
-The process_files community_organisation_records_v10_sql.json and community_user_records_v10_sql.json directly inserts records in the community schema tables organisation and user. The users inserted will get immediate access to the created database. This the user name name you have to state in the _scheme_ object user_project:user_name. The password can also be given as an object in the _scheme_file_ (user_project:user_password). Alternatively you can put the password in a [.netrc][netrc].
+The _process_ files `"community_organisation_records_v10_sql.json"` and `"community_user_records_v10_sql.json"` directly inserts records in the community schema tables organisation and user. The users inserted will get immediate access to the created database.
+
+Note that this is a different password to the ones in the postgres pg_user _scheme_ file shown above: the pg_user password authenticates the *database connection* itself, while `community.user.password` authenticates an individual *application login* and must be pre-hashed as described in [hashing user passwords](#hashing-user-passwords). This setup-time route is meant for your initial, default users. Once the database is running, organisations and users can also be added by non-technical staff filling in an Excel sheet — see [Setup Community][setup_community].
 
 The figure below illustrates the content and connections for the schema community after setting up the Xspatula framework.
 
@@ -314,8 +345,11 @@ The process_file processes_v10_sql.json defines the table structure for definiti
 - process_parameter_set_value (if a text parameter can take on only a predefined set of values),
 - process_parameter_minmax (if a numerical parameter is restricted to a range)
 - process_parameter_schema_table (the target table for any particular parameter),
-- process_parameter_permission (if a set parameter is allowed to be updated or deleted), and
-- process_parameter_default (default parameter values if no value is given by user).
+- process_parameter_permission (if a set parameter is allowed to be updated or deleted),
+- process_parameter_inherit (if a parameter can default to a value copied from an existing database record), and
+- process_parameter_auto_name (if a parameter's value is auto-generated by concatenating other parameters in the same process).
+
+For the full column-level reference of every `process` schema table, see the [process schema tables][define_process_tables] reference in Setup processes.
 
 The figure below illustrates the content and connections for the schema process after setting up the Xspatula framework.
 
@@ -326,6 +360,44 @@ The figure below illustrates the content and connections for the schema process 
 #### Initial process records
 
 Running processes_records_v10_sql.json inserts the root process and processes required for managing all other processes in the framework.
+
+#### Turning on auditing
+
+`setup_db.ipynb` has a second, optional cell after the main "Setup database" cell you've just walked through: **Apply audit triggers**. It is worth understanding what each cell does before you run either:
+
+- **The "Setup database" cell**, as a side effect of running it, always scans every table's definition for an inline `audit` key and (re)writes a set of audit-trigger configuration files to disk — one per schema — plus a matching pilot file. This is pure file bookkeeping: it never touches the database and creates no audit objects, so running it changes nothing about whether auditing is actually active.
+- **The "Apply audit triggers" cell** reads those freshly-written files and applies them to the database: it creates an `audit` schema with a `logged_actions` table, a shared trigger function, and one trigger per audited table. This is the step that actually switches auditing on. It's optional — skip it and your database simply has no audit triggers — and safe to (re-)run any time, including repeatedly, since it always applies the complete current configuration rather than only what changed.
+
+A table opts into auditing by carrying an `audit` key next to its `parameters` in its `create_table` process block:
+
+```json
+"audit": {
+  "INSERT": true,
+  "UPDATE": true,
+  "DELETE": true
+}
+```
+
+No `audit` key (or one with every value `false`) means that table simply isn't audited — there's no other configuration step required. The cell looks like this in the notebook:
+
+```
+## Apply audit triggers (optional, separate step)
+
+Every table's audit setting is declared inline on its own create_table process
+block via an "audit" key. Running the cell above already assembled the
+per-schema audit trigger config files and a matching pilot file
+(db_<project>_audit.txt) from those keys, purely as files - it did not touch
+the database.
+
+Run the cell below any time after the cell above - immediately, later, or
+repeatedly - to actually apply that config to the database.
+```
+```python
+audit_job_file = 'job_setup_audit.json'
+Initiate_audit(notebook_path, scheme_file, audit_job_file)
+```
+
+Full instructions for using the audit system once it's switched on — what gets logged, how to query it, and which tables are worth auditing on `INSERT` versus only `UPDATE`/`DELETE` — are in the [Auditing][auditing] collection.
 
 ### Project file hierarchy
 
@@ -376,3 +448,9 @@ The directory structure for the project defined in the scheme_file and the job_f
 [process_file]: ../framework/process_file/
 
 [schemas_tables]: ./schemas_tables/
+
+[auditing]: /auditing/
+
+[setup_community]: /setup_community/
+
+[define_process_tables]: ../setup_processes/define_process/#process-schema-tables

@@ -10,7 +10,7 @@ date: 2026-06-09
 last_modified_at: 2026-06-09
 ---
 
-Once you have set up the database you should avoid using the postgres superuser for managing access and running processes. Instead you log in as one of the database users defined during [database setup][setup_db].
+Once you have set up the database you should avoid using the postgres superuser for managing access and running processes. Instead you log in as one of the database users defined during [database setup][setup_db] or using the process <span class='process'>manage_user</span>.
 
 The scheme file for using the database — as opposed to creating it — no longer needs information about the postgres database cluster. It only needs a `project_path` and user credentials for the database (`user_project`).
 
@@ -22,8 +22,20 @@ The minimal scheme file for process registration (and all other post-setup opera
 {
   "project_path": "./xspatula",
   "user_project": {
-    "user_name": "ini_cat_5_user",
-    "password": "armchair-scouting-windowframe-bicycling"
+    "user_name": "ini_cat5",
+    "password": "armchair"
+  }
+}
+```
+
+If you want to change the default settings for execute, verbosity, overwrite and delete you need to add the process object from its default settings (the example below shows the default settings):
+
+```json
+{
+  "project_path": "./xspatula",
+  "user_project": {
+    "user_name": "ini_cat5",
+    "password": "armchair"
   },
   "process": [
     {
@@ -36,7 +48,7 @@ The minimal scheme file for process registration (and all other post-setup opera
 }
 ```
 
-The `user_name` and `password` refer to an ordinary database user (not a postgres pg_user). This user must have been inserted into the `community.user` table during database setup, and must have sufficient privileges — a stratum-5 user is recommended for setup operations.
+The `user_name` and `password` refer to an ordinary database user (not a postgres pg_user). This user must exist in the `community.user` table and must have sufficient privileges — a stratum-5 user is recommended for setup operations. For details on the different options of setting up users see [Setup Community][setup_community].
 
 ## Using a .netrc file
 
@@ -62,7 +74,7 @@ You can replace `user_name` and `password` with a `user_netrc_id` to store crede
 The corresponding entry in `~/.netrc`:
 
 ```
-machine xspatula login ini_cat_5_user password armchair-scouting-windowframe-bicycling
+machine xspatula login ini_cat5 password armchair
 ```
 
 The `machine` value is an arbitrary identifier you choose — the framework reads the `login` and `password` from the matching `.netrc` entry.
@@ -82,10 +94,12 @@ See the [scheme file reference][scheme_file_ref] in the framework documentation 
 
 | File | Purpose |
 |---|---|
-| `scheme_xspatula_local_use.json` | Example scheme file for post-setup operations; uses `ini_cat_5_user` with explicit password |
+| `scheme_xspatula_local_use.json` | Example scheme file for post-setup operations; uses `ini_cat5` user with explicit password |
 
 [setup_db]: ../../setup_db/
 
 [netrc]: ../../setup_db/netrc/
 
 [scheme_file_ref]: ../../framework/scheme_file/
+
+[setup_community]: ../../setup_community/

@@ -55,6 +55,56 @@ add_user_data:
         url: /user_data/translate_excel
       - title: "Insert data"
         url: /user_data/insert_data
+      - title: "Single-step insert"
+        url: /user_data/single_step_insert
+
+auditing:
+  - title: "Auditing"
+    children:
+      - title: "Introduction"
+        url: /auditing/
+      - title: "Setup"
+        url: /auditing/setup
+      - title: "Queries"
+        url: /auditing/queries
+
+setup_community:
+  - title: "Setup Community"
+    children:
+      - title: "Introduction"
+        url: /setup_community/
+      - title: "Bootstrap user"
+        url: /setup_community/bootstrap_user
+      - title: "SMTP email"
+        url: /setup_community/smtp_email
+      - title: "Excel intake"
+        url: /setup_community/excel_intake
+      - title: "Register notebook"
+        url: /setup_community/register_notebook
+      - title: "Welcome email"
+        url: /setup_community/welcome_email
+
+building:
+  - title: "Building"
+    children:
+      - title: "Project"
+        url: /building/
+      - title: "Notebooks"
+        url: /building/notebooks
+      - title: "Database"
+        url: /building/database
+      - title: "Auditing"
+        url: /building/auditing
+      - title: "Initial user"
+        url: /building/initial_user
+      - title: "SMTP"
+        url: /building/smtp
+      - title: "Add users"
+        url: /building/add_users
+      - title: "Processes"
+        url: /building/processes
+      - title: "Postgres"
+        url: /building/postgres
 
 main:
   - title: "Xspatula framework"
@@ -69,5 +119,14 @@ main:
   - title: "Add user data"
     url: /user_data/
     description: "Add user data to the Xspatula postgreSQL database"
+  - title: "Audit"
+    url: /auditing/
+    description: "Track every change made to the Xspatula postgreSQL database"
+  - title: "Community"
+    url: /setup_community/
+    description: "Register organisations and users via Excel intake"
+  - title: "Building"
+    url: /building/
+    description: "Build a new Xspatula project from scratch"
   - title: "About"
     url: ../about/

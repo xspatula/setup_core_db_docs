@@ -136,6 +136,24 @@
               >Add user data</a>
             </li><li class="masthead__menu-item">
               <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
                 href="/about/"
                 
                 
@@ -198,6 +216,8 @@
               <li><a href="/user_data/translate_excel">Translate excel</a></li>
             
               <li><a href="/user_data/insert_data">Insert data</a></li>
+            
+              <li><a href="/user_data/single_step_insert">Single-step insert</a></li>
             
           </ul>
           
@@ -303,6 +323,8 @@
 </ol>
 
 <p>The translate and insert steps are independent — you can re-run either one without affecting the other, as long as <code class="language-plaintext highlighter-rouge">overwrite</code> and <code class="language-plaintext highlighter-rouge">delete</code> are set appropriately.</p>
+
+<p>If you don’t need to inspect or hand-edit the generated JSON, the <a href="../single_step_insert/">single-step insert route</a> does both steps above in one notebook cell.</p>
 
 <h2 id="input-files">Input files</h2>
 

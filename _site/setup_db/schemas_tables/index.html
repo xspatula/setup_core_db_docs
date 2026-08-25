@@ -136,6 +136,24 @@
               >Add user data</a>
             </li><li class="masthead__menu-item">
               <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
                 href="/about/"
                 
                 
@@ -240,7 +258,7 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>In the Xspatula framework, schemas and tables are defined as part of the database setup. Only the superuser can create, update or delete schemas and tables. As long as you do not set overwrite or delete to true, no data will be lost. But if you set overwrite to true, existing data in the table you overwrite will be lost.</p>
+        <p>In the Xspatula framework, schemas and tables are defined as part of the database setup. As long as you do not set overwrite or delete to true, no data will be lost. But if you set overwrite to true, existing data in the table you overwrite will be lost. If you set delete to true the table is removed and all existing data lost.</p>
 
 <h2 id="create-schema">Create schema</h2>
 
@@ -300,7 +318,7 @@
           "id SERIAL", # automatically incremented value giving all users a unqique id
           "organisation_id INTEGER REFERENCES community.organisation (id)", # the id of the organisation for this user, 0 = no organisation
           "user_name VARCHAR UNIQUE", # unique user name
-          "password VARCHAR", # password for logging into the framework for the user
+          "password VARCHAR", # bcrypt hash of the user's password, generated with setup/hash_password.py - never plain text
           "stratum_code SMALLINT DEFAULT 1", # stratum_code is the privilege level for the user, 1 = few rights
           "first_name VARCHAR", # first name of user
           "middle_name VARCHAR", # middle name of user
@@ -341,6 +359,8 @@
 
 <p>You can use the suggested users to test setting up the database. Then delete the whole database and define your own users and recreate the database.</p>
 
+<p>The <code class="language-plaintext highlighter-rouge">password</code> value for each user below is <strong>not</strong> the plain-text password anyone would type in — it’s a bcrypt hash. Before editing this file with your own users, choose a plain-text password for each one and run it through <code class="language-plaintext highlighter-rouge">setup/hash_password.py</code> (see <a href="../#hashing-user-passwords">hashing user passwords</a> on the Setup DB page), then paste the printed hash in place of the plain text. The values shown below (<code class="language-plaintext highlighter-rouge">$2b$12$...</code>) are illustrative placeholders, not real hashes.</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
   "process": [
     {
@@ -367,7 +387,7 @@
               "0",
               "user_manager_email@example.com",
               "user_manager_email_alt@example.com",
-              "cuttingedge-railway-precipitation-cumbersome",
+              "$2b$12$examplehashforusermanagerxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
               "user",
               "manager",
               "user_manager",
@@ -378,7 +398,7 @@
               "0",
               "cat_5_email@example.com",
               "cat_5_email_alt@example.com",
-              "armchair-scouting-windowframe-bicycling",
+              "$2b$12$examplehashforinicat5userxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
               "ini_cat_5_user",
               "Ini",
               "Cat",
@@ -389,7 +409,7 @@
               "0",
               "jane_doe@example.com",
               "jane_doe_alt@example.com",
-              "hello-xspatula",
+              "$2b$12$examplehashforjanedoexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
               "Jane",
               "Doe",
               "jane_doe",
@@ -416,14 +436,17 @@
   <li>process_parameter_minmax (if a numerical parameter can only take on a limited range)</li>
   <li>process_parameter_schema_table (the target schema.table for a parameter to be written to the database)</li>
   <li>process_parameter_permission (if the parameter is allowed to be updated or deleted)</li>
-  <li>process_parameter_default (if a parameter can be automatically selected from another schema.table.record)</li>
+  <li>process_parameter_inherit (if a parameter can default to a value copied from an existing database record)</li>
+  <li>process_parameter_auto_name (if a parameter’s value is auto-generated by concatenating other parameters in the same process)</li>
 </ul>
 
 <p>The handling of processes is fairly complex. If you are in for a deeper understanding please have a look in the JSON process files setting up and inserting the data for defining processes:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/xspatula/setup_db/processes_v10_sql.json
-./setup/zzz/xspatula/setup_db/json_core/processes_records_v10_sql.json
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./setup/zzz/xspatula/setup_db/json_core/process/processes_v10_sql.json
+./setup/zzz/xspatula/setup_db/json_core/process/processes_records_v10_sql.json
 </code></pre></div></div>
+
+<p>For the full column-level reference of every <code class="language-plaintext highlighter-rouge">process</code> schema table, and how each maps to a registration option, see the <a href="../../setup_processes/define_process/#process-schema-tables">process schema tables</a> reference in Setup processes.</p>
 
 <h2 id="input-files">Input files</h2>
 
@@ -469,7 +492,7 @@
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">community_user_records_v10_sql.json</code></td>
-      <td>Inserts default users including <code class="language-plaintext highlighter-rouge">ini_cat_5_user</code> and <code class="language-plaintext highlighter-rouge">jane_doe</code> — edit before running</td>
+      <td>Inserts default users including <code class="language-plaintext highlighter-rouge">ini_cat_5_user</code> and <code class="language-plaintext highlighter-rouge">jane_doe</code> — edit before running; <code class="language-plaintext highlighter-rouge">password</code> values must be bcrypt hashes from <code class="language-plaintext highlighter-rouge">setup/hash_password.py</code>, not plain text</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">processes_v10_sql.json</code></td>

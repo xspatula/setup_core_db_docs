@@ -136,6 +136,24 @@
               >Add user data</a>
             </li><li class="masthead__menu-item">
               <a
+                href="/auditing/"
+                 title="Track every change made to the Xspatula postgreSQL database"
+                
+              >Audit</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/setup_community/"
+                 title="Register organisations and users via Excel intake"
+                
+              >Community</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/building/"
+                 title="Build a new Xspatula project from scratch"
+                
+              >Building</a>
+            </li><li class="masthead__menu-item">
+              <a
                 href="/about/"
                 
                 
@@ -238,7 +256,7 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>Once you have set up the database you should avoid using the postgres superuser for managing access and running processes. Instead you log in as one of the database users defined during <a href="../../setup_db/">database setup</a>.</p>
+        <p>Once you have set up the database you should avoid using the postgres superuser for managing access and running processes. Instead you log in as one of the database users defined during <a href="../../setup_db/">database setup</a> or using the process <span class="process">manage_user</span>.</p>
 
 <p>The scheme file for using the database — as opposed to creating it — no longer needs information about the postgres database cluster. It only needs a <code class="language-plaintext highlighter-rouge">project_path</code> and user credentials for the database (<code class="language-plaintext highlighter-rouge">user_project</code>).</p>
 
@@ -249,8 +267,19 @@
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"project_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./xspatula"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"user_project"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ini_cat_5_user"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"armchair-scouting-windowframe-bicycling"</span><span class="w">
+    </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ini_cat5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"armchair"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>If you want to change the default settings for execute, verbosity, overwrite and delete you need to add the process object from its default settings (the example below shows the default settings):</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"project_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./xspatula"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user_project"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ini_cat5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"armchair"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -263,7 +292,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">user_name</code> and <code class="language-plaintext highlighter-rouge">password</code> refer to an ordinary database user (not a postgres pg_user). This user must have been inserted into the <code class="language-plaintext highlighter-rouge">community.user</code> table during database setup, and must have sufficient privileges — a stratum-5 user is recommended for setup operations.</p>
+<p>The <code class="language-plaintext highlighter-rouge">user_name</code> and <code class="language-plaintext highlighter-rouge">password</code> refer to an ordinary database user (not a postgres pg_user). This user must exist in the <code class="language-plaintext highlighter-rouge">community.user</code> table and must have sufficient privileges — a stratum-5 user is recommended for setup operations. For details on the different options of setting up users see <a href="../../setup_community/">Setup Community</a>.</p>
 
 <h2 id="using-a-netrc-file">Using a .netrc file</h2>
 
@@ -287,7 +316,7 @@
 
 <p>The corresponding entry in <code class="language-plaintext highlighter-rouge">~/.netrc</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>machine xspatula login ini_cat_5_user password armchair-scouting-windowframe-bicycling
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>machine xspatula login ini_cat5 password armchair
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">machine</code> value is an arbitrary identifier you choose — the framework reads the <code class="language-plaintext highlighter-rouge">login</code> and <code class="language-plaintext highlighter-rouge">password</code> from the matching <code class="language-plaintext highlighter-rouge">.netrc</code> entry.</p>
@@ -340,7 +369,7 @@
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">scheme_xspatula_local_use.json</code></td>
-      <td>Example scheme file for post-setup operations; uses <code class="language-plaintext highlighter-rouge">ini_cat_5_user</code> with explicit password</td>
+      <td>Example scheme file for post-setup operations; uses <code class="language-plaintext highlighter-rouge">ini_cat5</code> user with explicit password</td>
     </tr>
   </tbody>
 </table>
