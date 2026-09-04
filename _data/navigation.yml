@@ -1,3 +1,23 @@
+main_navigation:
+  - title: Content
+    children:
+      - title: "Framework"
+        url: /framework/
+      - title: "Setup DB"
+        url: /setup_db/
+      - title: "Setup processes"
+        url: /setup_processes/
+      - title: "Add user data"
+        url: /user_data/
+      - title: "Audit"
+        url: /auditing/
+      - title: "Community"
+        url: /setup_community/
+      - title: "Building"
+        url: /building/
+      - title: "About"
+        url: ../about/
+
 framework:
   - title: Xspatula framework
     children:

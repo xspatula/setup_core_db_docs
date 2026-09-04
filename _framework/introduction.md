@@ -3,7 +3,6 @@ title: "Xspatula framework"
 layout: home
 sidebar:
   nav: "framework"
-
 excerpt: "The Xspatula framework is a skeleton allowing users to build a postgreSQL database and define the arguments (parameters) for processes that utilise the database."
 permalink: /framework/
 author_profile: false
@@ -37,7 +36,7 @@ The framework is built for running with Jupyter notebooks. The core framework in
 
 In the [notebooks][notebook] you define the scheme and the project (job) that you want to run.
 
-All python operations specific to data and modeling must be developed as part of building up your own framework.
+All python operations specific to your data and modeling must be developed as part of building up your own framework.
 
 ## Xspatula access and license
 

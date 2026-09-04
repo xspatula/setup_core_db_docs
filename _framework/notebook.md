@@ -3,14 +3,14 @@ title:  "Xspatula notebooks"
 layout: single
 sidebar:
   nav: "framework"
-excerpt: "To manage the Xspatula framework database it comes with three Jupyter notebooks: setup_db, delete_db and setup_processes. Before you can run the notebooks you need to create a python environment. The only thing you need to edit in the framework itself are your credentials for the postgreSQL database cluster you want to use."
+excerpt: "To manage the Xspatula framework database it comes with three Jupyter notebooks: setup_db, delete_db and setup_processes. Before you can run the notebooks you need to create a python environment. To test the core functionality, the only thing you need to edit in the framework itself are your credentials for the postgreSQL database cluster you want to use."
 permalink: /framework/notebook/
 author_profile: false
 date:   2026-03-15 16:13:03 +0200
 last_modified_at:   2026-03-29 21:15:03 +0200
 ---
 
-To manage the Xspatula framework database it comes with three Jupyter notebooks: setup_db, delete_db and setup_processes. Before you can run the notebooks you need to create a python environment. The only thing you need to edit in the framework itself are your credentials for the postgreSQL database cluster you have access to.
+To manage the Xspatula framework database it comes with three Jupyter notebooks: setup_db, delete_db and setup_processes. Before you can run the notebooks you need to create a python environment. To test the core functionality, the only thing you need to edit in the framework itself are your credentials for the postgreSQL database cluster you have access to.
 
 ## Prerequisits
 
@@ -23,7 +23,7 @@ To build your own database, whether on your local machine or a remote server, yo
 
 ## Python environment
 
-To run a Jupyter notebook you need to define the Python environment that must contain all Python packages used by the notebook and its underlying code. In the Xspatula package path ./setup/anaconda there is a prepared .yml file and a short instruction for how to setup the virtual environment. The same information is available in the [Anaconda][anaconda] document that also links to the Anaconda [download][download_anaconda] and [installation][install_anaconda] guides.
+To run a Jupyter notebook you need to define the Python environment that must contain all Python packages used by the notebook and its underlying code. In the Xspatula package path `./setup/anaconda` there is a prepared .yml file and a short instruction for how to setup the virtual environment. The same information is available in the [Anaconda][anaconda] document that also links to the Anaconda [download][download_anaconda] and [installation][install_anaconda] guides.
 
 ## Notebook structure
 

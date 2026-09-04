@@ -14,7 +14,7 @@ The first step in building up an Xspatula framework is to setup a postgreSQL dat
 
 ## Prerequisits
 
-To build your own postgreSQL database using the Xspatula framework you might need to install the following applications/files:
+To build your own postgreSQL database you might need to install the following applications/files:
 
 - [Visual Studion code (VScode)][vscode] (if you want to use the Jupyter notebook interface),
 - [postgreSQL][postgres] (unless you have access to a machine with postgres installed),
